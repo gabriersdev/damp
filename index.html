@@ -294,13 +294,22 @@
 			
 			#printdiv{ text-align: center; }
 			
-			#btImprimir{
+			#btImprimir,
+			[data-action="registros-salvos"]{
 				height: 55px;
-				width: 130px;
+				min-width: 130px;
 				font-size: 25px;		
 				text-transform: uppercase;
 			}
-			
+
+			#modal-registros-salvos .alert{
+				margin: 0;
+			}
+
+			.apagar-registro-salvo,
+			.recuperar-registro-salvo{
+				text-transform: uppercase;
+			}
 
 			/* ******************** MEDIA PRINT ************************ */
 			@media print{
@@ -778,7 +787,9 @@
 				</footer>	
 		
 				<div id="printdiv">
-					<input type="button" onclick="printWindow();" id="btImprimir" class="btn btn-danger do-not-print" value="Imprimir" name="btImprimir"></div>
+					<input type="button" onclick="printWindow();" id="btImprimir" class="btn btn-danger do-not-print" value="Imprimir" name="btImprimir">
+					<button type="button" class="btn btn-primary" data-action="registros-salvos">Registros</button>
+				</div>
 				<input id="pressedkeys" type="hidden">
 
 				<!-- MODAIS DA PÁGINA -->
@@ -855,6 +866,43 @@
 									<button type="button" class="btn btn-warning pull-right" data-dismiss="modal">X</button>	
 									</div>									
 								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal fade" id="modal-registros-salvos" role="dialog">
+					<div class="modal-dialog modal-centered">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							</div>
+							<div class="modal-body">
+								<div class="alert alert-warning">
+									<span>Não foram encontrados registros armazenados</span>
+								</div>
+								<br>
+
+								<table>
+									<thead>
+										<tr>
+											<th>Proponente</th>
+											<th>Salvo em</th>
+											<th>Ação</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Gabriel</td>
+											<td>15/07/2023 20:43</td>
+											<td>
+												<button class="btn btn-primary recuperar-registro-salvo" onclick="recuperarRegistroSalvo()">Recuperar</button>
+												<button class="btn btn-danger apagar-registro-salvo" onclick="apagarRegistroSalvo()">Apagar</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 							</div>
 						</div>
 					</div>
@@ -1233,7 +1281,9 @@
 				}
 			});
 
-
+			$('[data-action="registros-salvos"]').click(evento => {
+				$('#modal-registros-salvos').modal('show');
+			})
 //**************************************************************
 //**************************************************************
 //**************************************************************
@@ -1673,5 +1723,15 @@
 				return true;
 			}
 			
+		</script>
+
+		<script>
+			function apagarRegistroSalvo(){
+				console.log('Apagar registro!');
+			}
+			
+			function recuperarRegistroSalvo(){
+				console.log('Recuperar registro!');
+			}
 		</script>
 </html>
