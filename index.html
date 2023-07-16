@@ -407,7 +407,7 @@
 								<select class="width_tmp_select" data-input="width_tmp_select">
 									<option class="width_tmp_option"></option>
 								</select>
-								desde <input type="text" id="text_data2" data-input="text_data2 class="data" size="8" maxlength="8" placeholder="00/00/0000">.
+								desde <input type="text" id="text_data2" data-input="text_data2" class="data" size="8" maxlength="8" placeholder="00/00/0000">.
 							</div>
 						</div>
 
@@ -525,7 +525,7 @@
 								</abel>
 						</div>
 						<div id="modalidade4" class="recuo20">
-							<input type="checkbox" class="hide_chk" id="chkmodalidade4" data-input="chkmodalidade4>
+							<input type="checkbox" class="hide_chk" id="chkmodalidade4" data-input="chkmodalidade4">
 								<label for="chkmodalidade4">
 									Construção em Terreno Próprio – Orçamento: <input type="text" id="text_enquad4" data-input="text_enquad4" class="valor" maxlength="21" data-thousands="." data-decimal="," data-prefix="R$ ">
 								</label>
@@ -537,7 +537,7 @@
 								</label>
 						</div>
 						<div id="modalidade6" class="recuo20">
-							<input type="checkbox" class="hide_chk" id="chkmodalidade6" data-input="chkmodalidade6>
+							<input type="checkbox" class="hide_chk" id="chkmodalidade6" data-input="chkmodalidade6">
 								<label for="chkmodalidade6">
 									CCFGTS – Conclusão – Orçamento: <input type="text" id="text_enquad6" data-input="text_enquad6" class="valor" maxlength="21" data-thousands="." data-decimal="," data-prefix="R$ ">
 								</label>
@@ -1660,7 +1660,10 @@
 				return false;
 			}
 			
-			function printWindow(){	window.print();	}
+			function printWindow(){	
+				window.print();	
+				salvarRegistro();
+			}
 			
 			function vercpf (cpf){			
 				var cpf = cpf.replace(".", "");
@@ -1726,6 +1729,35 @@
 		</script>
 
 		<script>
+			function salvarRegistro(){
+				const registro = new Object();
+
+				document.querySelectorAll('[data-input]').forEach((elemento) => {
+					const type = elemento.getAttribute('type');
+					console.log(elemento.dataset.input, elemento.value, elemento.checked)
+					if(type == 'checkbox'){
+						if(elemento.value.trim() == 'on' || elemento.value.trim() == 'off'){
+							registro[elemento.dataset.input] = elemento.value.trim() == 'on' ? true : elemento.value.trim() == 'false' ? false : '';
+						}else{
+							registro[elemento.dataset.input] = elemento.checked;
+						}
+					}else if(type == 'text' && elemento.value.trim().length > 0){
+						registro[elemento.dataset.input] = elemento.value.trim();
+					}else if(elemento.tagName.trim() == 'select'){
+						registro[elemento.dataset.input] = elemento.value();
+					}else{
+						registro[elemento.dataset.input] = elemento.textContent || elemento.innerText;
+					}
+				})
+
+				try{
+					localStorage.setItem('registros-armazenados', JSON.stringify(registro));
+					console.log(registro.length);
+				}catch(error){
+					console.log('Ocorreu um erro ao salvar o registro. Erro: %s', error);
+				}
+			}
+
 			function apagarRegistroSalvo(){
 				console.log('Apagar registro!');
 			}
