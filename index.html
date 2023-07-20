@@ -1731,8 +1731,9 @@
 		<script>
 			function salvarRegistro(){
 				const registro = new Object();
-
+				
 				document.querySelectorAll('[data-input]').forEach((elemento) => {
+					console.log(elemento.tagName);
 					const type = elemento.getAttribute('type');
 					console.log(elemento.dataset.input, elemento.value, elemento.checked)
 					if(type == 'checkbox'){
@@ -1743,16 +1744,23 @@
 						}
 					}else if(type == 'text' && elemento.value.trim().length > 0){
 						registro[elemento.dataset.input] = elemento.value.trim();
-					}else if(elemento.tagName.trim() == 'select'){
-						registro[elemento.dataset.input] = elemento.value();
+					}else if(elemento.tagName.trim().toLowerCase() == 'select'){
+						registro[elemento.dataset.input] = elemento.value;
 					}else{
 						registro[elemento.dataset.input] = elemento.textContent || elemento.innerText;
 					}
 				})
 
 				try{
-					localStorage.setItem('registros-armazenados', JSON.stringify(registro));
-					console.log(registro.length);
+					let registros_salvos = JSON.parse(localStorage.getItem('registros-armazenados'));
+
+					if(registros_salvos == null && !Array.isArray(registros_salvos)){
+						registros_salvos = new Array();
+					}
+					
+					registros_salvos.push(registro)
+					localStorage.setItem('registros-armazenados', JSON.stringify(registros_salvos));
+					
 				}catch(error){
 					console.log('Ocorreu um erro ao salvar o registro. Erro: %s', error);
 				}
