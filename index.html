@@ -878,30 +878,6 @@
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 							</div>
 							<div class="modal-body">
-								<div class="alert alert-warning">
-									<span>Não foram encontrados registros armazenados</span>
-								</div>
-								<br>
-
-								<table>
-									<thead>
-										<tr>
-											<th>Proponente</th>
-											<th>Salvo em</th>
-											<th>Ação</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Gabriel</td>
-											<td>15/07/2023 20:43</td>
-											<td>
-												<button class="btn btn-primary recuperar-registro-salvo" onclick="recuperarRegistroSalvo()">Recuperar</button>
-												<button class="btn btn-danger apagar-registro-salvo" onclick="apagarRegistroSalvo()">Apagar</button>
-											</td>
-										</tr>
-									</tbody>
-								</table>
 							</div>
 							</div>
 						</div>
@@ -1282,6 +1258,7 @@
 			});
 
 			$('[data-action="registros-salvos"]').click(evento => {
+				carregarRegistros();
 				$('#modal-registros-salvos').modal('show');
 			})
 //**************************************************************
@@ -1744,11 +1721,13 @@
 						}
 					}else if(type == 'text' && elemento.value.trim().length > 0){
 						registro[elemento.dataset.input] = elemento.value.trim();
-					}else if(elemento.tagName.trim().toLowerCase() == 'select' && true){
+					}else if(elemento.tagName.trim().toLowerCase() == 'select'){
 						registro[elemento.dataset.input] = elemento.value;
 					}else{
 						registro[elemento.dataset.input] = elemento.textContent || elemento.innerText;
 					}
+
+					registro['data_criacao'] = Date.now();
 				})
 
 				try{
@@ -1766,12 +1745,62 @@
 				}
 			}
 
-			function apagarRegistroSalvo(){
-				console.log('Apagar registro!');
+			function carregarRegistros(){
+				try{
+					const modal = document.querySelector('#modal-registros-salvos .modal-body');
+					let registros_salvos = JSON.parse(localStorage.getItem('registros-armazenados'));
+
+					if(registros_salvos == null && !Array.isArray(registros_salvos)){
+						modal.innerHTML = `<div class="alert alert-warning"><span>Não foram encontrados registros armazenados</span></div>`
+					}else{
+						modal.innerHTML = `<table><thead><tr><th>Proponente</th><th>Salvo em</th><th>Ação</th></tr></thead><tbody></tbody></table>`;
+						registros_salvos.forEach((registro, index) => {
+							const data = new Date(registro.data_criacao).toLocaleDateString("pt-BR");
+							modal.querySelector('table').innerHTML += `<tr data-id-registro="${index}"><td>${registro.text_nome}</td><td>${data !== 'Invalid Date' ? data : '-'}</td><td><button class="btn btn-primary recuperar-registro-salvo" onclick="recuperarRegistroSalvo(event, this)">Recuperar</button>&nbsp;<button class="btn btn-danger apagar-registro-salvo" onclick="apagarRegistroSalvo(event, this)">Apagar</button></td></tr>`;
+						})
+					}
+
+				}catch(error){
+					console.log('Ocorreu um erro ao carregar os registros. Erro: %s', error);
+				}
+			}
+
+			function apagarRegistroSalvo(evento, elemento){
+				evento.preventDefault();
+				try{
+					let id = elemento.closest('[data-id-registro]').getAttribute('data-id-registro');
+					let registros_salvos = JSON.parse(localStorage.getItem('registros-armazenados'));
+					let registros_atuais = new Array();
+
+					if(registros_salvos == null && !Array.isArray(registros_salvos) && id == null && typeof parseInt(id) !== 'number'){
+						console.log('Não foi possível identificar o ID para apagar o registro ou não existem registros salvos');
+					}else{
+						// Confirmar exclusão de registro - pendente
+
+						registros_salvos.forEach((registro, index) => {
+							if(index !== parseInt(id)){
+								registros_atuais.push(registro);
+							}
+						})
+						
+						registros_atuais !== null && Array.isArray(registros_atuais) ? localStorage.setItem('registros-armazenados', JSON.stringify(registros_atuais)) : '';
+
+						carregarRegistros();
+					}
+
+				}catch(error){
+					console.log('Ocorreu um erro ao apagar o registro. Erro: %s', error);
+				}
 			}
 			
-			function recuperarRegistroSalvo(){
-				console.log('Recuperar registro!');
+			function recuperarRegistroSalvo(evento, elemento){
+				evento.preventDefault();
+
+				try{
+					let id = elemento.closest('[data-id-registro]');
+				}catch(error){
+
+				}
 			}
 		</script>
 </html>
