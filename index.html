@@ -1744,7 +1744,7 @@
 						}
 					}else if(type == 'text' && elemento.value.trim().length > 0){
 						registro[elemento.dataset.input] = elemento.value.trim();
-					}else if(elemento.tagName.trim().toLowerCase() == 'select'){
+					}else if(elemento.tagName.trim().toLowerCase() == 'select' && true){
 						registro[elemento.dataset.input] = elemento.value;
 					}else{
 						registro[elemento.dataset.input] = elemento.textContent || elemento.innerText;
