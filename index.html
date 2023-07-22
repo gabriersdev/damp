@@ -1710,16 +1710,16 @@
 				const registro = new Object();
 				
 				document.querySelectorAll('[data-input]').forEach((elemento) => {
-					console.log(elemento.tagName);
+					// console.log(elemento.tagName);
 					const type = elemento.getAttribute('type');
-					console.log(elemento.dataset.input, elemento.value, elemento.checked)
+					// console.log(elemento.dataset.input, elemento.value, elemento.checked)
 					if(type == 'checkbox'){
 						if(elemento.value.trim() == 'on' || elemento.value.trim() == 'off'){
-							registro[elemento.dataset.input] = elemento.value.trim() == 'on' ? true : elemento.value.trim() == 'false' ? false : '';
+							registro[elemento.dataset.input] = elemento.checked;
 						}else{
 							registro[elemento.dataset.input] = elemento.checked;
 						}
-					}else if(type == 'text' && elemento.value.trim().length > 0){
+					}else if(type == 'text'){
 						registro[elemento.dataset.input] = elemento.value.trim();
 					}else if(elemento.tagName.trim().toLowerCase() == 'select'){
 						registro[elemento.dataset.input] = elemento.value;
@@ -1799,7 +1799,45 @@
 				evento.preventDefault();
 
 				try{
-					let id = elemento.closest('[data-id-registro]');
+					let id = elemento.closest('[data-id-registro]').getAttribute('data-id-registro');
+					const registros_salvos = JSON.parse(localStorage.getItem('registros-armazenados'));
+
+					if(registros_salvos == null && !Array.isArray(registros_salvos) && id == null && typeof parseInt(id) !== 'number'){
+						console.log('Não foi possível identificar o ID para recuperar o registro ou não existem registros salvos');
+					}else{
+						try{
+
+							const dados = registros_salvos[id]
+							console.log(dados);
+
+							if(typeof dados == 'object' ){
+								const chaves = Object.keys(dados);
+
+								chaves.forEach((chave, index) => {
+									const elemento = document.querySelector(`[data-input="${chave}"]`);
+									const valor = dados[chave];
+
+									if(elemento !== null && elemento !== undefined && valor !== null && valor !== undefined){
+										const type = elemento.getAttribute('type');
+										if(type == 'checkbox'){
+											elemento.checked = valor;
+										}else if(type == 'text'){
+											elemento.value = valor;
+										}else if(elemento.tagName.trim().toLowerCase() == 'select'){
+											elemento.value = valor;
+										}else{
+											elemento.value = valor;
+										}
+									}
+								})
+							}
+
+
+						}catch(error){
+							console.log('Ocorreu um erro ao recuperar os dados do registro. Erro: %s', error);
+						}
+					}
+
 				}catch(error){
 
 				}
