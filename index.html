@@ -376,8 +376,8 @@
 					<div>						
 						Eu, <input type="text" id="text_nome" data-input="text_nome" placeholder="NOME" class="userInputs somentetexto autoajuste" maxLength="90">, 
 						nascido(a) em <input type="text" id="text_data1" data-input="text_data1" placeholder="00/00/0000" class="data">, 
-						CPF nº <input id="text_cpf" data-input="text_cpf" placeholder="CPF" class="userInputs">, 
-						PIS/PASEP nº <input id="text_pis" data-input="text_pis" placeholder="PIS/PASEP" class="userInputs">, 
+						CPF nº <input type="text" id="text_cpf" data-input="text_cpf" placeholder="CPF" class="userInputs">, 
+						PIS/PASEP nº <input type="text" id="text_pis" data-input="text_pis" placeholder="PIS/PASEP" class="userInputs">, 
 						declaro sob as penas da Lei, que:						
 					</div>
 				</div>			
@@ -509,7 +509,7 @@
 						<div id="modalidade1" class="recuo20">
 							<input type="checkbox" class="hide_chk" id="chkmodalidade1" data-input="chkmodalidade1">
 								<label for="chkmodalidade1">
-									Aquisição Imóvel Concluído - Venda e Compra: <input type="text" id="text_enquad1" data-input="text_enquad2" class="valor" maxlength="21" data-thousands="." data-decimal="," data-prefix="R$ ">
+									Aquisição Imóvel Concluído - Venda e Compra: <input type="text" id="text_enquad1" data-input="text_enquad1" class="valor" maxlength="21" data-thousands="." data-decimal="," data-prefix="R$ ">
 								</label>
 						</div>
 						<div id="modalidade2" class="recuo20">
@@ -1131,8 +1131,11 @@
 //**************************************************************
 			/*SELECT MONITOR*/			
 			$(document).on('change','#selectEstCiv',function(){
-				// console.log($(this).val());
-				switch($(this).val()){
+				verificaEstadoCivil($(this).val());
+			});
+
+			function verificaEstadoCivil(valor){
+				switch(valor){
 					case "casado":
 						$('#uniaoestavel').hide(400);
 						$('#regime').show(400);
@@ -1151,7 +1154,7 @@
 						$('#uniaoestavel').hide(400);
 					break;
 				}
-			});
+			}
 
 			$('#end_comp_logradouro').click(function(){
 				$('#end_comp_bairro').slideToggle(600);				
@@ -1709,16 +1712,19 @@
 			function salvarRegistro(){
 				const registro = new Object();
 				
+				// console.group();
+				// console.log(document.querySelector('[data-input="text_cpf"]').value);
+				// console.log(document.querySelector('[data-input="text_cpf"]').value.trim());
+				// console.log(document.querySelector('[data-input="text_pis"]').value);
+				// console.log(document.querySelector('[data-input="text_pis"]').value.trim());
+				// console.groupEnd();
+
 				document.querySelectorAll('[data-input]').forEach((elemento) => {
 					// console.log(elemento.tagName);
 					const type = elemento.getAttribute('type');
 					// console.log(elemento.dataset.input, elemento.value, elemento.checked)
 					if(type == 'checkbox'){
-						if(elemento.value.trim() == 'on' || elemento.value.trim() == 'off'){
-							registro[elemento.dataset.input] = elemento.checked;
-						}else{
-							registro[elemento.dataset.input] = elemento.checked;
-						}
+						registro[elemento.dataset.input] = elemento.checked;
 					}else if(type == 'text'){
 						registro[elemento.dataset.input] = elemento.value.trim();
 					}else if(elemento.tagName.trim().toLowerCase() == 'select'){
@@ -1804,11 +1810,10 @@
 
 					if(registros_salvos == null && !Array.isArray(registros_salvos) && id == null && typeof parseInt(id) !== 'number'){
 						console.log('Não foi possível identificar o ID para recuperar o registro ou não existem registros salvos');
+						alert('Não foi possível recuperar o registro');
 					}else{
 						try{
-
 							const dados = registros_salvos[id]
-							console.log(dados);
 
 							if(typeof dados == 'object' ){
 								const chaves = Object.keys(dados);
@@ -1825,21 +1830,29 @@
 											elemento.value = valor;
 										}else if(elemento.tagName.trim().toLowerCase() == 'select'){
 											elemento.value = valor;
+
+											if(chave == 'selectEstCiv'){
+												verificaEstadoCivil(valor);
+											}
+
 										}else{
 											elemento.value = valor;
 										}
 									}
 								})
-							}
 
+								HabilitaImpressao();
+								$('#modal-registros-salvos').modal('hide');
+							}
 
 						}catch(error){
 							console.log('Ocorreu um erro ao recuperar os dados do registro. Erro: %s', error);
+							alert('Não foi possível recuperar o registro');
 						}
 					}
 
 				}catch(error){
-
+					alert('Não foi possível recuperar o registro');
 				}
 			}
 		</script>
