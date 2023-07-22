@@ -1775,17 +1775,19 @@
 					if(registros_salvos == null && !Array.isArray(registros_salvos) && id == null && typeof parseInt(id) !== 'number'){
 						console.log('Não foi possível identificar o ID para apagar o registro ou não existem registros salvos');
 					}else{
-						// Confirmar exclusão de registro - pendente
+						// Confirmar exclusão de registro
 
-						registros_salvos.forEach((registro, index) => {
+						if(confirm('Excluir registro\n\nTem certeza que deseja excluir este registro?')){
+							registros_salvos.forEach((registro, index) => {
 							if(index !== parseInt(id)){
 								registros_atuais.push(registro);
 							}
 						})
 						
-						registros_atuais !== null && Array.isArray(registros_atuais) ? localStorage.setItem('registros-armazenados', JSON.stringify(registros_atuais)) : '';
+							registros_atuais !== null && Array.isArray(registros_atuais) ? localStorage.setItem('registros-armazenados', JSON.stringify(registros_atuais)) : '';
 
-						carregarRegistros();
+							carregarRegistros();
+						}
 					}
 
 				}catch(error){
