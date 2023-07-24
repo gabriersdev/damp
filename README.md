@@ -1,6 +1,6 @@
 # Damp 
 
-Este projeto é uma adaptação da Declaração para Enquadramento no Programa (DAMP), criada pela Caixa Econômica Federal para uso em processos de aquisição de imóveis e terrenos com a utilização de FGTS. O projeto está disponível para acesso [clicando aqui.](link-projeto)
+Este projeto é uma adaptação da Declaração para Enquadramento no Programa (DAMP), criada pela Caixa Econômica Federal para uso em processos de aquisição de imóveis e terrenos com a utilização de FGTS. O projeto está disponível para acesso [clicando aqui.][link-projeto]
 
 Funcionalidades adicionadas:
 - Armazenamento no navegador dos formulários criados
@@ -12,4 +12,4 @@ Neste projeto utilizamos as tecnologias:
 - jQuery
 - Bootstrap
 
-[link-projeto]:[https://gabrieszin.github.io/damp/]
+[link-projeto]: https://gabrieszin.github.io/damp/
