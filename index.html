@@ -1641,8 +1641,10 @@
 			}
 			
 			function printWindow(){	
+				$('[data-action="registros-salvos"]').hide();
 				window.print();	
 				salvarRegistro();
+				$('[data-action="registros-salvos"]').show();
 			}
 			
 			function vercpf (cpf){			
