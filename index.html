@@ -1420,7 +1420,7 @@
 				}
 				if (!$('#chkresidencia1').is(':checked') && !$('#chkresidencia2').is(':checked')){
 						noPrintSettings();
-					return false;
+						return false;
 				}
 				if ($('#chkresidencia2').is(':checked')){
 					if ($('#text_possuiimovellocal').val() == ""){
@@ -1428,7 +1428,13 @@
 						noPrintSettings();
 						return false;
 					}
-				}		
+				}
+				if($('#chkresidencia2').is(':checked')){
+					$('#residencia1').hide(400);
+				}
+				if($('#chkresidencia1').is(':checked')){
+					$('#residencia2').hide(400);
+				}
 /*--------------------------------------*/
 
 /*----------------04 - IR ---------------*/
@@ -1437,6 +1443,8 @@
 					return false;
 				}
 				if ($('#chkir1').is(':checked')){
+					$('#ir2').hide(400);
+
 					if ($('#text_irano1').val() == ""){
 						$('#text_irano1').focus();
 						noPrintSettings();
@@ -1450,6 +1458,8 @@
 				}
 
 				if ($('#chkir2').is(':checked')){
+					$('#ir1').hide(400);
+
 					if ($('#text_irano2').val() == ""){
 						$('#text_irano2').focus();
 						noPrintSettings();	
@@ -1498,6 +1508,12 @@
 						noPrintSettings();
 						return false;
 					}
+				}
+
+				if($('#chkusufruto1').is(':checked')){
+					$('#usufruto2').hide(400);
+				}else if($('#chkusufruto2').is(':checked')){
+					$('#usufruto1').hide(400);
 				}
 /*--------------------------------------*/
 
