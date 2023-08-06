@@ -1571,6 +1571,14 @@
 						return false;
 					}
 				}
+
+				const modalidade = document.querySelector('#modalidade');
+				modalidade.querySelectorAll('input[type=checkbox]').forEach((input, index) => {
+					if(!input.checked){
+						$(input.closest(`#modalidade${index + 1}`)).hide(300);
+					}
+				})
+				
 /*--------------------------------------*/
 
 /*------  8 ENQUADRAMENTO  ------------*/
@@ -1609,6 +1617,17 @@
 						return false;
 					}
 				}
+
+				const enquadramento = document.querySelector('#enquadramento');
+				enquadramento.querySelectorAll('input[type=checkbox].enquad').forEach((input, index) => {
+					const div_enquadramento = input.closest(`#enquadramento${index + 1}`);
+					if(!input.checked){
+						$(div_enquadramento).hide(400);
+					}else{
+						$(div_enquadramento.querySelector(`#boxenq${index + 1}`)).show(400)
+					}
+				})
+
 /*--------------------------------------*/		
 
 /*---- USO DO FGTS---------------------*/		
