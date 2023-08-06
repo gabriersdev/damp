@@ -1693,12 +1693,20 @@
 			}
 			
 			function printWindow(){	
-				$('[data-action="registros-salvos"]').hide();
+				ocultarElementosEnquantoImprime();
 				window.print();	
 				salvarRegistro();
-				$('[data-action="registros-salvos"]').show();
+				exibirElementoDepoisImpressao();
 			}
 			
+			function ocultarElementosEnquantoImprime(){
+				$('#printdiv').hide();
+			}
+			
+			function exibirElementoDepoisImpressao(){
+				$('#printdiv').show();
+			}
+
 			function vercpf (cpf){			
 				var cpf = cpf.replace(".", "");
 				var cpf = cpf.replace(".", "");
