@@ -1889,6 +1889,8 @@
 												verificaEstadoCivil(valor);
 											}
 
+										}else if(elemento.tagName.toLocaleLowerCase().trim() == 'div'){
+											elemento.textContent = valor;
 										}else{
 											elemento.value = valor;
 										}
