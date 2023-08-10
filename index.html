@@ -1883,6 +1883,11 @@
 											elemento.checked = valor;
 										}else if(type == 'text'){
 											elemento.value = valor;
+											
+											if(valor.length > 0){
+												elemento.style.width = `${((valor.length) * 16) + 16}px`;
+											}
+											
 										}else if(elemento.tagName.trim().toLowerCase() == 'select'){
 											elemento.value = valor;
 
