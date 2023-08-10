@@ -1885,6 +1885,7 @@
 											elemento.value = valor;
 											
 											if(valor.length > 0 && elemento.dataset.input !== 'assinatura_titular' && elemento.dataset.input !== 'assinatura_caixa'){
+												elemento.setAttribute('size', valor.length);
 												elemento.style.width = `${((valor.length) * 16) + 16}px`;
 											}
 											
