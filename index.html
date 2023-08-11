@@ -1594,6 +1594,12 @@
 					if ($('#sn_1').is(':checked') && !$('#sn_2').is(':checked')){flag1 = true;}			
 					else if (!$('#sn_1').is(':checked') && $('#sn_2').is(':checked')){flag1 = true;}
 					else{flag1 = false;}
+
+					if($('#sn_1').is(':checked')){
+						$('#span_2').hide('400');
+					}else if($('#sn_2').is(':checked')){
+						$('#span_1').hide('400');
+					}
 					
 					if ($('#sn_3').is(':checked') && !$('#sn_4').is(':checked')){flag2 = true;}
 					else if (!$('#sn_3').is(':checked') && $('#sn_4').is(':checked')){flag2 = true;}
@@ -1601,6 +1607,12 @@
 					if ( (flag1 === false) || (flag2 === false)){
 						noPrintSettings();
 						return false;			
+					}
+
+					if($('#sn_3').is(':checked')){
+						$('#span_4').hide('400');
+					}else if($('#sn_4').is(':checked')){
+						$('#span_3').hide('400');
 					}
 				}
 /*---				
