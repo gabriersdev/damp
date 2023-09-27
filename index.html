@@ -160,7 +160,7 @@
 						background: gainsboro;
 						font-weight: 700;
 						text-transform: uppercase;
-						min-width: 100px;
+						min-width: 275px;
 					}
 					
 					#residencia1, #residencia2, #usufruto1, #usufruto2{
@@ -1131,10 +1131,10 @@
 						//**************************************************************
 						/*SELECT MONITOR*/			
 						$(document).on('change','#selectEstCiv',function(){
-							verificaEstadoCivil($(this).val());
+							verificaEstadoCivil($(this).val(), this);
 						});
 						
-						function verificaEstadoCivil(valor){
+						function verificaEstadoCivil(valor, elemento){
 							switch(valor){
 								case "casado":
 								$('#uniaoestavel').hide(400);
@@ -1154,6 +1154,8 @@
 								$('#uniaoestavel').hide(400);
 								break;
 							}
+
+							$(elemento).css({width: '275px'})
 						}
 						
 						$('#end_comp_logradouro').click(function(){
@@ -1911,8 +1913,10 @@
 															
 															if(dados[`${elemento.dataset.input}_w`] !== undefined && typeof(parseInt(dados[`${elemento.dataset.input}_w`])) == 'number'){
 																elemento.style.width = `${(dados[`${elemento.dataset.input}_w`])}px`;
+															}else if(elemento.dataset.input == 'selectRegime'){
+																elemento.style.width = '275px';
 															}else{
-																elemento.style.width = `${((valor.lzength) * 16) + 16}px`;
+																elemento.style.width = `${((valor.length) * 16) + 16}px`;
 															};
 														}
 														
