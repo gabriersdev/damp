@@ -1,0 +1,254 @@
+body{
+  font-family: calibri, sans-serif;
+  font-size: 16px; /* ALTERAR AQUI SE NECESSARIO */
+  margin: 40px; /* ALTERAR AQUI SE NECESSARIO */				
+}
+
+#navegador_incompativel, #print_area{display: none;}
+
+.fonte10{font-size: 10px;}
+.fonte11{font-size: 11px;}
+.fonte12{font-size: 12px;}
+.fonte13{font-size: 13px;}
+.fonte14{font-size: 14px;}
+.fonte16{font-size: 16px;}
+.oculto{display: none;}
+.justificado{text-align: justify;}
+.recuo20{margin-left: 20px;}
+.recuo30{margin-left: 30px;}
+.recuo40{margin-left: 40px;}
+
+.userInputs{width: 101px;}
+.data{width: 77px;}
+.valor{min-width: 40px;}
+.nrdamp{min-width: 185px;}			
+.wd20{width: 22px;}
+.wd34{width: 34px;}
+.wd65{width: 65px;}			
+
+.data, .userInputs, .valor, .nrdamp{
+  border: none;
+  font-size: 15px;
+  background: gainsboro;
+  font-weight: 700;
+  text-decoration: underline;
+  text-transform: uppercase;
+}
+
+.nrdamp{font-size: 18px;}
+
+.data, .userInputs{text-align: center;}
+.valor{text-align: left;}
+
+#logo-img{
+  width: 172px;
+  /*border: solid 2px darkblue;*/
+  float: left !important;
+}
+
+#aut-declaracao{
+  width: 385px;
+  /*border: solid 2px darkred;*/
+  float: right !important;
+  margin-right: 0px;
+  font-size: 15px;
+  text-align: justify;
+}
+
+#box-sigilo{
+  margin-top: 10px;
+  margin-right: 15px;
+  text-align: center;
+  border-bottom: 1px solid #000;
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+  width: 110px;
+  float: right;
+}
+
+.width_tmp_select{
+  display : none;
+}
+
+.spn-block{display: block;}	
+
+#selectEstCiv, #selectRegime {
+  cursor: pointer;
+  outline: 0px;
+  border: 0px;
+  -appearance: none;
+  -appearance: none;
+  text-indent: 0.01px;
+  text-overflow: '';
+  background: gainsboro;
+  font-weight: 700;
+  text-transform: uppercase;
+  min-width: 275px;
+}
+
+#residencia1, #residencia2, #usufruto1, #usufruto2{
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.hide_chk > label{
+  display: inline !important;
+  font-weight: 400 !important;
+}
+
+#regimecasado, #uniaoestavel, .item{
+  margin-top: -10px;
+}
+
+input{cursor: pointer;}
+
+#custom-warning{
+  width: 80px;
+  height: 80px;
+  border: 2px solid #a1a1a1;
+  background: #dddddd;
+  border-radius: 45px;
+  text-align: center;
+  font-size: 80px;
+  color: #fff;
+  background-color: #c9302c;
+  border-color: #ac2925;
+  font-family: initial, -webkit-pictograph, serif, cursive;
+}
+
+#custom-warning > span{	
+  position: relative;
+  top: -20px;
+}			
+
+.margintoprecuo{
+  margin-top: -10px;
+}
+
+.editableDiv {
+  width: 95%;
+  background: #D8D8D8;
+  border: 1px solid #ddd;
+  text-transform: uppercase;
+  font-weight: 700;
+  border: solid 1px white;				
+}
+
+.justificado > li, justificado > p{
+  margin-top: -5px;
+}
+
+#tab_contasfgts, #cond_ftgs_msg{display: none;}
+
+table{width: 100%;}
+
+table,td,th{
+  border: 1px solid gray;
+  border-collapse: collapse;
+}
+
+td.rd_t{
+  border: solid 1px white !important;
+  border-right: 1px solid #808080 !important;
+}
+
+td>input{
+  border: none;
+  width: 100%;
+  height: 100%;
+  background-color: #D8D8D8;
+}
+
+#box_sig, td, th {
+  padding: 5px;
+}
+
+#damp{
+  text-align: right;
+  margin-right: 20px;
+}
+
+#text_numdamp{text-align: center;}
+
+.minitexto {font-size: 10px !important;}			
+
+[contenteditable=true]:empty:before{
+  color: #A9A9A9;
+  content: attr(placeholder);
+  font-size: 15px;
+  display: block; /* For Firefox */
+}
+
+#endereco[contenteditable=true]{	
+  background-color: gainsboro;
+}
+
+.end_camp{
+  border: none;
+  border-bottom: 1px solid black;
+  background-color: gainsboro;
+}
+
+#camporesponsabilidade{
+  margin-top: -10px;
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+.titulo-centralizado {
+  font-weight: 700;
+  text-align: center;
+}
+
+
+.assinatura {
+  border: none;
+  border-bottom: 1px solid #000;
+  background-color: #F9F9F9;
+  padding-left: 5px;
+}			
+
+.div_assinat{float: left;}
+
+footer{	
+  clear: left;
+  text-align: center;
+}
+
+#printdiv{ text-align: center; }
+
+#btImprimir,
+[data-action="registros-salvos"]{
+  height: 55px;
+  min-width: 130px;
+  font-size: 25px;		
+  text-transform: uppercase;
+}
+
+#modal-registros-salvos .alert{
+  margin: 0;
+}
+
+.apagar-registro-salvo,
+.recuperar-registro-salvo{
+  text-transform: uppercase;
+}
+
+/* ******************** MEDIA PRINT ************************ */
+@media print{
+  .hide_chk, .do-not-print{display: none !important;}
+  
+  body{
+    margin-left: 2px !important;
+    margin-right: 2px !important; 
+  }
+  
+  .editableDiv{
+    text-decoration: underline;
+  }
+}
+
+/*CAMPO 5 DO ENDERECO QUEBRADO */
+#mostrarCampoEnd, #end_comp_bairro, #municipio_usufruto{display: none;}
+#end_comp_logradouro{cursor: pointer;}
+/* *********************************************************************************** */
