@@ -212,21 +212,33 @@ td>input{
   padding-left: 5px;
 }			
 
-.div_assinat{float: left;}
+.div_assinat{
+  float: left;
+}
 
 footer{	
   clear: left;
   text-align: center;
 }
 
-#printdiv{ text-align: center; }
+#printdiv{ 
+  text-align: center;
+  margin-top: 1.5rem;
+}
 
 #btImprimir,
-[data-action="registros-salvos"]{
+[data-action="registros-salvos"],
+[data-action="exportar-registros"]{
   height: 55px;
   min-width: 130px;
   font-size: 25px;		
   text-transform: uppercase;
+}
+
+[data-action="exportar-registros"]{
+  display: block;
+  margin: 0 auto;
+  margin-top: 2rem;
 }
 
 #modal-registros-salvos .alert{
@@ -249,6 +261,10 @@ footer{
   
   .editableDiv{
     text-decoration: underline;
+  }
+  
+  div#printdiv{
+    display: none;
   }
 }
 

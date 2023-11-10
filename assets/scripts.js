@@ -1087,3 +1087,19 @@ function recuperarRegistroSalvo(evento, elemento){
     alert('Não foi possível recuperar o registro');
   }
 }
+
+$('[data-action="exportar-registros"]').on('click', (event) => {
+  event.preventDefault();
+
+  try{
+    registros_salvos = JSON.parse(localStorage.getItem('registros-armazenados'));
+    const saida = `${registros_salvos !== null && Array.isArray(registros_salvos) ? JSON.stringify(registros_salvos) : 'Não foram localizados registros.'}`
+    console.groupCollapsed('Clique para ver os recuperados do localStorage em JSON')
+    console.log(saida.trim());
+    console.groupEnd();
+
+    alert('Os registros foram exibidos em JSON no console do navegador. Pressione CTRL + C para copiar os registros e CTRL + V para colar em um editor de texto.')
+  }catch(error){
+    console.log('Ocorreu um erro ao exportar os registros. Erro: %s', error);
+  }
+})
