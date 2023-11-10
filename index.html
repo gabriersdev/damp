@@ -1,595 +1,588 @@
 ﻿<!DOCTYPE html>
 <html lang="pt-br">
-<head>
-	<title>DAMP29300-Versão Offline</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta charset="UTF-8">
-	<meta name="author" content="Carlos Santos">
-	<meta name="description" content="DAMP29300">
-	<link rel="shortcut icon" href="./assets/favicon.svg" type="image/x-icon">
-	
-	<!-- BOOTSTRAP 3.3.7 MIN CSS -->		
-	<link rel="stylesheet" href="./assets/bootstrap.min.css">
-	
-	<!-- ESTILIZACAO -->
-	<link rel="stylesheet" href="./assets/style.css">
-	
-	<!--jquery 3.2.1 min-->
-	<script src="./assets/jquery.min.js" defer></script>
-	<!-- BOOTSTRAP 3.3.7 MIN -->
-	<script src="./assets/boostrap.min.js" defer></script>
-	<!-- JQUERY INPUTMASK BUNDLE.JS -->
-	<script src="./assets/jqueryInputMask.min.js" defer></script>
-	<!--jQuery Masked Input Plugin-->
-	<script src="./assets/jqueryMaskPlugin.js" defer></script>
-	<!--jQuery AutogrowInput-->		
-	<script src="./assets/jqueryAutoGrow.min.js" defer></script>
-	<!--MASKMONEY-->
-	<script src="./assets/maskMoney.js" defer></script>
-</head>
-<body onload="msieversion();">
-	
-	<div id="navegador_incompativel" class="container">
-		<div class="panel panel-warning">
-			<div class="panel-heading">
-				<h3>Esta aplicação não é compatível com esse navegador (Internet Explorer).</h3>
-			</div>
-			<div class="panel-body text-warning">
-				<h4>Por favor utilize as versões mais recentes do:<br>
-					<ul>
-						<li>Chrome (versão 49 ou superior)</li>
-						<li>Firefox (versão 52 ou superior)</li>
-					</ul>
-				</h4>
-				<hr style="border: 1px solid #8a6d3b;">
-				<h4>
-					Informação do Navegador utilizado:<br>
-					<span id="nav_incomp_fulllname" class="text-info"></span>
-				</h4>
-			</div>
-		</div>
-	</div>
-	
-	<div id="print_area" class="container no-print-allowed">
-		<div>
-			<div id="header-mo">
-				<div id="logo-img">
-					<img src="./assets/logocaixagrayscale.png">
-				</div>
-				<div id="aut-declaracao">
-					Declaração para Enquadramento no Programa <span id="cond_ftgs_msg">e Autorização para Movimentação e Utilização dos Recursos da Conta Vinculada do FGTS na Aquisição/Construção de imóvel residencial, com ou sem financiamento</span>
-				</div>
-			</div>
-			<div class="row" style="clear: both;"><!-- manter esse clear: both inline -->
-				<div class="col-sm-7"></div>
-				<div id="box-sigilo" class="col-sm-2">
-					<span class="fonte13">Grau de Sigilo</span><br>
-					#Público
-				</div>
-			</div>
-		</div>
-		<br>
-		<div>		
-			<div>						
-				Eu, <input type="text" id="text_nome" data-input="text_nome" placeholder="NOME" class="userInputs somentetexto autoajuste" maxLength="90">, 
-				nascido(a) em <input type="text" id="text_data1" data-input="text_data1" placeholder="00/00/0000" class="data">, 
-				CPF nº <input type="text" id="text_cpf" data-input="text_cpf" placeholder="CPF" class="userInputs">, 
-				PIS/PASEP nº <input type="text" id="text_pis" data-input="text_pis" placeholder="PIS/PASEP" class="userInputs">, 
-				declaro sob as penas da Lei, que:						
-			</div>
-		</div>			
-		
-		<div id="estadocivil"><strong>1 - ESTADO CIVIL</strong>
-			<div class="recuo20">
-				<p>Sou
-					<select id="selectEstCiv" data-input="selectEstCiv">
-						<option value=""></option>
-						<option value="casado">CASADO(A)</option>
-						<option value="solteiro">SOLTEIRO(A)</option>
-						<option value="viuvo">VIUVO(A)</option>
-						<option value="divorciado">DIVORCIADO(A)/SEPARADO(A)</option>
-					</select>							
-				</p>
-				
-				<div id="regime" class="oculto">
-					<div id="regimecasado">
-						Sob regime de 
-						<select id="selectRegime" data-input="selectRegime" class="select_resizable">
-							<option value=""></option>		
-							<option value="parcial">COMUNHÃO PARCIAL DE BENS</option>					
-							<option value="universal">COMUNHÃO UNIVERSAL DE BENS</option>
-							<option value="separacao">SEPARAÇÃO TOTAL DE BENS</option>					
-							<option value="aquestos">PARTICIPAÇÃO FINAL NOS AQUESTOS</option>
-						</select>
-						<select class="width_tmp_select" data-input="width_tmp_select">
-							<option class="width_tmp_option"></option>
-						</select>
-						desde <input type="text" id="text_data2" data-input="text_data2" class="data" size="8" maxlength="8" placeholder="00/00/0000">.
-					</div>
-				</div>
-				
-				<div id="uniaoestavel" class="oculto">
-					<div id="uniaoestavel1"  class="justificado">								
-						<input type ="checkbox" id="chkuniaoestavel1" data-input="chkuniaoestavel1" name="chkuniaoestavel1" class="hide_chk">
-						<label for="chkuniaoestavel1">
-							<strong>Mantenho união estável</strong> desde <input type="text" id="text_data3" data-input="text_data3" class="data" size="8" maxlength="8" placeholder="00/00/0000"> e declaro ciência que na união estável, salvo contrato escrito entre os companheiros, aplica-se às relações patrimoniais, o regime da comunhão parcial de bens e, se lavrada Escritura Pública Declaratória de União Estável, apresentarei a mesma à CAIXA.
-						</label>
-					</div>
-					<div id="uniaoestavel2" class="justificado">
-						<input type ="checkbox" id="chkuniaoestavel2" data-input="chkuniaoestavel2" class="hide_chk">
-						<label for="chkuniaoestavel2">
-							<strong>NÃO mantenho união estável</strong> e declaro, sob responsabilidade civil e criminal, que não mantenho relação de vida comum ou união estável com outra pessoa, nas condições dos Art.1723 a 1727 do Título III – Da União Estável, do Código Civil Brasileiro. Declaro ainda estar ciente que, comprovada a falsidade nesta declaração, estarei sujeito(a) às penas previstas no Art. 299 do Código Penal Brasileiro.<br>
-						</label>
-					</div>
-				</div>
-			</div>
-		</div>
-		<br>
-		<div id="ocupacao" class="item margintoprecuo"><strong>2 - SITUAÇÃO OCUPACIONAL</strong>
-			<div id="ocupacao1" class="recuo20">
-				<input type="checkbox" id="chkocupacao1" data-input="chkocupacao1" class="hide_chk">
-				<label for="chkuniaoestavel2">
-					Sou <input type="text" id="text_ocupacao" data-input="text_ocupacao" class="userInputs somentetexto autoajuste" maxlength="50" placeholder="profissão de maior rendimento, inclusive no caso de aposentadoria/pensão">
-					e exerço minha ocupação principal no município de 
-					<input type="text" id="text_localocupa" data-input="text_localocupa" class="userInputs somentetexto autoajuste" size="35" placeholder="MUNICIPIO" maxlength="50">/<input type="text" id="text_uf0" data-input="text_uf0" class="userInputs somentetexto autoajuste" maxlength="2" placeholder="UF">.
-				</label>
-			</div>
-			<div id="ocupacao2" class="recuo20">
-				<input type="checkbox" id="chkocupacao2" data-input="chkocupacao2" class="hide_chk">
-				<label for="chkocupacao2">Estou desempregado(a).</label>
-			</div>
-			<div id="ocupacao3" class="recuo20">
-				<input type="checkbox" id="chkocupacao3" data-input="chkocupacao3" class="hide_chk modal-popup"><!-- MODAL APOSENTADO-->
-				<label for="chkocupacao3">Sou aposentado(a)/pensionista.</label>
-			</div>
-		</div>
-		<br>
-		<div id="residencia" class="margintoprecuo"><strong>3 - RESIDÊNCIA</strong>
-			<div class="recuo20">
-				<strong>Resido em:</strong>
-				<input type="text" id="text_logradouro" data-input="text_logradouro" class="userInputs somentetexto autoajuste" size="35" placeholder="MUNICIPIO" maxlength="80">/<input type="text" id="text_uf1" data-input="text_uf1" class="userInputs somentetexto autoajuste" maxlength="2" placeholder="UF"> 
-				há <input type="text" id="text_compl1" data-input="text_compl1" class="userInputs wd20 numh" size="3" maxlength="2" placeholder="00"> anos 
-				e <input type="text" id="text_compl2" data-input="text_compl2" class="userInputs wd20 numh" size="3" maxlength="2" placeholder="00"> meses e:
-			</div>
-			<div id="residencia1" class="recuo20">
-				<input type="checkbox" id="chkresidencia1" data-input="chkresidencia1" class="hide_chk modal-popup">
-				<label for="residencia1">Não possuo imóvel.</label>
-			</div>
-			<div id="residencia2" class="recuo20">
-				<input type="checkbox" id="chkresidencia2" data-input="chkresidencia2" class="hide_chk modal-popup">
-				<label for="residencia2">Possuo imóvel em
-					<input type="text" id="text_possuiimovellocal" data-input="text_possuiimovellocal" class="userInputs somentetexto autoajuste" placeholder="CIDADE" maxlength="50">/<input type="text" id="text_uf999" data-input="text_uf999" class="userInputs somentetexto autoajuste" maxlength="2" placeholder="UF">.
-				</label>
-			</div>
-		</div>
-		<br>
-		<div id="ir" class="margintoprecuo"><strong>4 - DECLARAÇÃO DE IMPOSTO DE RENDA</strong>
-			<div id="ir1" class="recuo20">
-				<input type="checkbox" id="chkir1" data-input="chkir1" class="hide_chk">
-				<label for="chkir1">
-					Sou isento(a) da Declaração do IR ano base <input type="text" id="text_irano1" data-input="text_irano1" class="data wd34 ano" placeholder="0000" size="3" maxlength="4">, exercício <input type="text" id="text_irexerc1" data-input="text_irexerc1" class="data wd34 ano" placeholder="0000" size="3" maxlength="4">.
-				</label>
-			</div>
-			<div id="ir2" class="recuo20">
-				<input type ="checkbox" id="chkir2" data-input="chkir2" class="hide_chk">
-				<label for="chkir2">
-					A Declaração do Imposto de Renda entregue à CAIXA é cópia fiel à última declaração apresentada à Receita Federal ano base <input type="text" id="text_irano2" data-input="text_irano2" class="data wd34 ano" placeholder="0000" size="3" maxlength="4">, exercício <input type="text" id="text_irexerc2" data-input="text_irexerc2" class="data wd34 ano" placeholder="0000" size="3" maxlength="4">.
-				</label>
-			</div>
-		</div>
-		<br>
-		<div class="margintoprecuo"><strong>5 - IMÓVEL OBJETO DO FINANCIAMENTO</strong>
-			<div class="recuo20">O imóvel objeto da aquisição está localizado à
-				<br>
-				<div class="editableDiv" data-input="endereco_logradouro" placeholder=" LOGRADOURO, N°, CEP, BAIRRO" contenteditable="true"></div>
-				<input type="text" id="text_logradouro2" data-input="text_logradouro2" class="userInputs somentetexto autoajuste" size="35" placeholder="MUNICIPIO" maxlength="80" style="font-size: 16px;">/<input type="text" id="text_uf2" data-input="text_uf2" class="userInputs somentetexto autoajuste" maxlength="2" placeholder="UF" style="font-size: 16px;"> 	
-			</div>
-			<br>
-			<div id="usufruto" class="margintoprecuo"><strong>6 - USUFRUTO</strong>		
-				<div id="usufruto1" class="recuo20">
-					<input type="checkbox" id="chkusufruto1" data-input="chkusufruto1" class="hide_chk">
-					<label for="chkusufruto1">NÃO SOU USUFRUTUÁRIO.</label>
-				</div>
-				<div id="usufruto2" class="recuo20">
-					<input type="checkbox" id="chkusufruto2" data-input="chkusufruto2" class="hide_chk">
-					<label for="chkusufruto2"><u>Renunciei à condição de usufrutuário</u> de imóvel, registrada no RI
-						<span id="municipio_usufruto"> no municipío <input type="text" id="mun_usufruto" data-input="mun_usufruto" class="userInputs autoajuste" placeholder="MUNICIPIO" maxlength="80">/<input type="text" id="uf_usufruto" data-input="uf_usufruto" class="userInputs autoajuste" maxlength="2" placeholder="UF">.</span>
-					</label>
-				</div>
-			</div>
-		</div>				
-		<!-- FIM DO GRUPO 1 -->
-		<br>
-		<!-- INICIO DO GRUPO 2 -->
-		<div><!--GRUPO ENQUADRAMENTO/MODALIDADE-->				
-			<div id="modalidade" class="margintoprecuo"><strong>7 - MODALIDADE</strong>
-				<div id="modalidade1" class="recuo20">
-					<input type="checkbox" class="hide_chk" id="chkmodalidade1" data-input="chkmodalidade1">
-					<label for="chkmodalidade1">
-						Aquisição Imóvel Concluído - Venda e Compra: <input type="text" id="text_enquad1" data-input="text_enquad1" class="valor" maxlength="21" data-thousands="." data-decimal="," data-prefix="R$ ">
-					</label>
-				</div>
-				<div id="modalidade2" class="recuo20">
-					<input type="checkbox" class="hide_chk" id="chkmodalidade2" data-input="chkmodalidade2">
-					<label for="chkmodalidade2">
-						Aquisição Imóvel em Construção (empreendimento) – Venda e Compra: <input type="text" id="text_enquad2" data-input="text_enquad2" class="valor" maxlength="21" data-thousands="." data-decimal="," data-prefix="R$ ">
-					</label>
-				</div>
-				<div id="modalidade3" class="recuo20">
-					<input type="checkbox" class="hide_chk" id="chkmodalidade3" data-input="chkmodalidade3">
-					<label for="chkmodalidade3">
-						Aquisição Terreno e Construção – Venda e Compra Terreno + Orçamento: <input type="text" id="text_enquad3" data-input="text_enquad3" class="valor" maxlength="21" data-thousands="." data-decimal="," data-prefix="R$ ">
-					</abel>
-				</div>
-				<div id="modalidade4" class="recuo20">
-					<input type="checkbox" class="hide_chk" id="chkmodalidade4" data-input="chkmodalidade4">
-					<label for="chkmodalidade4">
-						Construção em Terreno Próprio – Orçamento: <input type="text" id="text_enquad4" data-input="text_enquad4" class="valor" maxlength="21" data-thousands="." data-decimal="," data-prefix="R$ ">
-					</label>
-				</div>			
-				<div id="modalidade5" class="recuo20">
-					<input type="checkbox" class="hide_chk" id="chkmodalidade5" data-input="chkmodalidade5">
-					<label for="chkmodalidade5">
-						CCFGTS - Reforma e/ou Ampliação – Orçamento: <input type="text" id="text_enquad5" data-input="text_enquad5" class="valor" maxlength="21" data-thousands="." data-decimal="," data-prefix="R$ ">
-					</label>
-				</div>
-				<div id="modalidade6" class="recuo20">
-					<input type="checkbox" class="hide_chk" id="chkmodalidade6" data-input="chkmodalidade6">
-					<label for="chkmodalidade6">
-						CCFGTS – Conclusão – Orçamento: <input type="text" id="text_enquad6" data-input="text_enquad6" class="valor" maxlength="21" data-thousands="." data-decimal="," data-prefix="R$ ">
-					</label>
-				</div>
-				<div id="modalidade7" class="recuo20">
-					<input type="checkbox" class="hide_chk" id="chkmodalidade7" data-input="chkmodalidade7">
-					<label for="chkmodalidade7">
-						CCFGTS – Aquisição de Material de Construção  – Orçamento: <input type="text" id="text_enquad7" data-input="text_enquad7" class="valor" maxlength="21" data-thousands="." data-decimal="," data-prefix="R$ ">
-					</label>
-				</div>	
-			</div>
-		</div>	<!-- FIM DA MODALIDADE -->				
-		<br>
-		<div id="enquadramento" class="margintoprecuo"><strong>8 - ENQUADRAMENTO</strong>					
-			<div id="enquadramento1" class="recuo20">					
-				<input type="checkbox" class="enquad hide_chk" id="chkenquadramento1" data-input="chkenquadramento1">
-				<label for="chkenquadramento1">
-					
-					<strong>CARTA DE CRÉDITO FGTS – CCFGTS/PMCMV OU CCFGTS-OPERAÇÕES ESPECIAIS</strong>
-					<div id="boxenq1" class="oculto">
-						<p style="margin-top:0"><strong>DECLARO</strong>, sob as penas da Lei, que:</p>
-						<ul class="justificado" style="margin-top: -12px">
-							<li class="small-font-print">Não sou titular de financiamento ativo no SFH em qualquer parte do País, independente do percentual de propriedade;</li>
-							<li>Não sou proprietário, arrendatário, cessionário ou promitente comprador de imóvel residencial urbano, concluído ou em construção, no município onde:</li>
-							<ol class="lista_ordenada_letra">
-								<li  class="small-font-print">Exerço minha ocupação principal, incluindo os municípios limítrofes e integrantes da mesma Região Metropolitana; nem</li>
-								<li class="small-font-print">Resido atualmente, incluindo os municípios limítrofes e integrantes da mesma Região Metropolitana; nem</li>
-								<li class="small-font-print">Pretendo trabalhar ou residir.</li>
-							</ol>
-							<li>Restituirei o valor do subsídio, proporcionalmente ao prazo remanescente, se quitar, transferir ou amortizar o financiamento até o 5º ano de vigência do contrato;</li>				
-							<li>Não sou titular de direito de aquisição de imóvel residencial urbano, concluído ou em construção, no atual local de meu domicílio nem onde pretendo fixá-lo, inclusive no Programa de Arrendamento Residencial;</li>
-							<li>O imóvel objeto da proposta de financiamento destina-se a minha residência e localiza-se em área urbana, no município onde comprovadamente resido ou exerço minha ocupação principal, incluindo os municípios limítrofes e integrantes da mesma Região Metropolitana ou onde pretendo fixar residência e/ou trabalho e, se já concluído, possui plenas condições de habitabilidade;</li>
-							<li>Recebi a Cartilha “O que você precisa saber antes de comprar o seu imóvel”;</li>
-							<li>Concordo em adquirir o imóvel sem via de acesso pavimentada, se for o caso;</li>						
-							<li>Estou ciente que, se concedido o redutor de 0,5% na taxa de juros, este será cancelado se não atendidas as exigências estabelecidas para sua aplicação;</li>
-							<li>Estou ciente que, caso já tenha sido beneficiado com desconto/subsídio concedido pelo FGTS, exceto para Aquisição de Material de Construção - AMC, o novo financiamento será concedido sem desconto, sem redução da taxa de juros e com pagamento da Taxa de Administração.</li>
-						</ul>
-						<div class="yesno">
-							<strong class="spn-block">Possuo 36 meses³ de trabalho sob o regime do FGTS:</strong>
-							<span id="span_1" class="recuo20">
-								<input type="checkbox" id="sn_1" data-input="sn_1" value="sim" class="yesno hide_chk">
-								<label for="sn_1">SIM</label>
-							</span>
-							<span id="span_2" class="recuo20">
-								<input type="checkbox" id="sn_2" data-input="sn_2" value="nao" class="yesno hide_chk">
-								<label for="sn_2">NÃO</label>
-							</span>
-							<span class="minitexto spn-block" class="recuo20">³ Na contagem do tempo é considerado a soma dos períodos trabalhados, consecutivos ou não, na mesma ou em diferentes empresas.</span>
-						</div>
-						
-						<div class="yesno">
-							<strong class="spn-block">Já fui beneficiado com desconto/subsídio concedido pelo FGTS (exceto para Aquisição de Material de Construção – AMC):</strong>
-							<span id="span_3" class="recuo20">
-								<input type="checkbox" id="sn_3" data-input="sn_3" value="sim" class="yesno hide_chk">
-								<label for="sn_3">SIM</label>
-							</span>
-							<span id="span_4" class="recuo20">
-								<input type="checkbox" id="sn_4" data-input="sn_4" value="nao" class="yesno hide_chk">
-								<label for="sn_4">NÃO</label>
-							</span>
-						</div>
-					</div>
-				</label>
-			</div>
-			
-			<div id="enquadramento2" class="recuo20">
-				<input type="checkbox" class="enquad hide_chk" id="chkenquadramento2" data-input="chkenquadramento2">
-				<label for="chkenquadramento2">
-					<strong>CARTA DE CRÉDITO PRÓ-COTISTA OU PRÓ-COTISTA/PMCMV</strong>
-					<div id="boxenq2" class="oculto">
-						<p style="margin-top: 0"><strong>DECLARO</strong>, sob as penas da Lei, que:</p>
-						<ul class="justificado" style="margin-top: -12px">
-							<li>Não sou titular de financiamento ativo no SFH em qualquer parte do País, independente do percentual de propriedade;</li>
-							<li>Não sou proprietário, arrendatário, cessionário ou promitente comprador de imóvel residencial urbano, concluído ou em construção, no município onde:</li>
-							<ul class="lista_ordenada_letra">
-								<li >Exerço minha ocupação principal, incluindo os municípios limítrofes e integrantes da mesma Região Metropolitana; nem</li>
-								<li >Resido atualmente, incluindo os municípios limítrofes e integrantes da mesma Região Metropolitana</li>
-								<!--li>Pretendo trabalhar ou residir.</li>-->
-							</ul>
-							<li>Não sou titular de direito de aquisição de imóvel residencial urbano, concluído ou em construção, no atual local de meu domicílio nem onde pretendo fixá-lo, inclusive no Programa de Arrendamento Residencial;</li>
-							
-							<li>Um dos participantes da proposta de financiamento possui:</li>
-							<ul class="lista_ordenada_letra">
-								<li>36 meses³ de trabalho sob o regime do FGTS;</li>
-								<li>Contrato de trabalho ativo sob regime do FGTS ou saldo em CV FGTS, na data de concessão do financiamento, de, no mínimo, 10% do Valor de Avaliação do imóvel;</li>
-							</ul>
-							<li>O imóvel objeto da proposta de financiamento destina-se a minha residência e localiza-se em área urbana, no município onde comprovadamente resido ou exerço minha ocupação principal, incluindo os municípios limítrofes e integrantes da mesma Região Metropolitana e, se já concluído, possui plenas condições de habitabilidade;</li>
-							<li>Não sou detentor de usufruto de imóvel residencial, pois renunciei expressamente essa condição, registrada no Registro de Imóveis.</li>
-						</ul>
-						<span class="minitexto spn-block" class="recuo20">³ Na contagem do tempo é considerado a soma dos períodos trabalhados, consecutivos ou não, na mesma ou em diferentes empresas.</span>
-					</div>
-				</label>
-			</div>
-			
-			<div id="enquadramento3" class="recuo20">
-				<input type="checkbox" class="enquad hide_chk" id="chkenquadramento3" data-input="chkenquadramento3">
-				<label for="chkenquadramento3">
-					<strong>AQUISIÇÃO DE MATERIAL DE CONSTRUÇÃO – AMC</strong>
-					<div id="boxenq3" class="oculto">
-						<p><strong>DECLARO</strong>, sob as penas da Lei, que:</p>
-						<ul class="justificado" style="margin-top: -12px">
-							<li>Não sou titular de financiamento ativo no SFH em qualquer parte do País;</li>
-							<li> Não transferi, na qualidade de promitente vendedor, sem interveniência da Instituição Financeira, saldo devedor de financiamento firmado no SFH em qualquer parte do País;</li>
-							<li>Não sou proprietário, cessionário ou promitente comprador de imóvel residencial, urbano ou rural, no atual local de domicílio nem onde pretendo fixá-lo;</li>
-							<li>Não sou titular de direito de aquisição de imóvel residencial, urbano ou rural, no atual local de domicílio nem onde pretendo fixá-lo;</li>
-							<li>Os recursos pleiteados serão destinados à compra de material de construção para execução das obras de construção/reforma de imóvel para minha residência;</li>
-							<li>Estou ciente que, caso já tenha sido beneficiado com desconto/subsídio concedido pelo FGTS, o novo financiamento será concedido sem desconto, sem redução de taxa de juros e com pagamento de Taxa de Administração;</li>
-							<li>Estou ciente que, se concedido o redutor de 0,5%, este será cancelado se não atendidas às exigências estabelecidas para sua aplicação.</li>
-							<li>Não sou detentor de usufruto de imóvel residencial, pois renunciei expressamente essa condição, registrada no Registro de Imóveis</li>
-						</ul>
-						<div class="yesno">
-							<strong class="spn-block">Possuo 36 meses³ de trabalho sob o regime do FGTS:</strong>
-							<span id="span_7" class="recuo20">
-								<input type="checkbox" id="sn_7" value="sim" data-input="sn_7" class="yesno hide_chk">
-								<label for="sn_7">SIM</label>
-							</span>
-							<span id="span_8" class="recuo20">
-								<input type="checkbox" id="sn_8" value="nao" data-input="sn_8" class="yesno hide_chk">
-								<label for="sn_8">NÃO</label>
-							</span>
-							<span class="minitexto spn-block" class="recuo20">³ Na contagem do tempo é considerado a soma dos períodos trabalhados, consecutivos ou não, na mesma ou em diferentes empresas.</span>
-						</div>
-					</div>
-				</label>						
-			</div>
-			
-			<div id="enquadramento4" class="recuo20">
-				<input type="checkbox" id="chkenquadramento4" data-input="chkenquadramento4" class="enquad hide_chk">
-				<label for="chkenquadramento4">
-					<strong>AQUISIÇÃO/CONSTRUÇÃO À VISTA, SEM FINANCIAMENTO</strong>
-				</label>
-			</div>
-			<div id="enquadramento5" class="recuo20">
-				<input type="checkbox" id="chkenquadramento5" data-input="chkenquadramento5" class="enquad hide_chk">
-				<label for="chkenquadramento6">
-					<strong>CARTA DE CRÉDITO SBPE (com uso do FGTS)</strong>
-				</label>
-			</div>
-			<div id="enquadramento6" class="recuo20">
-				<input type="checkbox" id="chkenquadramento6" data-input="chkenquadramento6" class="enquad hide_chk">
-				<label for="">
-					<strong>CARTA DE CRÉDITO SBPE (no caso de cônjuge/companheiro(a) do trabalhador que irá utilizar o FGTS)</strong>
-				</label>
-			</div>
-		</div><!--FIM DO ENQUADRAMENTO-->
-		<br>
-		<div id="contasfgts" class="margintoprecuo"><strong>9 – UTILIZAÇÃO DO FGTS</strong>
-			<div id="usofgts" class="recuo20">
-				<p>Operação com utilização de Conta(s) Vinculada(s) do FGTS?</p>
-				<span id="span_9">
-					<input type="checkbox" id="sn_9" data-input="sn_9" value="sim" class="yesno hide_chk">
-					<label for="sn_9">SIM</label>
-				</span>
-				<span id="span_10">
-					<input type="checkbox" id="sn_10" data-input="sn_10" value="nao" class="yesno hide_chk">
-					<label for="sn_10">NÃO</label>
-				</span>
-			</div>
-			
-			<div id="tab_contasfgts" class="recuo20">
-				<p id="damp"><strong>Nº OPERAÇÃO: </strong>
-					<input id="text_numdamp" data-input="text_numdamp" type="text" class="nrdamp">
-				</p>
-				<input type="checkbox" id="chk_autoriza_saque" data-input="chk_autoriza_saque">Autorizo a CAIXA ECONÔMICA FEDERAL a efetuar o saque dos meus recursos no FGTS na(s) Conta(s) Vinculada(s) e no(s) valor(es) abaixo:
-				
-				<table id="tb1">
-					<tr id="tr_header">
-						<th></th>
-						<th>Nº conta FGTS/Cód. Empregado</th>
-						<th>Código Empregador/Cód. Estabelecimento/Cód. Empresa</th>
-						<th>Utilização FMP(Preencher Sim ou Não)</th>
-						<th>Valor do Saque R$ ²</th>
-					</tr>
-					<tr id="tr_1" class="conta_fgts">
-						<td class="rw_index">01</td>
-						<td><input type="text" data-input="tabela_fgts_01_1" class="tabelas_fgts"></td>
-						<td><input type="text" data-input="tabela_fgts_01_2" class="tabelas_fgts"></td>
-						<td><input type="text" data-input="tabela_fgts_01_3" class="tabelas_fgts"></td>	
-						<td><input type="text" data-input="tabela_fgts_01_4" class="tabelas_fgts valor valorfgts" maxlength="17" data-thousands="." data-decimal="," data-prefix="R$ " id="first_field"></td>
-					</tr>
-					<tr id="tr_total">
-						<td colspan= "3" class="rd_t"></td>
-						<td><span>TOTAL</span></td>							
-						<td><input type="text" id="resultado" data-input="resultado" maxlength="25"></td>
-					</tr>
-				</table>
-				
-				<p class="minitexto" style="margin-top: -25px;">² Valor a ser utilizado, incluindo o montante resgatado do FMP, se for o caso</p>
-				
-				<div id="ctr_box" class="do-not-print">
-					<p>Clique para adicionar ou remover linhas na tabela.</p>
-					<div>
-						<button id="btnAdicionar" class="btn btn-success btn-fgts" data-toggle="tooltip" title="Adicionar Linha!">+</button>
-						<button id="btnRemover" class="btn btn-danger btn-fgts" data-toggle="tooltip" data-placement="bottom" title="Remover Linha!" style="margin-left: 70px;">-</button>
-					</div>	
-				</div>
-				<br>
-				<div>
-					<p><strong>DECLARAÇÕES DO TITULAR DA CONTA VINCULADA DO FGTS</strong></p>
-					<p style="margin-top: -15px"><strong> DECLARO</strong>, sob as penas da Lei, que:</p>
-					<div class="justificado" style="margin-top: -12px">
-						<ul>
-							<li>Tenho no mínimo 36 meses de trabalho sob o regime do FGTS, somando-se os períodos trabalhados, consecutivos ou não, na mesma ou em diferentes empresas;</li>
-							<li>Não sou titular de outro financiamento ativo concedido no âmbito do SFH;</li>
-							<li>Não transferi, na qualidade de promitente vendedor, sem interveniência da Instituição Financeira, saldo devedor de financiamento firmado no SFH em qualquer parte do País;</li>
-							<li>Não sou proprietário, possuidor, promitente comprador, usufrutuário ou cessionário de outro imóvel residencial urbano ou de parte residencial de imóvel misto, concluído ou em construção, no mesmo município onde exerço minha ocupação laboral principal nem onde resido, incluindo, em ambos os casos, os municípios limítrofes e integrantes da mesma Região Metropolitana;</li>
-							<li>Estou ciente de que o valor total acima demonstrado encontra-se comprometido e destinado exclusivamente para as providências, por parte do Agente Financeiro, de movimentação dos meus recursos do FGTS para a finalidade mencionada.</li>
-						</ul>
-						<p>
-							Declaro ainda a veracidade das informações acima prestadas, ciência e concordância com as condições para uso dos recursos da conta vinculada do FGTS, para aquisição e/ou construção de imóvel, na forma apresentada pelo Agente Financeiro e estabelecida no Manual de Moradia Própria, na Internet: 
-							<a href="http://www.caixa.gov.br/Downloads/fgts-moradia/" target="_blank">http://www.caixa.gov.br/Downloads/fgts-moradia/</a>, e caso seja verificado ilícito tenho ciência que este será noticiado à Policia Federal e ao Ministério Público Federal.
-						</p>
-						<p>
-							Estou suficientemente esclarecido(a) que eventuais falsidades nessas declarações, as quais são essenciais à movimentação da(s) conta(s) vinculada(s) do FGTS, configuram crimes previstos no Código Penal Brasileiro, que ensejará o pedido pelo Agente Operador do FGTS de abertura de competente INQUÉRITO POLICIAL à Polícia Federal e me responsabilizo a devolver ao Fundo os valores sacados indevidamente, acrescidos de correção monetária e juros devidos, e sujeitando-me às sanções civis, administrativas e criminais previstas em lei.
-						</p>
-					</div>
-				</div>
-			</div>
-		</div><!--fim da div contasftgs-->
-		<br>
-		<div id="camporesponsabilidade">
-			<div class="titulo-centralizado"><strong>RESPONSABILIDADE PELAS INFORMAÇÕES DECLARADAS</strong></div>
-			<div style="font-size: 13px;" class="justificado"><strong>Responsabilizo-me pela exatidão e veracidade das informações declaradas e estou ciente de que, se falsas as declarações, ficarei sujeito às penas da lei, ficando, ainda, obrigado(a) a devolver os valores indevidamente sacados da conta vinculada do FGTS e/ou descontos concedidos pelo FGTS nos termos da Resolução do Conselho Curador do FGTS 702/12, suas alterações e aditamentos, acrescidos de correção monetária e juros sem prejuízo do vencimento antecipado da dívida decorrente do crédito concedido, com a conseqüente cobrança administrativa/judicial.</strong></div>
-		</div>
-		
-		<div id="campoassinatura">						
-			<p><input id="local_assin" data-input="local_assin" type="text" class="end_camp" size="35">, <input type="text" class="end_camp numh" data-input="dia_assin" size="3" maxlength="2"> de <input type="text" data-input="mes_assin" class="end_camp autoajuste" size="10" maxlength="10"> de <input type="text" data-input="ano_assin" class="end_camp" size="10" maxlength="4"></p>
-			<p class="texto-acessorio">Local/Data</p>
-			<br><br>
-			
-			<div class="div_assinat">
-				<p><input type="text" data-input="assinatura_titular" size="33" class="assinatura"></p> 
-				<p class="texto-acessorio">Assinatura do Titular</p>
-			</div>
-			<div class="div_assinat" style="margin-left: 45px;">
-				<p><input type="text" data-input="assinatura_caixa" size="37" class="assinatura"></p> 
-				<p class="texto-acessorio">Assinatura Empregado Caixa/Canal Parceiro</p>
-			</div>
-		</div>
-		
-		<footer>
-			<br>
-			<br>
-			<strong>SAC CAIXA</strong>: 0800 726 0101 (informações, reclamações, sugestões e elogios)<br>
-			<strong>Para pessoas com deficiência auditiva ou de fala</strong>: 0800 726 2492<br>
-			<strong>Alô CAIXA</strong>: 4004 0104 (capitais e regiões metropolitanas) ou 0800 104 0104 (demais localidades)<br>
-			<strong>Ouvidoria</strong>: 0800 725 7474
-			<p>caixa.gov.br</p>
-			<br>
-			<div ID="modeloMO"><p>29.300 v034</p></div>
-		</footer>	
-		
-		<div id="printdiv">
-			<input type="button" onclick="printWindow();" id="btImprimir" class="btn btn-danger do-not-print" value="Imprimir" name="btImprimir">
-			<button type="button" class="btn btn-primary" data-action="registros-salvos">Registros</button>
-		</div>
-		<input id="pressedkeys" type="hidden">
-		
-		<!-- MODAIS DA PÁGINA -->
-		<div class="modal fade option_view frd-modal-finished" id="minha-modal">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-body">
-						<div class="panel panel-danger text-center">
-							<div class="panel-heading" style="font-size: 20px;"><h2><strong>ATENÇÃO!</strong></h2></div>
-							<div class="panel-body">
-								<div>
-									<div style="width: 90px;float: left;margin-right: 30px;"><!-- PONTO DE EXCLAMAÇÃO CUSTOM DA MODAL -->
-										<div id="custom-warning">
-											<span>!</span>
-										</div>
-									</div>
-									<div style="width: 545px;text-align: justify;font-size: 21px;"><!-- TEXTO DA MODAL -->
-										<span id="modal-body-text" class="text-danger">
-										</span>
-									</div>
-								</div>
-								<br style="clear: both;">
-								<button class="btn-frd-modal-finished btn btn-danger pull-right" data-dismiss="modal">OK</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="modal fade" id="modal-IR" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-body">
-						<div class="panel panel-warning">
-							<div class="panel-heading" style="font-size: 20px;">
-								<h3><strong>ATENÇÃO!</strong></h3>
-								<h4><strong>Ano exercício (<span id="anoexerc"></span>) do IR informado é menor que (ou igual) o ano base (<span id="anobase"></span>)!!!</strong></h4>
-							</div>
-							<div class="panel-body text-warning">
-								<div>
-									<p><strong>ANO BASE: </strong>Período de 12 meses (1º de janeiro a 31 de dezembro) em que foram registrados os rendimentos e despesas do contribuinte.</p>
-									<p><strong>EXERCÍCIO: </strong>Ano em que a declaração é feita.</p>
-									<br>
-									<strong style="display: block;">Exemplo:</strong>
-									<p>Em 2014 (ano <strong>exercício</strong>), declaram-se os rendimentos, despesas e bens de 2013 (ano <strong>base</strong>), por exemplo</p>
-								</div>
-								<button type="button" class="btn btn-warning pull-right" data-dismiss="modal">OK</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="modal fade" id="modalCPFPIS" role="dialog">
-			<div class="modal-dialog">
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-body">
-						<div class="panel panel-warning">
-							<div class="panel-heading" style="font-size: 20px; text-align: center;">
-								<h3><strong><span id="md-header"></span> inválido!!!</strong></h3>
-							</div>
-							<div class="panel-body text-warning">
-								<div>
-									<h4>
-										<p><span id="textoinicial"></span>"<strong id="nrDigitado"></strong>" não é válido ou foi digitado incorretamente!</p>
-										
-										<p><span id="textofim"></span></p>
-									</h4>
-								</div>
-								<br>
-								<button type="button" class="btn btn-warning pull-right" data-dismiss="modal">X</button>	
-							</div>									
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="modal fade" id="modal-registros-salvos" role="dialog">
-			<div class="modal-dialog modal-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					</div>
-					<div class="modal-body">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-</div>
-<!-- FECHAMENTO DA DIV PRINCIPAL -->
-
-<!-- SCRIPTS -->
-<script src="./assets/scripts.js" defer></script>
-
-</body>
+  <head>
+    <title>DAMP29300-Versão Offline</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta name="author" content="Carlos Santos">
+    <meta name="description" content="DAMP29300">
+    <link rel="shortcut icon" href="./assets/favicon.svg" type="image/x-icon">
+    <!-- BOOTSTRAP 3.3.7 MIN CSS -->		
+    <link rel="stylesheet" href="./assets/bootstrap.min.css">
+    <!-- ESTILIZACAO -->
+    <link rel="stylesheet" href="./assets/style.css">
+    <!--jquery 3.2.1 min-->
+    <script src="./assets/jquery.min.js" defer></script>
+    <!-- BOOTSTRAP 3.3.7 MIN -->
+    <script src="./assets/boostrap.min.js" defer></script>
+    <!-- JQUERY INPUTMASK BUNDLE.JS -->
+    <script src="./assets/jqueryInputMask.min.js" defer></script>
+    <!--jQuery Masked Input Plugin-->
+    <script src="./assets/jqueryMaskPlugin.js" defer></script>
+    <!--jQuery AutogrowInput-->		
+    <script src="./assets/jqueryAutoGrow.min.js" defer></script>
+    <!--MASKMONEY-->
+    <script src="./assets/maskMoney.js" defer></script>
+  </head>
+  <body onload="msieversion();">
+    <div id="navegador_incompativel" class="container">
+      <div class="panel panel-warning">
+        <div class="panel-heading">
+          <h3>Esta aplicação não é compatível com esse navegador (Internet Explorer).</h3>
+        </div>
+        <div class="panel-body text-warning">
+          <h4>
+            Por favor utilize as versões mais recentes do:<br>
+            <ul>
+              <li>Chrome (versão 49 ou superior)</li>
+              <li>Firefox (versão 52 ou superior)</li>
+            </ul>
+          </h4>
+          <hr style="border: 1px solid #8a6d3b;">
+          <h4>
+            Informação do Navegador utilizado:<br>
+            <span id="nav_incomp_fulllname" class="text-info"></span>
+          </h4>
+        </div>
+      </div>
+    </div>
+    <div id="print_area" class="container no-print-allowed">
+      <div>
+        <div id="header-mo">
+          <div id="logo-img">
+            <img src="./assets/logocaixagrayscale.png">
+          </div>
+          <div id="aut-declaracao">
+            Declaração para Enquadramento no Programa <span id="cond_ftgs_msg">e Autorização para Movimentação e Utilização dos Recursos da Conta Vinculada do FGTS na Aquisição/Construção de imóvel residencial, com ou sem financiamento</span>
+          </div>
+        </div>
+        <div class="row" style="clear: both;">
+          <!-- manter esse clear: both inline -->
+          <div class="col-sm-7"></div>
+          <div id="box-sigilo" class="col-sm-2">
+            <span class="fonte13">Grau de Sigilo</span><br>
+            #Público
+          </div>
+        </div>
+      </div>
+      <br>
+      <div>
+        <div>						
+          Eu, <input type="text" id="text_nome" data-input="text_nome" placeholder="NOME" class="userInputs somentetexto autoajuste" maxLength="90">, 
+          nascido(a) em <input type="text" id="text_data1" data-input="text_data1" placeholder="00/00/0000" class="data">, 
+          CPF nº <input type="text" id="text_cpf" data-input="text_cpf" placeholder="CPF" class="userInputs">, 
+          PIS/PASEP nº <input type="text" id="text_pis" data-input="text_pis" placeholder="PIS/PASEP" class="userInputs">, 
+          declaro sob as penas da Lei, que:						
+        </div>
+      </div>
+      <div id="estadocivil">
+        <strong>1 - ESTADO CIVIL</strong>
+        <div class="recuo20">
+          <p>
+            Sou
+            <select id="selectEstCiv" data-input="selectEstCiv">
+              <option value=""></option>
+              <option value="casado">CASADO(A)</option>
+              <option value="solteiro">SOLTEIRO(A)</option>
+              <option value="viuvo">VIUVO(A)</option>
+              <option value="divorciado">DIVORCIADO(A)/SEPARADO(A)</option>
+            </select>
+          </p>
+          <div id="regime" class="oculto">
+            <div id="regimecasado">
+              Sob regime de 
+              <select id="selectRegime" data-input="selectRegime" class="select_resizable">
+                <option value=""></option>
+                <option value="parcial">COMUNHÃO PARCIAL DE BENS</option>
+                <option value="universal">COMUNHÃO UNIVERSAL DE BENS</option>
+                <option value="separacao">SEPARAÇÃO TOTAL DE BENS</option>
+                <option value="aquestos">PARTICIPAÇÃO FINAL NOS AQUESTOS</option>
+              </select>
+              <select class="width_tmp_select" data-input="width_tmp_select">
+                <option class="width_tmp_option"></option>
+              </select>
+              desde <input type="text" id="text_data2" data-input="text_data2" class="data" size="8" maxlength="8" placeholder="00/00/0000">.
+            </div>
+          </div>
+          <div id="uniaoestavel" class="oculto">
+            <div id="uniaoestavel1"  class="justificado">								
+              <input type ="checkbox" id="chkuniaoestavel1" data-input="chkuniaoestavel1" name="chkuniaoestavel1" class="hide_chk">
+              <label for="chkuniaoestavel1">
+              <strong>Mantenho união estável</strong> desde <input type="text" id="text_data3" data-input="text_data3" class="data" size="8" maxlength="8" placeholder="00/00/0000"> e declaro ciência que na união estável, salvo contrato escrito entre os companheiros, aplica-se às relações patrimoniais, o regime da comunhão parcial de bens e, se lavrada Escritura Pública Declaratória de União Estável, apresentarei a mesma à CAIXA.
+              </label>
+            </div>
+            <div id="uniaoestavel2" class="justificado">
+              <input type ="checkbox" id="chkuniaoestavel2" data-input="chkuniaoestavel2" class="hide_chk">
+              <label for="chkuniaoestavel2">
+              <strong>NÃO mantenho união estável</strong> e declaro, sob responsabilidade civil e criminal, que não mantenho relação de vida comum ou união estável com outra pessoa, nas condições dos Art.1723 a 1727 do Título III – Da União Estável, do Código Civil Brasileiro. Declaro ainda estar ciente que, comprovada a falsidade nesta declaração, estarei sujeito(a) às penas previstas no Art. 299 do Código Penal Brasileiro.<br>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div id="ocupacao" class="item margintoprecuo">
+        <strong>2 - SITUAÇÃO OCUPACIONAL</strong>
+        <div id="ocupacao1" class="recuo20">
+          <input type="checkbox" id="chkocupacao1" data-input="chkocupacao1" class="hide_chk">
+          <label for="chkuniaoestavel2">
+          Sou <input type="text" id="text_ocupacao" data-input="text_ocupacao" class="userInputs somentetexto autoajuste" maxlength="50" placeholder="profissão de maior rendimento, inclusive no caso de aposentadoria/pensão">
+          e exerço minha ocupação principal no município de 
+          <input type="text" id="text_localocupa" data-input="text_localocupa" class="userInputs somentetexto autoajuste" size="35" placeholder="MUNICIPIO" maxlength="50">/<input type="text" id="text_uf0" data-input="text_uf0" class="userInputs somentetexto autoajuste" maxlength="2" placeholder="UF">.
+          </label>
+        </div>
+        <div id="ocupacao2" class="recuo20">
+          <input type="checkbox" id="chkocupacao2" data-input="chkocupacao2" class="hide_chk">
+          <label for="chkocupacao2">Estou desempregado(a).</label>
+        </div>
+        <div id="ocupacao3" class="recuo20">
+          <input type="checkbox" id="chkocupacao3" data-input="chkocupacao3" class="hide_chk modal-popup"><!-- MODAL APOSENTADO-->
+          <label for="chkocupacao3">Sou aposentado(a)/pensionista.</label>
+        </div>
+      </div>
+      <br>
+      <div id="residencia" class="margintoprecuo">
+        <strong>3 - RESIDÊNCIA</strong>
+        <div class="recuo20">
+          <strong>Resido em:</strong>
+          <input type="text" id="text_logradouro" data-input="text_logradouro" class="userInputs somentetexto autoajuste" size="35" placeholder="MUNICIPIO" maxlength="80">/<input type="text" id="text_uf1" data-input="text_uf1" class="userInputs somentetexto autoajuste" maxlength="2" placeholder="UF"> 
+          há <input type="text" id="text_compl1" data-input="text_compl1" class="userInputs wd20 numh" size="3" maxlength="2" placeholder="00"> anos 
+          e <input type="text" id="text_compl2" data-input="text_compl2" class="userInputs wd20 numh" size="3" maxlength="2" placeholder="00"> meses e:
+        </div>
+        <div id="residencia1" class="recuo20">
+          <input type="checkbox" id="chkresidencia1" data-input="chkresidencia1" class="hide_chk modal-popup">
+          <label for="residencia1">Não possuo imóvel.</label>
+        </div>
+        <div id="residencia2" class="recuo20">
+          <input type="checkbox" id="chkresidencia2" data-input="chkresidencia2" class="hide_chk modal-popup">
+          <label for="residencia2">Possuo imóvel em
+          <input type="text" id="text_possuiimovellocal" data-input="text_possuiimovellocal" class="userInputs somentetexto autoajuste" placeholder="CIDADE" maxlength="50">/<input type="text" id="text_uf999" data-input="text_uf999" class="userInputs somentetexto autoajuste" maxlength="2" placeholder="UF">.
+          </label>
+        </div>
+      </div>
+      <br>
+      <div id="ir" class="margintoprecuo">
+        <strong>4 - DECLARAÇÃO DE IMPOSTO DE RENDA</strong>
+        <div id="ir1" class="recuo20">
+          <input type="checkbox" id="chkir1" data-input="chkir1" class="hide_chk">
+          <label for="chkir1">
+          Sou isento(a) da Declaração do IR ano base <input type="text" id="text_irano1" data-input="text_irano1" class="data wd34 ano" placeholder="0000" size="3" maxlength="4">, exercício <input type="text" id="text_irexerc1" data-input="text_irexerc1" class="data wd34 ano" placeholder="0000" size="3" maxlength="4">.
+          </label>
+        </div>
+        <div id="ir2" class="recuo20">
+          <input type ="checkbox" id="chkir2" data-input="chkir2" class="hide_chk">
+          <label for="chkir2">
+          A Declaração do Imposto de Renda entregue à CAIXA é cópia fiel à última declaração apresentada à Receita Federal ano base <input type="text" id="text_irano2" data-input="text_irano2" class="data wd34 ano" placeholder="0000" size="3" maxlength="4">, exercício <input type="text" id="text_irexerc2" data-input="text_irexerc2" class="data wd34 ano" placeholder="0000" size="3" maxlength="4">.
+          </label>
+        </div>
+      </div>
+      <br>
+      <div class="margintoprecuo">
+        <strong>5 - IMÓVEL OBJETO DO FINANCIAMENTO</strong>
+        <div class="recuo20">
+          O imóvel objeto da aquisição está localizado à
+          <br>
+          <div class="editableDiv" data-input="endereco_logradouro" placeholder=" LOGRADOURO, N°, CEP, BAIRRO" contenteditable="true"></div>
+          <input type="text" id="text_logradouro2" data-input="text_logradouro2" class="userInputs somentetexto autoajuste" size="35" placeholder="MUNICIPIO" maxlength="80" style="font-size: 16px;">/<input type="text" id="text_uf2" data-input="text_uf2" class="userInputs somentetexto autoajuste" maxlength="2" placeholder="UF" style="font-size: 16px;"> 	
+        </div>
+        <br>
+        <div id="usufruto" class="margintoprecuo">
+          <strong>6 - USUFRUTO</strong>		
+          <div id="usufruto1" class="recuo20">
+            <input type="checkbox" id="chkusufruto1" data-input="chkusufruto1" class="hide_chk">
+            <label for="chkusufruto1">NÃO SOU USUFRUTUÁRIO.</label>
+          </div>
+          <div id="usufruto2" class="recuo20">
+            <input type="checkbox" id="chkusufruto2" data-input="chkusufruto2" class="hide_chk">
+            <label for="chkusufruto2"><u>Renunciei à condição de usufrutuário</u> de imóvel, registrada no RI
+            <span id="municipio_usufruto"> no municipío <input type="text" id="mun_usufruto" data-input="mun_usufruto" class="userInputs autoajuste" placeholder="MUNICIPIO" maxlength="80">/<input type="text" id="uf_usufruto" data-input="uf_usufruto" class="userInputs autoajuste" maxlength="2" placeholder="UF">.</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <!-- FIM DO GRUPO 1 -->
+      <br>
+      <!-- INICIO DO GRUPO 2 -->
+      <div>
+        <!--GRUPO ENQUADRAMENTO/MODALIDADE-->				
+        <div id="modalidade" class="margintoprecuo">
+          <strong>7 - MODALIDADE</strong>
+          <div id="modalidade1" class="recuo20">
+            <input type="checkbox" class="hide_chk" id="chkmodalidade1" data-input="chkmodalidade1">
+            <label for="chkmodalidade1">
+            Aquisição Imóvel Concluído - Venda e Compra: <input type="text" id="text_enquad1" data-input="text_enquad1" class="valor" maxlength="21" data-thousands="." data-decimal="," data-prefix="R$ ">
+            </label>
+          </div>
+          <div id="modalidade2" class="recuo20">
+            <input type="checkbox" class="hide_chk" id="chkmodalidade2" data-input="chkmodalidade2">
+            <label for="chkmodalidade2">
+            Aquisição Imóvel em Construção (empreendimento) – Venda e Compra: <input type="text" id="text_enquad2" data-input="text_enquad2" class="valor" maxlength="21" data-thousands="." data-decimal="," data-prefix="R$ ">
+            </label>
+          </div>
+          <div id="modalidade3" class="recuo20">
+            <input type="checkbox" class="hide_chk" id="chkmodalidade3" data-input="chkmodalidade3">
+            <label for="chkmodalidade3">
+              Aquisição Terreno e Construção – Venda e Compra Terreno + Orçamento: <input type="text" id="text_enquad3" data-input="text_enquad3" class="valor" maxlength="21" data-thousands="." data-decimal="," data-prefix="R$ ">
+              </abel>
+          </div>
+          <div id="modalidade4" class="recuo20">
+          <input type="checkbox" class="hide_chk" id="chkmodalidade4" data-input="chkmodalidade4">
+          <label for="chkmodalidade4">
+          Construção em Terreno Próprio – Orçamento: <input type="text" id="text_enquad4" data-input="text_enquad4" class="valor" maxlength="21" data-thousands="." data-decimal="," data-prefix="R$ ">
+          </label>
+          </div>			
+          <div id="modalidade5" class="recuo20">
+            <input type="checkbox" class="hide_chk" id="chkmodalidade5" data-input="chkmodalidade5">
+            <label for="chkmodalidade5">
+            CCFGTS - Reforma e/ou Ampliação – Orçamento: <input type="text" id="text_enquad5" data-input="text_enquad5" class="valor" maxlength="21" data-thousands="." data-decimal="," data-prefix="R$ ">
+            </label>
+          </div>
+          <div id="modalidade6" class="recuo20">
+            <input type="checkbox" class="hide_chk" id="chkmodalidade6" data-input="chkmodalidade6">
+            <label for="chkmodalidade6">
+            CCFGTS – Conclusão – Orçamento: <input type="text" id="text_enquad6" data-input="text_enquad6" class="valor" maxlength="21" data-thousands="." data-decimal="," data-prefix="R$ ">
+            </label>
+          </div>
+          <div id="modalidade7" class="recuo20">
+            <input type="checkbox" class="hide_chk" id="chkmodalidade7" data-input="chkmodalidade7">
+            <label for="chkmodalidade7">
+            CCFGTS – Aquisição de Material de Construção  – Orçamento: <input type="text" id="text_enquad7" data-input="text_enquad7" class="valor" maxlength="21" data-thousands="." data-decimal="," data-prefix="R$ ">
+            </label>
+          </div>
+        </div>
+      </div>
+      <!-- FIM DA MODALIDADE -->				
+      <br>
+      <div id="enquadramento" class="margintoprecuo">
+        <strong>8 - ENQUADRAMENTO</strong>					
+        <div id="enquadramento1" class="recuo20">
+          <input type="checkbox" class="enquad hide_chk" id="chkenquadramento1" data-input="chkenquadramento1">
+          <label for="chkenquadramento1">
+            <strong>CARTA DE CRÉDITO FGTS – CCFGTS/PMCMV OU CCFGTS-OPERAÇÕES ESPECIAIS</strong>
+            <div id="boxenq1" class="oculto">
+              <p style="margin-top:0"><strong>DECLARO</strong>, sob as penas da Lei, que:</p>
+              <ul class="justificado" style="margin-top: -12px">
+                <li class="small-font-print">Não sou titular de financiamento ativo no SFH em qualquer parte do País, independente do percentual de propriedade;</li>
+                <li>Não sou proprietário, arrendatário, cessionário ou promitente comprador de imóvel residencial urbano, concluído ou em construção, no município onde:</li>
+                <ol class="lista_ordenada_letra">
+                  <li  class="small-font-print">Exerço minha ocupação principal, incluindo os municípios limítrofes e integrantes da mesma Região Metropolitana; nem</li>
+                  <li class="small-font-print">Resido atualmente, incluindo os municípios limítrofes e integrantes da mesma Região Metropolitana; nem</li>
+                  <li class="small-font-print">Pretendo trabalhar ou residir.</li>
+                </ol>
+                <li>Restituirei o valor do subsídio, proporcionalmente ao prazo remanescente, se quitar, transferir ou amortizar o financiamento até o 5º ano de vigência do contrato;</li>
+                <li>Não sou titular de direito de aquisição de imóvel residencial urbano, concluído ou em construção, no atual local de meu domicílio nem onde pretendo fixá-lo, inclusive no Programa de Arrendamento Residencial;</li>
+                <li>O imóvel objeto da proposta de financiamento destina-se a minha residência e localiza-se em área urbana, no município onde comprovadamente resido ou exerço minha ocupação principal, incluindo os municípios limítrofes e integrantes da mesma Região Metropolitana ou onde pretendo fixar residência e/ou trabalho e, se já concluído, possui plenas condições de habitabilidade;</li>
+                <li>Recebi a Cartilha “O que você precisa saber antes de comprar o seu imóvel”;</li>
+                <li>Concordo em adquirir o imóvel sem via de acesso pavimentada, se for o caso;</li>
+                <li>Estou ciente que, se concedido o redutor de 0,5% na taxa de juros, este será cancelado se não atendidas as exigências estabelecidas para sua aplicação;</li>
+                <li>Estou ciente que, caso já tenha sido beneficiado com desconto/subsídio concedido pelo FGTS, exceto para Aquisição de Material de Construção - AMC, o novo financiamento será concedido sem desconto, sem redução da taxa de juros e com pagamento da Taxa de Administração.</li>
+              </ul>
+              <div class="yesno">
+                <strong class="spn-block">Possuo 36 meses³ de trabalho sob o regime do FGTS:</strong>
+                <span id="span_1" class="recuo20">
+                <input type="checkbox" id="sn_1" data-input="sn_1" value="sim" class="yesno hide_chk">
+          <label for="sn_1">SIM</label>
+          </span>
+          <span id="span_2" class="recuo20">
+          <input type="checkbox" id="sn_2" data-input="sn_2" value="nao" class="yesno hide_chk">
+          <label for="sn_2">NÃO</label>
+          </span>
+          <span class="minitexto spn-block" class="recuo20">³ Na contagem do tempo é considerado a soma dos períodos trabalhados, consecutivos ou não, na mesma ou em diferentes empresas.</span>
+          </div>
+          <div class="yesno">
+          <strong class="spn-block">Já fui beneficiado com desconto/subsídio concedido pelo FGTS (exceto para Aquisição de Material de Construção – AMC):</strong>
+          <span id="span_3" class="recuo20">
+          <input type="checkbox" id="sn_3" data-input="sn_3" value="sim" class="yesno hide_chk">
+          <label for="sn_3">SIM</label>
+          </span>
+          <span id="span_4" class="recuo20">
+          <input type="checkbox" id="sn_4" data-input="sn_4" value="nao" class="yesno hide_chk">
+          <label for="sn_4">NÃO</label>
+          </span>
+          </div>
+          </div>
+          </label>
+        </div>
+        <div id="enquadramento2" class="recuo20">
+          <input type="checkbox" class="enquad hide_chk" id="chkenquadramento2" data-input="chkenquadramento2">
+          <label for="chkenquadramento2">
+            <strong>CARTA DE CRÉDITO PRÓ-COTISTA OU PRÓ-COTISTA/PMCMV</strong>
+            <div id="boxenq2" class="oculto">
+              <p style="margin-top: 0"><strong>DECLARO</strong>, sob as penas da Lei, que:</p>
+              <ul class="justificado" style="margin-top: -12px">
+                <li>Não sou titular de financiamento ativo no SFH em qualquer parte do País, independente do percentual de propriedade;</li>
+                <li>Não sou proprietário, arrendatário, cessionário ou promitente comprador de imóvel residencial urbano, concluído ou em construção, no município onde:</li>
+                <ul class="lista_ordenada_letra">
+                  <li >Exerço minha ocupação principal, incluindo os municípios limítrofes e integrantes da mesma Região Metropolitana; nem</li>
+                  <li >Resido atualmente, incluindo os municípios limítrofes e integrantes da mesma Região Metropolitana</li>
+                  <!--li>Pretendo trabalhar ou residir.</li>-->
+                </ul>
+                <li>Não sou titular de direito de aquisição de imóvel residencial urbano, concluído ou em construção, no atual local de meu domicílio nem onde pretendo fixá-lo, inclusive no Programa de Arrendamento Residencial;</li>
+                <li>Um dos participantes da proposta de financiamento possui:</li>
+                <ul class="lista_ordenada_letra">
+                  <li>36 meses³ de trabalho sob o regime do FGTS;</li>
+                  <li>Contrato de trabalho ativo sob regime do FGTS ou saldo em CV FGTS, na data de concessão do financiamento, de, no mínimo, 10% do Valor de Avaliação do imóvel;</li>
+                </ul>
+                <li>O imóvel objeto da proposta de financiamento destina-se a minha residência e localiza-se em área urbana, no município onde comprovadamente resido ou exerço minha ocupação principal, incluindo os municípios limítrofes e integrantes da mesma Região Metropolitana e, se já concluído, possui plenas condições de habitabilidade;</li>
+                <li>Não sou detentor de usufruto de imóvel residencial, pois renunciei expressamente essa condição, registrada no Registro de Imóveis.</li>
+              </ul>
+              <span class="minitexto spn-block" class="recuo20">³ Na contagem do tempo é considerado a soma dos períodos trabalhados, consecutivos ou não, na mesma ou em diferentes empresas.</span>
+            </div>
+          </label>
+        </div>
+        <div id="enquadramento3" class="recuo20">
+          <input type="checkbox" class="enquad hide_chk" id="chkenquadramento3" data-input="chkenquadramento3">
+          <label for="chkenquadramento3">
+            <strong>AQUISIÇÃO DE MATERIAL DE CONSTRUÇÃO – AMC</strong>
+            <div id="boxenq3" class="oculto">
+              <p><strong>DECLARO</strong>, sob as penas da Lei, que:</p>
+              <ul class="justificado" style="margin-top: -12px">
+                <li>Não sou titular de financiamento ativo no SFH em qualquer parte do País;</li>
+                <li> Não transferi, na qualidade de promitente vendedor, sem interveniência da Instituição Financeira, saldo devedor de financiamento firmado no SFH em qualquer parte do País;</li>
+                <li>Não sou proprietário, cessionário ou promitente comprador de imóvel residencial, urbano ou rural, no atual local de domicílio nem onde pretendo fixá-lo;</li>
+                <li>Não sou titular de direito de aquisição de imóvel residencial, urbano ou rural, no atual local de domicílio nem onde pretendo fixá-lo;</li>
+                <li>Os recursos pleiteados serão destinados à compra de material de construção para execução das obras de construção/reforma de imóvel para minha residência;</li>
+                <li>Estou ciente que, caso já tenha sido beneficiado com desconto/subsídio concedido pelo FGTS, o novo financiamento será concedido sem desconto, sem redução de taxa de juros e com pagamento de Taxa de Administração;</li>
+                <li>Estou ciente que, se concedido o redutor de 0,5%, este será cancelado se não atendidas às exigências estabelecidas para sua aplicação.</li>
+                <li>Não sou detentor de usufruto de imóvel residencial, pois renunciei expressamente essa condição, registrada no Registro de Imóveis</li>
+              </ul>
+              <div class="yesno">
+                <strong class="spn-block">Possuo 36 meses³ de trabalho sob o regime do FGTS:</strong>
+                <span id="span_7" class="recuo20">
+                <input type="checkbox" id="sn_7" value="sim" data-input="sn_7" class="yesno hide_chk">
+          <label for="sn_7">SIM</label>
+          </span>
+          <span id="span_8" class="recuo20">
+          <input type="checkbox" id="sn_8" value="nao" data-input="sn_8" class="yesno hide_chk">
+          <label for="sn_8">NÃO</label>
+          </span>
+          <span class="minitexto spn-block" class="recuo20">³ Na contagem do tempo é considerado a soma dos períodos trabalhados, consecutivos ou não, na mesma ou em diferentes empresas.</span>
+          </div>
+          </div>
+          </label>						
+        </div>
+        <div id="enquadramento4" class="recuo20">
+          <input type="checkbox" id="chkenquadramento4" data-input="chkenquadramento4" class="enquad hide_chk">
+          <label for="chkenquadramento4">
+          <strong>AQUISIÇÃO/CONSTRUÇÃO À VISTA, SEM FINANCIAMENTO</strong>
+          </label>
+        </div>
+        <div id="enquadramento5" class="recuo20">
+          <input type="checkbox" id="chkenquadramento5" data-input="chkenquadramento5" class="enquad hide_chk">
+          <label for="chkenquadramento6">
+          <strong>CARTA DE CRÉDITO SBPE (com uso do FGTS)</strong>
+          </label>
+        </div>
+        <div id="enquadramento6" class="recuo20">
+          <input type="checkbox" id="chkenquadramento6" data-input="chkenquadramento6" class="enquad hide_chk">
+          <label for="">
+          <strong>CARTA DE CRÉDITO SBPE (no caso de cônjuge/companheiro(a) do trabalhador que irá utilizar o FGTS)</strong>
+          </label>
+        </div>
+      </div>
+      <!--FIM DO ENQUADRAMENTO-->
+      <br>
+      <div id="contasfgts" class="margintoprecuo">
+        <strong>9 – UTILIZAÇÃO DO FGTS</strong>
+        <div id="usofgts" class="recuo20">
+          <p>Operação com utilização de Conta(s) Vinculada(s) do FGTS?</p>
+          <span id="span_9">
+          <input type="checkbox" id="sn_9" data-input="sn_9" value="sim" class="yesno hide_chk">
+          <label for="sn_9">SIM</label>
+          </span>
+          <span id="span_10">
+          <input type="checkbox" id="sn_10" data-input="sn_10" value="nao" class="yesno hide_chk">
+          <label for="sn_10">NÃO</label>
+          </span>
+        </div>
+        <div id="tab_contasfgts" class="recuo20">
+          <p id="damp"><strong>Nº OPERAÇÃO: </strong>
+            <input id="text_numdamp" data-input="text_numdamp" type="text" class="nrdamp">
+          </p>
+          <input type="checkbox" id="chk_autoriza_saque" data-input="chk_autoriza_saque">Autorizo a CAIXA ECONÔMICA FEDERAL a efetuar o saque dos meus recursos no FGTS na(s) Conta(s) Vinculada(s) e no(s) valor(es) abaixo:
+          <table id="tb1">
+            <tr id="tr_header">
+              <th></th>
+              <th>Nº conta FGTS/Cód. Empregado</th>
+              <th>Código Empregador/Cód. Estabelecimento/Cód. Empresa</th>
+              <th>Utilização FMP(Preencher Sim ou Não)</th>
+              <th>Valor do Saque R$ ²</th>
+            </tr>
+            <tr id="tr_1" class="conta_fgts">
+              <td class="rw_index">01</td>
+              <td><input type="text" data-input="tabela_fgts_01_1" class="tabelas_fgts"></td>
+              <td><input type="text" data-input="tabela_fgts_01_2" class="tabelas_fgts"></td>
+              <td><input type="text" data-input="tabela_fgts_01_3" class="tabelas_fgts"></td>
+              <td><input type="text" data-input="tabela_fgts_01_4" class="tabelas_fgts valor valorfgts" maxlength="17" data-thousands="." data-decimal="," data-prefix="R$ " id="first_field"></td>
+            </tr>
+            <tr id="tr_total">
+              <td colspan= "3" class="rd_t"></td>
+              <td><span>TOTAL</span></td>
+              <td><input type="text" id="resultado" data-input="resultado" maxlength="25"></td>
+            </tr>
+          </table>
+          <p class="minitexto" style="margin-top: -25px;">² Valor a ser utilizado, incluindo o montante resgatado do FMP, se for o caso</p>
+          <div id="ctr_box" class="do-not-print">
+            <p>Clique para adicionar ou remover linhas na tabela.</p>
+            <div>
+              <button id="btnAdicionar" class="btn btn-success btn-fgts" data-toggle="tooltip" title="Adicionar Linha!">+</button>
+              <button id="btnRemover" class="btn btn-danger btn-fgts" data-toggle="tooltip" data-placement="bottom" title="Remover Linha!" style="margin-left: 70px;">-</button>
+            </div>
+          </div>
+          <br>
+          <div>
+            <p><strong>DECLARAÇÕES DO TITULAR DA CONTA VINCULADA DO FGTS</strong></p>
+            <p style="margin-top: -15px"><strong> DECLARO</strong>, sob as penas da Lei, que:</p>
+            <div class="justificado" style="margin-top: -12px">
+              <ul>
+                <li>Tenho no mínimo 36 meses de trabalho sob o regime do FGTS, somando-se os períodos trabalhados, consecutivos ou não, na mesma ou em diferentes empresas;</li>
+                <li>Não sou titular de outro financiamento ativo concedido no âmbito do SFH;</li>
+                <li>Não transferi, na qualidade de promitente vendedor, sem interveniência da Instituição Financeira, saldo devedor de financiamento firmado no SFH em qualquer parte do País;</li>
+                <li>Não sou proprietário, possuidor, promitente comprador, usufrutuário ou cessionário de outro imóvel residencial urbano ou de parte residencial de imóvel misto, concluído ou em construção, no mesmo município onde exerço minha ocupação laboral principal nem onde resido, incluindo, em ambos os casos, os municípios limítrofes e integrantes da mesma Região Metropolitana;</li>
+                <li>Estou ciente de que o valor total acima demonstrado encontra-se comprometido e destinado exclusivamente para as providências, por parte do Agente Financeiro, de movimentação dos meus recursos do FGTS para a finalidade mencionada.</li>
+              </ul>
+              <p>
+                Declaro ainda a veracidade das informações acima prestadas, ciência e concordância com as condições para uso dos recursos da conta vinculada do FGTS, para aquisição e/ou construção de imóvel, na forma apresentada pelo Agente Financeiro e estabelecida no Manual de Moradia Própria, na Internet: 
+                <a href="http://www.caixa.gov.br/Downloads/fgts-moradia/" target="_blank">http://www.caixa.gov.br/Downloads/fgts-moradia/</a>, e caso seja verificado ilícito tenho ciência que este será noticiado à Policia Federal e ao Ministério Público Federal.
+              </p>
+              <p>
+                Estou suficientemente esclarecido(a) que eventuais falsidades nessas declarações, as quais são essenciais à movimentação da(s) conta(s) vinculada(s) do FGTS, configuram crimes previstos no Código Penal Brasileiro, que ensejará o pedido pelo Agente Operador do FGTS de abertura de competente INQUÉRITO POLICIAL à Polícia Federal e me responsabilizo a devolver ao Fundo os valores sacados indevidamente, acrescidos de correção monetária e juros devidos, e sujeitando-me às sanções civis, administrativas e criminais previstas em lei.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--fim da div contasftgs-->
+      <br>
+      <div id="camporesponsabilidade">
+        <div class="titulo-centralizado"><strong>RESPONSABILIDADE PELAS INFORMAÇÕES DECLARADAS</strong></div>
+        <div style="font-size: 13px;" class="justificado"><strong>Responsabilizo-me pela exatidão e veracidade das informações declaradas e estou ciente de que, se falsas as declarações, ficarei sujeito às penas da lei, ficando, ainda, obrigado(a) a devolver os valores indevidamente sacados da conta vinculada do FGTS e/ou descontos concedidos pelo FGTS nos termos da Resolução do Conselho Curador do FGTS 702/12, suas alterações e aditamentos, acrescidos de correção monetária e juros sem prejuízo do vencimento antecipado da dívida decorrente do crédito concedido, com a conseqüente cobrança administrativa/judicial.</strong></div>
+      </div>
+      <div id="campoassinatura">
+        <p><input id="local_assin" data-input="local_assin" type="text" class="end_camp" size="35">, <input type="text" class="end_camp numh" data-input="dia_assin" size="3" maxlength="2"> de <input type="text" data-input="mes_assin" class="end_camp autoajuste" size="10" maxlength="10"> de <input type="text" data-input="ano_assin" class="end_camp" size="10" maxlength="4"></p>
+        <p class="texto-acessorio">Local/Data</p>
+        <br><br>
+        <div class="div_assinat">
+          <p><input type="text" data-input="assinatura_titular" size="33" class="assinatura"></p>
+          <p class="texto-acessorio">Assinatura do Titular</p>
+        </div>
+        <div class="div_assinat" style="margin-left: 45px;">
+          <p><input type="text" data-input="assinatura_caixa" size="37" class="assinatura"></p>
+          <p class="texto-acessorio">Assinatura Empregado Caixa/Canal Parceiro</p>
+        </div>
+      </div>
+      <footer>
+        <br>
+        <br>
+        <strong>SAC CAIXA</strong>: 0800 726 0101 (informações, reclamações, sugestões e elogios)<br>
+        <strong>Para pessoas com deficiência auditiva ou de fala</strong>: 0800 726 2492<br>
+        <strong>Alô CAIXA</strong>: 4004 0104 (capitais e regiões metropolitanas) ou 0800 104 0104 (demais localidades)<br>
+        <strong>Ouvidoria</strong>: 0800 725 7474
+        <p>caixa.gov.br</p>
+        <br>
+        <div ID="modeloMO">
+          <p>29.300 v034</p>
+        </div>
+      </footer>
+      <div id="printdiv">
+        <input type="button" onclick="printWindow();" id="btImprimir" class="btn btn-danger do-not-print" value="Imprimir" name="btImprimir">
+        <button type="button" class="btn btn-primary" data-action="registros-salvos">Registros</button>
+      </div>
+      <input id="pressedkeys" type="hidden">
+      <!-- MODAIS DA PÁGINA -->
+      <div class="modal fade option_view frd-modal-finished" id="minha-modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="panel panel-danger text-center">
+                <div class="panel-heading" style="font-size: 20px;">
+                  <h2><strong>ATENÇÃO!</strong></h2>
+                </div>
+                <div class="panel-body">
+                  <div>
+                    <div style="width: 90px;float: left;margin-right: 30px;">
+                      <!-- PONTO DE EXCLAMAÇÃO CUSTOM DA MODAL -->
+                      <div id="custom-warning">
+                        <span>!</span>
+                      </div>
+                    </div>
+                    <div style="width: 545px;text-align: justify;font-size: 21px;">
+                      <!-- TEXTO DA MODAL -->
+                      <span id="modal-body-text" class="text-danger">
+                      </span>
+                    </div>
+                  </div>
+                  <br style="clear: both;">
+                  <button class="btn-frd-modal-finished btn btn-danger pull-right" data-dismiss="modal">OK</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="modal-IR" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="panel panel-warning">
+                <div class="panel-heading" style="font-size: 20px;">
+                  <h3><strong>ATENÇÃO!</strong></h3>
+                  <h4><strong>Ano exercício (<span id="anoexerc"></span>) do IR informado é menor que (ou igual) o ano base (<span id="anobase"></span>)!!!</strong></h4>
+                </div>
+                <div class="panel-body text-warning">
+                  <div>
+                    <p><strong>ANO BASE: </strong>Período de 12 meses (1º de janeiro a 31 de dezembro) em que foram registrados os rendimentos e despesas do contribuinte.</p>
+                    <p><strong>EXERCÍCIO: </strong>Ano em que a declaração é feita.</p>
+                    <br>
+                    <strong style="display: block;">Exemplo:</strong>
+                    <p>Em 2014 (ano <strong>exercício</strong>), declaram-se os rendimentos, despesas e bens de 2013 (ano <strong>base</strong>), por exemplo</p>
+                  </div>
+                  <button type="button" class="btn btn-warning pull-right" data-dismiss="modal">OK</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="modalCPFPIS" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="panel panel-warning">
+                <div class="panel-heading" style="font-size: 20px; text-align: center;">
+                  <h3><strong><span id="md-header"></span> inválido!!!</strong></h3>
+                </div>
+                <div class="panel-body text-warning">
+                  <div>
+                    <h4>
+                      <p><span id="textoinicial"></span>"<strong id="nrDigitado"></strong>" não é válido ou foi digitado incorretamente!</p>
+                      <p><span id="textofim"></span></p>
+                    </h4>
+                  </div>
+                  <br>
+                  <button type="button" class="btn btn-warning pull-right" data-dismiss="modal">X</button>	
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="modal-registros-salvos" role="dialog">
+        <div class="modal-dialog modal-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!-- FECHAMENTO DA DIV PRINCIPAL -->
+    <!-- SCRIPTS -->
+    <script src="./assets/scripts.js" defer></script>
+  </body>
 </html>
