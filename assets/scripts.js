@@ -904,6 +904,7 @@ function verpis (pis){
 }
 
 // Código não implementado pelo TI da Caixa
+let registros_salvos = '';
 
 function salvarRegistro(){
   const registro = new Object();
@@ -926,10 +927,11 @@ function salvarRegistro(){
     }
     
     registro['data_criacao'] = Date.now();
+    registro['id'] = Math.floor(Date.now() * Math.random());
   })
   
   try{
-    let registros_salvos = JSON.parse(localStorage.getItem('registros-armazenados'));
+    registros_salvos = JSON.parse(localStorage.getItem('registros-armazenados'));
     
     if(registros_salvos == null && !Array.isArray(registros_salvos)){
       registros_salvos = new Array();
@@ -943,18 +945,36 @@ function salvarRegistro(){
   }
 }
 
+function dataTimestampToBRL(timestamp){
+  return new Date(timestamp).toLocaleDateString("pt-BR");
+}
+
+function dataBRLToTimestamp(data){
+  const datax = data.replaceAll('/','').replaceAll('-','');
+  return new Date(datax.substr(4, 4), datax.substr(0, 2), datax.substr(2, 2)).getTime();
+}
+
 function carregarRegistros(){
   try{
     const modal = document.querySelector('#modal-registros-salvos .modal-body');
-    let registros_salvos = JSON.parse(localStorage.getItem('registros-armazenados'));
+    registros_salvos = JSON.parse(localStorage.getItem('registros-armazenados'));
     
     if(registros_salvos == null && !Array.isArray(registros_salvos)){
       modal.innerHTML = `<div class="alert alert-warning"><span>Não foram encontrados registros armazenados</span></div>`
     }else{
-      modal.innerHTML = `<table><thead><tr><th>Proponente</th><th>Salvo em</th><th>Ação</th></tr></thead><tbody></tbody></table>`;
+      modal.innerHTML = `<div class="alert alert-warning"><span>Registros ordenados do salvo mais recente para o mais antigo</span></div>`
+      modal.innerHTML += `<table><thead><tr><th>Proponente (nome abreviado)</th><th>Salvo em</th><th>Ação</th></tr></thead><tbody></tbody></table>`;
+
+      // Ordenando os itens salvos de acordo com a data (mais novos para mais antigos)
+      registros_salvos.sort((a, b) => {a.data_criacao < b.data_criacao}).reverse();
+
       registros_salvos.forEach((registro, index) => {
-        const data = new Date(registro.data_criacao).toLocaleDateString("pt-BR");
-        modal.querySelector('table').innerHTML += `<tr data-id-registro="${index}"><td>${registro.text_nome}</td><td>${data !== 'Invalid Date' ? data : '-'}</td><td><button class="btn btn-primary recuperar-registro-salvo" onclick="recuperarRegistroSalvo(event, this)">Recuperar</button>&nbsp;<button class="btn btn-danger apagar-registro-salvo" onclick="apagarRegistroSalvo(event, this)">Apagar</button></td></tr>`;
+        // Exibindo apenas os 50 primeiros registros
+        if(index < 50){
+          const data = dataTimestampToBRL(registro.data_criacao);
+        const nome = registro.text_nome.toUpperCase().substr(0, 27);
+        modal.querySelector('table').innerHTML += `<tr data-id-registro="${registro.id || index}"><td>${nome.length === 27 ? nome + "..." : nome}</td><td>${data !== 'Invalid Date' ? data : '-'}</td><td><button class="btn btn-primary recuperar-registro-salvo" onclick="recuperarRegistroSalvo(event, this)">Recuperar</button>&nbsp;<button class="btn btn-danger apagar-registro-salvo" onclick="apagarRegistroSalvo(event, this)">Apagar</button></td></tr>`;
+        }
       })
     }
     
@@ -967,23 +987,23 @@ function apagarRegistroSalvo(evento, elemento){
   evento.preventDefault();
   try{
     let id = elemento.closest('[data-id-registro]').getAttribute('data-id-registro');
-    let registros_salvos = JSON.parse(localStorage.getItem('registros-armazenados'));
+    registros_salvos = JSON.parse(localStorage.getItem('registros-armazenados'));
     let registros_atuais = new Array();
     
     if(registros_salvos == null && !Array.isArray(registros_salvos) && id == null && typeof parseInt(id) !== 'number'){
       console.log('Não foi possível identificar o ID para apagar o registro ou não existem registros salvos');
     }else{
       // Confirmar exclusão de registro
-      
-      if(confirm('Excluir registro\n\nTem certeza que deseja excluir este registro?')){
+      const data = dataTimestampToBRL(registros_salvos.find((registro) => registro.id === parseInt(id)).data_criacao);
+      if(confirm(`⚠️ Excluir registro\n\nConfirma a exclusão do registro criado em ${data !== 'Invalid Date' ? data : '-'} do(a) ${document.querySelector('tr[data-id-registro="' + id + '"] > td').textContent.trim().toUpperCase()}? A exclusão não é reversível.`)){
         registros_salvos.forEach((registro, index) => {
-          if(index !== parseInt(id)){
+          if(registro.id !== parseInt(id)){
             registros_atuais.push(registro);
           }
         })
         
         registros_atuais !== null && Array.isArray(registros_atuais) ? localStorage.setItem('registros-armazenados', JSON.stringify(registros_atuais)) : '';
-        
+
         carregarRegistros();
       }
     }
@@ -998,15 +1018,16 @@ function recuperarRegistroSalvo(evento, elemento){
   
   try{
     let id = elemento.closest('[data-id-registro]').getAttribute('data-id-registro');
-    const registros_salvos = JSON.parse(localStorage.getItem('registros-armazenados'));
-    
+    registros_salvos = JSON.parse(localStorage.getItem('registros-armazenados'));
+
     if(registros_salvos == null && !Array.isArray(registros_salvos) && id == null && typeof parseInt(id) !== 'number'){
       console.log('Não foi possível identificar o ID para recuperar o registro ou não existem registros salvos');
       alert('Não foi possível recuperar o registro');
     }else{
       try{
-        const dados = registros_salvos[id]
+        const dados = registros_salvos.find((registro) => registro.id === parseInt(id));
         
+        // Preenchendo os campos, conforme os tipos deles e os dados recuperados
         if(typeof dados == 'object' ){
           const chaves = Object.keys(dados);
           
@@ -1052,6 +1073,9 @@ function recuperarRegistroSalvo(evento, elemento){
           HabilitaImpressao();
           $('#modal-registros-salvos').modal('hide');
         }
+
+        // Scrollando para o topo da página
+        window.scrollTo({top: 0, behavior: 'smooth'});
         
       }catch(error){
         console.log('Ocorreu um erro ao recuperar os dados do registro. Erro: %s', error);
