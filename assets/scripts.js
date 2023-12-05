@@ -1098,7 +1098,7 @@ $('[data-action="exportar-registros"]').on('click', (event) => {
     console.log(saida.trim());
     console.groupEnd();
 
-    alert('Os registros foram exibidos em JSON no console do navegador. Pressione CTRL + C para copiar os registros e CTRL + V para colar em um editor de texto.')
+    alert('Os registros foram listados em JSON no console do navegador. Acesse o console do navegador e depois copie e cole os resultados em um editor de texto.')
   }catch(error){
     console.log('Ocorreu um erro ao exportar os registros. Erro: %s', error);
   }

@@ -98,7 +98,7 @@
                 <option value="separacao">SEPARAÇÃO TOTAL DE BENS</option>
                 <option value="aquestos">PARTICIPAÇÃO FINAL NOS AQUESTOS</option>
               </select>
-              <select class="width_tmp_select" data-input="width_tmp_select">
+              <select class="width_tmp_select" data-input="width_tmp_select" id="width_tmp_select" name="width_tmp_select">
                 <option class="width_tmp_option"></option>
               </select>
               desde <input type="text" id="text_data2" data-input="text_data2" class="data" size="8" maxlength="8" placeholder="00/00/0000">.
@@ -151,11 +151,11 @@
         </div>
         <div id="residencia1" class="recuo20">
           <input type="checkbox" id="chkresidencia1" data-input="chkresidencia1" class="hide_chk modal-popup">
-          <label for="residencia1">Não possuo imóvel.</label>
+          <label for="chkresidencia1">Não possuo imóvel.</label>
         </div>
         <div id="residencia2" class="recuo20">
           <input type="checkbox" id="chkresidencia2" data-input="chkresidencia2" class="hide_chk modal-popup">
-          <label for="residencia2">Possuo imóvel em
+          <label for="chkresidencia2">Possuo imóvel em
           <input type="text" id="text_possuiimovellocal" data-input="text_possuiimovellocal" class="userInputs somentetexto autoajuste" placeholder="CIDADE" maxlength="50">/<input type="text" id="text_uf999" data-input="text_uf999" class="userInputs somentetexto autoajuste" maxlength="2" placeholder="UF">.
           </label>
         </div>
@@ -369,13 +369,13 @@
         </div>
         <div id="enquadramento5" class="recuo20">
           <input type="checkbox" id="chkenquadramento5" data-input="chkenquadramento5" class="enquad hide_chk">
-          <label for="chkenquadramento6">
+          <label for="chkenquadramento5">
           <strong>CARTA DE CRÉDITO SBPE (com uso do FGTS)</strong>
           </label>
         </div>
         <div id="enquadramento6" class="recuo20">
           <input type="checkbox" id="chkenquadramento6" data-input="chkenquadramento6" class="enquad hide_chk">
-          <label for="">
+          <label for="chkenquadramento6">
           <strong>CARTA DE CRÉDITO SBPE (no caso de cônjuge/companheiro(a) do trabalhador que irá utilizar o FGTS)</strong>
           </label>
         </div>
@@ -410,10 +410,10 @@
             </tr>
             <tr id="tr_1" class="conta_fgts">
               <td class="rw_index">01</td>
-              <td><input type="text" data-input="tabela_fgts_01_1" class="tabelas_fgts"></td>
-              <td><input type="text" data-input="tabela_fgts_01_2" class="tabelas_fgts"></td>
-              <td><input type="text" data-input="tabela_fgts_01_3" class="tabelas_fgts"></td>
-              <td><input type="text" data-input="tabela_fgts_01_4" class="tabelas_fgts valor valorfgts" maxlength="17" data-thousands="." data-decimal="," data-prefix="R$ " id="first_field"></td>
+              <td><input type="text" data-input="tabela_fgts_01_1" id="tabela_fgts_01_1" name="tabela_fgts_01_1" class="tabelas_fgts"></td>
+              <td><input type="text" data-input="tabela_fgts_01_2" id="tabela_fgts_01_2" name="tabela_fgts_01_2" class="tabelas_fgts"></td>
+              <td><input type="text" data-input="tabela_fgts_01_3" id="tabela_fgts_01_3" name="tabela_fgts_01_3" class="tabelas_fgts"></td>
+              <td><input type="text" data-input="tabela_fgts_01_4" id="tabela_fgts_01_4" name="tabela_fgts_01_4" class="tabelas_fgts valor valorfgts" maxlength="17" data-thousands="." data-decimal="," data-prefix="R$ " id="first_field"></td>
             </tr>
             <tr id="tr_total">
               <td colspan= "3" class="rd_t"></td>
@@ -459,15 +459,15 @@
         <div style="font-size: 13px;" class="justificado"><strong>Responsabilizo-me pela exatidão e veracidade das informações declaradas e estou ciente de que, se falsas as declarações, ficarei sujeito às penas da lei, ficando, ainda, obrigado(a) a devolver os valores indevidamente sacados da conta vinculada do FGTS e/ou descontos concedidos pelo FGTS nos termos da Resolução do Conselho Curador do FGTS 702/12, suas alterações e aditamentos, acrescidos de correção monetária e juros sem prejuízo do vencimento antecipado da dívida decorrente do crédito concedido, com a conseqüente cobrança administrativa/judicial.</strong></div>
       </div>
       <div id="campoassinatura">
-        <p><input id="local_assin" data-input="local_assin" type="text" class="end_camp" size="35">, <input type="text" class="end_camp numh" data-input="dia_assin" size="3" maxlength="2"> de <input type="text" data-input="mes_assin" class="end_camp autoajuste" size="10" maxlength="10"> de <input type="text" data-input="ano_assin" class="end_camp" size="10" maxlength="4"></p>
+        <p><input id="local_assin" name="local_assin" data-input="local_assin" type="text" class="end_camp" size="35">, <input id="end_camp" name="end_camp" type="text" class="end_camp numh" data-input="dia_assin" size="3" maxlength="2"> de <input type="text" data-input="mes_assin" id="mes_assin" name="mes_assin" class="end_camp autoajuste" size="10" maxlength="10"> de <input type="text" data-input="ano_assin" id="ano_assin" name="ano_assin" class="end_camp" size="10" maxlength="4"></p>
         <p class="texto-acessorio">Local/Data</p>
         <br><br>
         <div class="div_assinat">
-          <p><input type="text" data-input="assinatura_titular" size="33" class="assinatura"></p>
+          <p><input type="text" id="assinatura_titular" name="assinatura_titular" data-input="assinatura_titular" size="33" class="assinatura"></p>
           <p class="texto-acessorio">Assinatura do Titular</p>
         </div>
         <div class="div_assinat" style="margin-left: 45px;">
-          <p><input type="text" data-input="assinatura_caixa" size="37" class="assinatura"></p>
+          <p><input type="text" id="assinatura_caixa" name="assinatura_caixa" data-input="assinatura_caixa" size="37" class="assinatura"></p>
           <p class="texto-acessorio">Assinatura Empregado Caixa/Canal Parceiro</p>
         </div>
       </div>
@@ -485,7 +485,7 @@
         </div>
       </footer>
       <div id="printdiv">
-        <input type="button" onclick="printWindow();" id="btImprimir" class="btn btn-danger do-not-print" value="Imprimir" name="btImprimir">
+        <input type="button" onclick="printWindow();" id="btImprimir" name="btImprimir" class="btn btn-danger do-not-print" value="Imprimir" name="btImprimir">
         <button type="button" class="btn btn-primary" data-action="registros-salvos">Registros</button>
 				<button class="btn btn-secondary" data-action="exportar-registros">Exportar</button>
       </div>

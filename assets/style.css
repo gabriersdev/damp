@@ -252,7 +252,9 @@ footer{
 
 /* ******************** MEDIA PRINT ************************ */
 @media print{
-  .hide_chk, .do-not-print{display: none !important;}
+  .hide_chk, .do-not-print{
+    display: none !important;
+  }
   
   body{
     margin-left: 2px !important;
