@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" style="--zoom: 1">
   <head>
     <title>DAMP29300-Versão Offline</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -487,7 +487,29 @@
       <div id="printdiv">
         <input type="button" onclick="printWindow();" id="btImprimir" name="btImprimir" class="btn btn-danger do-not-print" value="Imprimir" name="btImprimir">
         <button type="button" class="btn btn-primary" data-action="registros-salvos">Registros</button>
-				<button class="btn btn-secondary" data-action="exportar-registros">Exportar</button>
+				
+        <div class="printdiv_sec_options" style="display: flex; align-items: center; justify-content: center;">
+          <div>
+            <button class="btn btn-secondary" data-action="exportar-registros">Exportar</button>
+          </div>
+          <form class="options" action="#" method="POST">
+            <div class="form-group">
+              <label class="switch">
+                <input type="checkbox" id="chk_autocomplete" name="chk_autocomplete">
+                <span class="slider round"></span>
+              </label>
+              <span>Autocompletar</span>
+            </div>
+        
+            <div class="form-group">
+              <label class="switch">
+                <input type="checkbox" id="chk_scale_print" name="chk_scale_print">
+                <span class="slider round"></span>
+              </label>
+              <span>Escala para impressão (zoom de 1.5)</span>
+            </div>
+          </form>
+        </div>
       </div>
       <input id="pressedkeys" type="hidden">
       <!-- MODAIS DA PÁGINA -->

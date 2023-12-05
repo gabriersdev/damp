@@ -204,7 +204,6 @@ td>input{
   text-align: center;
 }
 
-
 .assinatura {
   border: none;
   border-bottom: 1px solid #000;
@@ -238,7 +237,22 @@ footer{
 [data-action="exportar-registros"]{
   display: block;
   margin: 0 auto;
+}
+
+.printdiv_sec_options{
   margin-top: 2rem;
+
+  .options{
+    border-left: 1px solid rgba(0, 0, 0, 0.3);
+    padding-left: 1.1rem;
+    margin-left: 1.25rem;
+    text-align: left;
+
+    .form-group{
+      padding: 0;
+      margin: 0;
+    }
+  }
 }
 
 #modal-registros-salvos .alert{
@@ -252,6 +266,10 @@ footer{
 
 /* ******************** MEDIA PRINT ************************ */
 @media print{
+  html{
+    zoom: var(--zoom);
+  }
+
   .hide_chk, .do-not-print{
     display: none !important;
   }
@@ -274,3 +292,64 @@ footer{
 #mostrarCampoEnd, #end_comp_bairro, #municipio_usufruto{display: none;}
 #end_comp_logradouro{cursor: pointer;}
 /* *********************************************************************************** */
+
+/* SWITCH - By: https://www.w3schools.com */
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 4rem;
+  height: 2rem;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  border: unset;
+  background-color: #B7B7B7;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.25rem;
+  width: 1.25rem;
+  inset: 4px;
+  background-color: #FFF;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #0269C2;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #0269C2;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(1.95rem);
+  -ms-transform: translateX(1.95rem);
+  transform: translateX(1.95rem);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 5rem;
+}
+
+.slider.round:before {
+  border-radius: 5rem;
+}

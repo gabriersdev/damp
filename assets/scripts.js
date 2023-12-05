@@ -238,6 +238,46 @@ $(document).ready(function(){
     }
   }				
   
+  // Verificando dados de configuração da DAMP
+  try{
+    const armazenados = JSON.parse(localStorage.getItem('damp-settings'));
+
+    if(armazenados !== null && armazenados.length !== 0){
+      if(armazenados['chk_autocomplete'] !== undefined && typeof armazenados['chk_autocomplete'] === 'boolean'){
+        controleAutocomplete(armazenados['chk_autocomplete']);
+        $('#chk_autocomplete').prop('checked', armazenados['chk_autocomplete']);
+      }else{
+        controleAutocomplete(true);
+        $('#chk_autocomplete').prop('checked', true);
+      }
+
+      if(armazenados['chk_scale_print'] !== undefined && typeof armazenados['chk_scale_print'] === 'boolean'){
+        controleEscalaImpressao(armazenados['chk_scale_print']);
+        $('#chk_scale_print').prop('checked', armazenados['chk_scale_print']);
+      }else{
+        controleEscalaImpressao(false);
+        $('#chk_scale_print').prop('checked', false);
+      }
+    }else{
+      try{
+        const option = new Object();
+        option['chk_autocomplete'] = true;
+        option['chk_scale_print'] = false;
+        localStorage.setItem('damp-settings', JSON.stringify(option));
+      }catch(error){
+        console.log('Um erro ocorreu ao inicializar as configurações da DAMP. Erro:', error)
+      }
+
+      controleAutocomplete(true);
+      $('#chk_autocomplete').prop('checked', true);
+      controleEscalaImpressao(false);
+      $('#chk_scale_print').prop('checked', false);
+    }
+
+  }catch(error){
+    console.log('Um erro ocorreu ao verificar as configurações da DAMP. Erro:', error)
+  }
+
 });//FIM DO DOCUMENT READY
 
 
@@ -286,109 +326,153 @@ $('input[type="checkbox"]').click(function(){
   var gparent = $(this).parent().parent().attr('id');
   var chldCount = $('#'+gparent).find('input[type=checkbox]').length;
   var chldCountEnq = $('#'+gparent).find('input[type=checkbox].enquad').length;
-  var classYESNO = (chkClass.indexOf("yesno") >= 0)
   
-  if (chkClass !="yesno" && classYESNO === false){				
-    if (gparent == "enquadramento"){var chldCount = chldCountEnq;}
-    
-    if ($("#"+chkID).is(":checked")){
-      for (var i=1; i <= chldCount; i++){
-        var hddDiv = "#"+gparent+i;
-        var hddchk = "#chk"+gparent+i;
-        if (!$(hddchk).is(":checked")){
+  try{
+    var classYESNO = (chkClass.indexOf("yesno") >= 0)
+  }catch(error){}
+
+  if(!['chk_autocomplete', 'chk_scale_print'].includes(this.getAttribute('id'))){
+    if (chkClass !="yesno" && classYESNO === false){				
+      if (gparent == "enquadramento"){var chldCount = chldCountEnq;}
+      
+      if ($("#"+chkID).is(":checked")){
+        for (var i=1; i <= chldCount; i++){
+          var hddDiv = "#"+gparent+i;
+          var hddchk = "#chk"+gparent+i;
+          if (!$(hddchk).is(":checked")){
+            $(hddchk).prop('checked', false);
+            $(hddDiv).hide(400);//ou toggle. tanto faz
+          }						
+          if (gparent == "enquadramento" && ($(hddchk).is(":checked"))){$("#boxenq"+i).show(400);}
+        }
+      }else{
+        for (var i = 1 ; i <= chldCount; i++){
+          var hddDiv = "#"+gparent+i;
+          var hddchk = "#chk"+gparent+i;
           $(hddchk).prop('checked', false);
-          $(hddDiv).hide(400);//ou toggle. tanto faz
-        }						
-        if (gparent == "enquadramento" && ($(hddchk).is(":checked"))){$("#boxenq"+i).show(400);}
-      }
-    }else{
-      for (var i = 1 ; i <= chldCount; i++){
-        var hddDiv = "#"+gparent+i;
-        var hddchk = "#chk"+gparent+i;
-        $(hddchk).prop('checked', false);
-        $(hddDiv).show(400);//ou toggle. tanto faz
-        if (gparent == "enquadramento" && (!$(hddchk).is(":checked"))){$("#boxenq"+i).hide(400);}
+          $(hddDiv).show(400);//ou toggle. tanto faz
+          if (gparent == "enquadramento" && (!$(hddchk).is(":checked"))){$("#boxenq"+i).hide(400);}
+        }
       }
     }
-  }
-  
-  if (classYESNO === true){
-    var numIndexA = parseInt(chkID.split("_")[1]);
-    var chkname = chkID.split("_")[0];
-    var num = numIndexA;
-    var numIndexB = num;
-    if ((numIndexA % 2) == 0){numIndexB--;}else{numIndexB++;}
     
-    if ($("#"+chkID).is(":checked")){
-      var thisCheck = '#'+chkID;
-      var thisSpan = '#span_'+numIndexA;						
-      var nextCheck = '#'+chkname+'_'+numIndexB;
-      var nextSpan = '#span_'+numIndexB;
+    if (classYESNO === true){
+      var numIndexA = parseInt(chkID.split("_")[1]);
+      var chkname = chkID.split("_")[0];
+      var num = numIndexA;
+      var numIndexB = num;
+      if ((numIndexA % 2) == 0){numIndexB--;}else{numIndexB++;}
       
-      $(thisSpan).css({"fontWeight": "bold", "color": "black"});
-      $(thisCheck).prop('checked', true);
-      
-      $(nextSpan).css({"fontWeight": "normal", "color": "#FEFEFF"});
-      $(nextCheck).prop('checked', false);
-      
-      $(nextSpan).hide(400);
-      
-      if (gparent == "usofgts" && ($('#sn_9').is(":checked"))){
-        $("#tab_contasfgts").show(400);
-        $("#cond_ftgs_msg").show(400);
-      }
-      if (gparent == "usofgts" && ($('#sn_10').is(":checked"))){
-        $("#tab_contasfgts").hide(400);
-        $("#cond_ftgs_msg").hide(400);
-      }
-    }else{
-      $('#span_'+numIndexA).css({"fontWeight": "normal", "color": "black"});
-      $('#span_'+numIndexA).prop('checked', false);
-      $('#span_'+numIndexA).show(150);
-      $('#span_'+numIndexB).css({"fontWeight": "normal", "color": "black"});
-      $('#span_'+numIndexB).prop('checked', false);
-      $('#span_'+numIndexB).show(150);
-      
-      if (gparent == "usofgts" && ((!$('#sn_10').is(":checked")) || (!$('#sn_9').is(":checked")))  ){
-        $("#tab_contasfgts").hide(400);
-        $("#cond_ftgs_msg").hide(400);
+      if ($("#"+chkID).is(":checked")){
+        var thisCheck = '#'+chkID;
+        var thisSpan = '#span_'+numIndexA;						
+        var nextCheck = '#'+chkname+'_'+numIndexB;
+        var nextSpan = '#span_'+numIndexB;
+        
+        $(thisSpan).css({"fontWeight": "bold", "color": "black"});
+        $(thisCheck).prop('checked', true);
+        
+        $(nextSpan).css({"fontWeight": "normal", "color": "#FEFEFF"});
+        $(nextCheck).prop('checked', false);
+        
+        $(nextSpan).hide(400);
+        
+        if (gparent == "usofgts" && ($('#sn_9').is(":checked"))){
+          $("#tab_contasfgts").show(400);
+          $("#cond_ftgs_msg").show(400);
+        }
+        if (gparent == "usofgts" && ($('#sn_10').is(":checked"))){
+          $("#tab_contasfgts").hide(400);
+          $("#cond_ftgs_msg").hide(400);
+        }
+      }else{
+        $('#span_'+numIndexA).css({"fontWeight": "normal", "color": "black"});
+        $('#span_'+numIndexA).prop('checked', false);
+        $('#span_'+numIndexA).show(150);
+        $('#span_'+numIndexB).css({"fontWeight": "normal", "color": "black"});
+        $('#span_'+numIndexB).prop('checked', false);
+        $('#span_'+numIndexB).show(150);
+        
+        if (gparent == "usofgts" && ((!$('#sn_10').is(":checked")) || (!$('#sn_9').is(":checked")))  ){
+          $("#tab_contasfgts").hide(400);
+          $("#cond_ftgs_msg").hide(400);
+        }
       }
     }
-  }
-  
-  //REMOVE O QUE FOI PREENCHIDO DENTRO DO CONTAINER AO QUAL SE ENCERRA CASO CHKBOX SEJA DESMARCADO
-  if (!$("#"+chkID).is(":checked")){			
-    $(this).parent().find('input:text').val('');				
-  }				
-  
-  /*CONDIÇÕES ESPECIAIS PARA OS CHECKS, SE ELAS HOUVEREM*/
-  switch(chkID){
-    case "chkusufruto2":/*SE FOR USUFRUTUÁRIO, ABRE O COMPLEMENTO PARA INFORMAR O MUNICIPIO DO IMOVEL*/
-    $('#municipio_usufruto').toggle(400);
-    if (!$("#"+chkID).is(":checked")){
-      $('#mun_usufruto').val('');
-      $('#uf_usufruto').val('');
+    
+    //REMOVE O QUE FOI PREENCHIDO DENTRO DO CONTAINER AO QUAL SE ENCERRA CASO CHKBOX SEJA DESMARCADO
+    if (!$("#"+chkID).is(":checked")){			
+      $(this).parent().find('input:text').val('');				
+    }				
+    
+    /*CONDIÇÕES ESPECIAIS PARA OS CHECKS, SE ELAS HOUVEREM*/
+    switch(chkID){
+      case "chkusufruto2":/*SE FOR USUFRUTUÁRIO, ABRE O COMPLEMENTO PARA INFORMAR O MUNICIPIO DO IMOVEL*/
+      $('#municipio_usufruto').toggle(400);
+      if (!$("#"+chkID).is(":checked")){
+        $('#mun_usufruto').val('');
+        $('#uf_usufruto').val('');
+      }
+      break;
+      case "":
+      break;
+      case "":
+      break;
     }
-    break;
-    case "":
-    break;
-    case "":
-    break;
+  }else{
+    const armazenados = JSON.parse(localStorage.getItem('damp-settings'));
+
+    // console.log(armazenados === null, armazenados.length === 0)
+    // console.log(localStorage.getItem('damp-settings'))
+
+    try{
+      if(armazenados === null || armazenados.length === 0){
+        const option = new Object()
+        option[this.getAttribute('id').trim().toLowerCase()] = this.checked;
+        localStorage.setItem('damp-settings', JSON.stringify(option));
+      }else{
+        const option = armazenados;
+        option[this.getAttribute('id').trim().toLowerCase()] = this.checked;
+        localStorage.setItem('damp-settings', JSON.stringify(option));
+      }
+  
+      switch(this.getAttribute('id').trim().toLowerCase()){
+        case 'chk_autocomplete':
+          controleAutocomplete(this.checked);
+        break;
+  
+        case 'chk_scale_print':
+          controleEscalaImpressao(this.checked);
+        break;
+      }
+    }catch(error){
+      console.log('Um erro ocorreu ao setar as configurações da DAMP. Erro:', error)
+    }
+
+    // console.log(localStorage.getItem('damp-settings'));
   }
 });
+
+function controleAutocomplete(condicao){
+  condicao ? $('input').prop('autocomplete', 'on') : $('input').prop('autocomplete', 'off');
+}
+
+function controleEscalaImpressao(condicao){
+  condicao ? $('html').prop('style', '--zoom: 1.5') : $('html').prop('style', '--zoom: 1');
+}
 
 $('[data-action="registros-salvos"]').click(evento => {
   carregarRegistros();
   $('#modal-registros-salvos').modal('show');
 })
-//**************************************************************
-//**************************************************************
-//**************************************************************
-//**************************************************************
-//********************  HABTILITA A IMPRESSÃO	
+
+//********************  HABILITA A IMPRESSÃO ********************//
 $('input').change(function(){
   var chkID = $(this).attr('id');
-  HabilitaImpressao(chkID);
+
+  if(!['chk_autocomplete', 'chk_scale_print'].includes(this.getAttribute('id'))){
+    HabilitaImpressao(chkID);
+  }
 });
 
 function HabilitaImpressao(chkClicado){
@@ -964,16 +1048,16 @@ function carregarRegistros(){
     }else{
       modal.innerHTML = `<div class="alert alert-warning"><span>Registros ordenados do salvo mais recente para o mais antigo</span></div>`
       modal.innerHTML += `<table><thead><tr><th>Proponente (nome abreviado)</th><th>Salvo em</th><th>Ação</th></tr></thead><tbody></tbody></table>`;
-
+      
       // Ordenando os itens salvos de acordo com a data (mais novos para mais antigos)
       registros_salvos.sort((a, b) => {a.data_criacao < b.data_criacao}).reverse();
-
+      
       registros_salvos.forEach((registro, index) => {
         // Exibindo apenas os 50 primeiros registros
         if(index < 50){
           const data = dataTimestampToBRL(registro.data_criacao);
-        const nome = registro.text_nome.toUpperCase().substr(0, 27);
-        modal.querySelector('table').innerHTML += `<tr data-id-registro="${registro.id || index}"><td>${nome.length === 27 ? nome + "..." : nome}</td><td>${data !== 'Invalid Date' ? data : '-'}</td><td><button class="btn btn-primary recuperar-registro-salvo" onclick="recuperarRegistroSalvo(event, this)">Recuperar</button>&nbsp;<button class="btn btn-danger apagar-registro-salvo" onclick="apagarRegistroSalvo(event, this)">Apagar</button></td></tr>`;
+          const nome = registro.text_nome.toUpperCase().substr(0, 27);
+          modal.querySelector('table').innerHTML += `<tr data-id-registro="${registro.id || index}"><td>${nome.length === 27 ? nome + "..." : nome}</td><td>${data !== 'Invalid Date' ? data : '-'}</td><td><button class="btn btn-primary recuperar-registro-salvo" onclick="recuperarRegistroSalvo(event, this)">Recuperar</button>&nbsp;<button class="btn btn-danger apagar-registro-salvo" onclick="apagarRegistroSalvo(event, this)">Apagar</button></td></tr>`;
         }
       })
     }
@@ -1003,7 +1087,7 @@ function apagarRegistroSalvo(evento, elemento){
         })
         
         registros_atuais !== null && Array.isArray(registros_atuais) ? localStorage.setItem('registros-armazenados', JSON.stringify(registros_atuais)) : '';
-
+        
         carregarRegistros();
       }
     }
@@ -1019,7 +1103,7 @@ function recuperarRegistroSalvo(evento, elemento){
   try{
     let id = elemento.closest('[data-id-registro]').getAttribute('data-id-registro');
     registros_salvos = JSON.parse(localStorage.getItem('registros-armazenados'));
-
+    
     if(registros_salvos == null && !Array.isArray(registros_salvos) && id == null && typeof parseInt(id) !== 'number'){
       console.log('Não foi possível identificar o ID para recuperar o registro ou não existem registros salvos');
       alert('Não foi possível recuperar o registro');
@@ -1073,7 +1157,7 @@ function recuperarRegistroSalvo(evento, elemento){
           HabilitaImpressao();
           $('#modal-registros-salvos').modal('hide');
         }
-
+        
         // Scrollando para o topo da página
         window.scrollTo({top: 0, behavior: 'smooth'});
         
@@ -1090,14 +1174,14 @@ function recuperarRegistroSalvo(evento, elemento){
 
 $('[data-action="exportar-registros"]').on('click', (event) => {
   event.preventDefault();
-
+  
   try{
     registros_salvos = JSON.parse(localStorage.getItem('registros-armazenados'));
     const saida = `${registros_salvos !== null && Array.isArray(registros_salvos) ? JSON.stringify(registros_salvos) : 'Não foram localizados registros.'}`
     console.groupCollapsed('Clique para ver os recuperados do localStorage em JSON')
     console.log(saida.trim());
     console.groupEnd();
-
+    
     alert('Os registros foram listados em JSON no console do navegador. Acesse o console do navegador e depois copie e cole os resultados em um editor de texto.')
   }catch(error){
     console.log('Ocorreu um erro ao exportar os registros. Erro: %s', error);
