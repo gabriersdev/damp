@@ -1047,7 +1047,7 @@ function carregarRegistros(){
       modal.innerHTML = `<div class="alert alert-warning"><span>Não foram encontrados registros armazenados</span></div>`
     }else{
       modal.innerHTML = `<div class="alert alert-warning"><span>Registros ordenados do salvo mais recente para o mais antigo</span></div>`
-      modal.innerHTML += `<table><thead><tr><th>Proponente (nome abreviado)</th><th>Salvo em</th><th>Ação</th></tr></thead><tbody></tbody></table>`;
+      modal.innerHTML += `<table style="margin-top: 1.5rem;"><thead><tr><th>Proponente (nome abreviado)</th><th>Salvo em</th><th>Ação</th></tr></thead><tbody></tbody></table>`;
       
       // Ordenando os itens salvos de acordo com a data (mais novos para mais antigos)
       registros_salvos.sort((a, b) => {a.data_criacao < b.data_criacao}).reverse();
