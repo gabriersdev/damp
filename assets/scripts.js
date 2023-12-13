@@ -6,6 +6,7 @@
   });
   $(window).resize(function(){ $('.autoajuste').trigger('autogrow'); });
   
+  // Definindo máscaras para inputs
   $("#text_cpf").mask("999.999.999-99");
   $("#text_pis").mask("999.99999.99-9");
   $(".data").mask("99/99/9999");
@@ -874,7 +875,6 @@
       $('#span_10').hide('400');
     }
     
-    /*fazer validações para os outros campos???*/
     /*--------------------------------------*/		
     $('#print_area').removeClass('no-print-allowed');		
     $('#btImprimir').prop("disabled",false);
@@ -889,10 +889,7 @@
     $('#btImprimir').removeClass("btn-success");
     $('#btImprimir').addClass("btn-danger");
   }
-  
-  
-  
-  
+
   /******************************************************************************/
   //FUNÇÕES JS			
   function msieversion(){
@@ -1214,19 +1211,21 @@
       
         return mes;
       }else{
-        return null;
+        return '';
       }
     }catch(error){
       console.warn('O valor informado não é um número');
-      return null;
+      return '';
     }
   }
   
+  // Definindo as funções globais, para acesso via eventos no HTML
   window.msieversion = msieversion;
   window.printWindow = printWindow;
   window.recuperarRegistroSalvo = recuperarRegistroSalvo;
   window.apagarRegistroSalvo = apagarRegistroSalvo;
 
+  // Preenchendo a data e o local de assinatura
   window.addEventListener('DOMContentLoaded', (event) => {
     const date = new Date().toLocaleDateString('pt-BR');
     if(new RegExp('(?<dia>[0-9]{2})\/(?<mês>[0-9]{2})\/(?<ano>[0-9]{4})').test(date)){
