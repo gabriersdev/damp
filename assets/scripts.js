@@ -1238,4 +1238,28 @@
   
     $('#local_assin').val('Belo Horizonte'.toUpperCase());
   })
-})()
+
+  // Paginação
+  const elements = [0, 1, 2, 3, 4, 9, 7, 6, 5, 8, 10];
+  elements.sort((a, b) => a - b);
+  // Object.freeze(elements);
+
+  const count = 5;
+
+  if(elements.length <= count){
+    // Exibir apenas 1 página
+  }else if(elements.length == 0 || !Array.isArray(elements)){
+    // Exibir mensagem que não tem nada
+  }else{
+    
+    const countPagination = Math.ceil(elements.length / count);
+    const pagination = new Array();
+
+    for (let i = 0; i < countPagination; i++) {
+      // Elementos para formação de uma página da paginação
+      elements.splice(0, count)
+    }
+    
+  }
+
+})();
