@@ -1061,8 +1061,9 @@
           }
         })
       }
-      
     }catch(error){
+      const modal = document.querySelector('#modal-registros-salvos .modal-body');
+      modal.innerHTML = `<div class="alert alert-warning"><span>Não foram encontrados registros armazenados</span></div>`
       console.log('Ocorreu um erro ao carregar os registros. Erro: %s', error);
     }
   }
