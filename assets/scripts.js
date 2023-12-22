@@ -1003,10 +1003,10 @@
         registro[elemento.dataset.input] = elemento.value.trim();
         registro[`${elemento.dataset.input}_w`] = elemento.clientWidth;
       }else if(elemento.tagName.trim().toLowerCase() == 'select'){
-        registro[elemento.dataset.input] = elemento.value;
+        registro[elemento.dataset.input] = elemento.value.trim();
         registro[`${elemento.dataset.input}_w`] = elemento.clientWidth;
       }else{
-        registro[elemento.dataset.input] = elemento.textContent || elemento.innerText;
+        registro[elemento.dataset.input] = elemento.textContent.trim() || elemento.innerText.trim();
         registro[`${elemento.dataset.input}_w`] = elemento.clientWidth;
       }
       
@@ -1046,20 +1046,22 @@
       if(registros_salvos == null && !Array.isArray(registros_salvos)){
         modal.innerHTML = `<div class="alert alert-warning"><span>Não foram encontrados registros armazenados</span></div>`
       }else{
-        modal.innerHTML = `<div class="alert alert-warning"><span>Registros ordenados do salvo mais recente para o mais antigo</span></div>`
+        modal.innerHTML = `<div class="alert alert-warning"><span>Registros ordenados do mais recente para o mais antigo</span></div>`
         modal.innerHTML += `<table style="margin-top: 1.5rem;"><thead><tr><th>Proponente (nome abreviado)</th><th>Salvo em</th><th>Ação</th></tr></thead><tbody></tbody></table>`;
         
-        // Ordenando os itens salvos de acordo com a data (mais novos para mais antigos)
-        registros_salvos.sort((a, b) => {a.data_criacao < b.data_criacao}).reverse();
-        
-        registros_salvos.forEach((registro, index) => {
-          // Exibindo apenas os 50 primeiros registros
-          if(index < 50){
-            const data = dataTimestampToBRL(registro.data_criacao);
-            const nome = registro.text_nome.toUpperCase().substr(0, 27);
-            modal.querySelector('table').innerHTML += `<tr data-id-registro="${registro.id || index}"><td>${nome.length === 27 ? nome + "..." : nome}</td><td>${data !== 'Invalid Date' ? data : '-'}</td><td><button class="btn btn-primary recuperar-registro-salvo" onclick="recuperarRegistroSalvo(event, this)">Recuperar</button>&nbsp;<button class="btn btn-danger apagar-registro-salvo" onclick="apagarRegistroSalvo(event, this)">Apagar</button></td></tr>`;
-          }
+        // Ordenando os itens salvos de acordo com a data (mais novos para mais antigos) e listando
+        // Exibindo apenas os 50 primeiros registros ordenados
+        registros_salvos.toSorted((a, b) => {a.data_criacao - b.data_criacao}).reverse().splice(0, 50).forEach((registro, index) => {
+          const data = dataTimestampToBRL(registro.data_criacao);
+          const nome = registro.text_nome.toUpperCase().substr(0, 27);
+          
+          //
+          registro.id == undefined ? registro.id = Math.floor(new Date(registro.data_criacao) * Math.random()) : '';
+
+          modal.querySelector('table').innerHTML += `<tr data-id-registro="${registro.id || index}"><td>${nome.trim().length === 27 ? nome.trim() + "..." : nome}</td><td>${data !== 'Invalid Date' ? data : '-'}</td><td><button class="btn btn-primary recuperar-registro-salvo" onclick="recuperarRegistroSalvo(event, this)">Recuperar</button>&nbsp;<button class="btn btn-danger apagar-registro-salvo" onclick="apagarRegistroSalvo(event, this)">Apagar</button></td></tr>`;
         })
+
+        localStorage.setItem('registros-armazenados', JSON.stringify(registros_salvos));
       }
     }catch(error){
       const modal = document.querySelector('#modal-registros-salvos .modal-body');
@@ -1112,6 +1114,12 @@
         try{
           const dados = registros_salvos.find((registro) => registro.id === parseInt(id));
           
+          if(dados == null){
+            console.log('Não foi possível identificar o ID para recuperar o registro ou não existem registros salvos');
+            alert('Não foi possível recuperar o registro');
+            return undefined;
+          }
+
           // Preenchendo os campos, conforme os tipos deles e os dados recuperados
           if(typeof dados == 'object' ){
             const chaves = Object.keys(dados);
