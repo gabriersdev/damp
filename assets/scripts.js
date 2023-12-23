@@ -1143,8 +1143,6 @@
                   
                   if(valor.length > 0 && elemento.dataset.input !== 'assinatura_titular' && elemento.dataset.input !== 'assinatura_caixa'){
                     elemento.setAttribute('size', valor.length);
-                    // elemento.style.width = `${((valor.lzength) * 16) + 16}px`;
-                    
                     if(dados[`${elemento.dataset.input}_w`] !== undefined && typeof(parseInt(dados[`${elemento.dataset.input}_w`])) == 'number'){
                       elemento.style.width = `${(dados[`${elemento.dataset.input}_w`])}px`;
                     }else if(elemento.dataset.input == 'selectRegime'){
@@ -1266,15 +1264,32 @@
   }else if(elements.length == 0 || !Array.isArray(elements)){
     // Exibir mensagem que não tem nada
   }else{
-    
+    // Resolvendo paginação
     const countPagination = Math.ceil(elements.length / count);
-    const pagination = new Array();
 
-    for (let i = 0; i < countPagination; i++) {
+    for (let indexPagination = 0; indexPagination < countPagination; indexPagination++) {
       // Elementos para formação de uma página da paginação
-      elements.splice(0, count)
+      elements.splice(0, count).forEach((element, indexElement) => {
+        // Inserção de página com os elementos
+        `<tr data-element-pagination-id="${indexPagination + "" + indexElement}">oi</tr>`;
+      });
+
+      // Inserindo os botões de troca de pagina
+      `<button class="" data-index-pagination="${indexPagination}">${indexPagination + 1}</button>`;
     }
-    
   }
+
+  // Para trocar de página quando houver click no botão de trocar página da paginação
+  $('[data-index-pagination]').on('click', (event) => {
+    event.preventDefault();
+    const idIndexPaginationButton = event.dataset.indexPagination;
+    if(![null, undefined].includes(idIndexPaginationButton)){
+      // Alterando class active
+      Array.from($(".pagination-page")).forEach((page, index) => index !== idIndexPaginationButton ? page.classList.remove("active") : page.classList.add("active"));
+    }else{
+      console.log("Não foi possível localizar o ID do botão de troca de paginação.");
+    }
+    // Removendo a classe de ativo para as páginas exceto a do mesmo index do botão
+  })
 
 })();
