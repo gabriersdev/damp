@@ -10,6 +10,7 @@ import {
   apagarRegistroSalvo, 
   carregarRegistros, 
   recuperarRegistroSalvo, 
+  recuperarDados,
   exportarRegistrosArmazenados 
 } from "./dataBaseFunctions.js";
 
@@ -294,7 +295,6 @@ import {
     }catch(error){
       console.log('Um erro ocorreu ao verificar as configurações da DAMP. Erro:', error)
     }
-    
   });
   //FIM DO DOCUMENT READY
   
@@ -310,6 +310,23 @@ import {
     }
     
     $('#local_assin').val('Belo Horizonte'.toUpperCase());
+    
+    // Verificando se existem parâmetros que foram definidos
+    try {
+      if(true){
+        const URLParams = new URLSearchParams(new URL(window.location).search);
+        const dadosURL = new Object();
+        let dado;
+        
+        for (dado of Array.from(URLParams)){
+          dadosURL[dado[0]] = dado[1];
+        }
+        
+        recuperarDados(dadosURL);
+      }
+    } catch (error) {
+      console.log("Um erro ocorreu ao tentar recuperar os dados passado por parâmetro. Erro: %s", error);
+    }
   })
   
   // Monitoramento de eventos
