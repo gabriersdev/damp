@@ -353,3 +353,7 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 5rem;
 }
+
+#campoassinatura input{
+  text-transform: uppercase;
+}
