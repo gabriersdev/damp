@@ -528,9 +528,11 @@ function vercpf (cpf){
   if (cpf.length != 11 || cpf == "00000000000" || cpf == "11111111111" || cpf == "22222222222" || cpf == "33333333333" || cpf == "44444444444" || cpf == "55555555555" || cpf == "66666666666" || cpf == "77777777777" || cpf == "88888888888" || cpf == "99999999999") {
     return false;
   }
-  
-  add = 0;
-  for (i=0; i < 9; i ++) {
+
+  let add = 0;
+  let rev;
+
+  for (let i=0; i < 9; i ++) {
     add += parseInt(cpf.charAt(i)) * (10 - i);
   }
   
@@ -544,7 +546,7 @@ function vercpf (cpf){
   }
   
   add = 0;
-  for (i = 0; i < 10; i ++) {
+  for (let i = 0; i < 10; i ++) {
     add += parseInt(cpf.charAt(i)) * (11 - i);
   }
   
@@ -561,6 +563,8 @@ function vercpf (cpf){
 function verpis (pis){
   var multiplicadorBase = "3298765432";
   var total = 0;
+  let multiplicando;
+
   var pis = pis.replace(".", "");
   var pis = pis.replace(".", "");
   var pis = pis.replace(".", "");

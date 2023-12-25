@@ -15,6 +15,36 @@ import {
 } from "./dataBaseFunctions.js";
 
 (() => {
+
+  // Apresentação do Projeto no console
+  const dados_do_projeto = {
+    "Project name": "DAMP",
+    "Developed by": "Gabriel Ribeiro",
+    "Version": "3.0.0",
+    "Release date": "2023-12-25",
+    "Hostname": new URL(window.location).hostname,
+    "Origin": new URL(window.location).origin,
+    "Status": "Active"
+  };
+
+  const novas_funcionalidades = [
+    "Compartilhamento de link de DAMP: é possível gerar um link para uma DAMP feita e armazenada no navegador e compartilhar o link com outras pessoas para gerar a mesma DAMP. Há uma limitação dos navegadores quanto a quantidade de caracteres de uma URL, por isso em alguns casos dados podem ser perdidos.",
+    "Falha na recuperação de dados corrigida: alguns campos de checkbox não eram devidamente apresentados na recuperação dos registros. O erro foi corrigido nesta versão."
+  ];
+
+  Object.freeze(novas_funcionalidades);
+  Object.freeze(dados_do_projeto);
+
+  // Exibindo dados
+  console.groupCollapsed(`${dados_do_projeto["Project name"]}, Version ${dados_do_projeto["Version"]}`);
+  console.table(dados_do_projeto);
+  console.groupEnd();
+
+  console.groupCollapsed('New features');
+  novas_funcionalidades.toSorted((a, b) => a.localeCompare(b)).forEach((feature) => {console.info(`${feature}`)});
+  console.groupEnd();
+  // Fim da apresentação do projeto
+
   $(function(){
     $('.autoajuste').autoGrowInput({minWidth: 60, maxWidth:	function(){ return $('body').width()-50; }, comfortZone: 2 });
   });
@@ -146,6 +176,7 @@ import {
       
       switch(btnId){
         case "btnAdicionar":
+        let numContaNova;
         var lastRowId = $('#tb1 tr.conta_fgts:last').attr('id');
         var numContaAnt = lastRowId.split('_')[1];
         var numConta = parseInt(numContaAnt) + 1;
