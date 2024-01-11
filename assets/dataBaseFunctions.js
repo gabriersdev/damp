@@ -60,7 +60,6 @@ function carregarRegistros(){
       modal.innerHTML = `<div class="alert alert-warning"><span>Não foram encontrados registros armazenados</span></div>`
     }else{
       modal.innerHTML = `<div class="alert alert-warning"><span>Registros ordenados do mais recente para o mais antigo</span></div>`
-      modal.innerHTML += `<table style="margin-top: 1.5rem;"><thead><tr><th>Proponente (nome abreviado)</th><th>Salvo em</th><th>Ação</th></tr></thead><tbody></tbody></table>`;
       
       // Ordenando os itens salvos de acordo com a data (mais novos para mais antigos) e listando
       // Exibindo apenas os 50 primeiros registros ordenados
@@ -100,7 +99,7 @@ const paginarElementos = (elements) => {
   elements.sort((a, b) => a - b);
   // Object.freeze(elements);
   
-  const count = 5;
+  const count = 10;
   
   if(elements.length <= count){
     // Exibir apenas 1 página
@@ -111,19 +110,32 @@ const paginarElementos = (elements) => {
   }else{
     // Resolvendo paginação
     const countPagination = Math.ceil(elements.length / count);
-    
+
     for (let indexPagination = 0; indexPagination < countPagination; indexPagination++) {
+      // Criando DIV
+      const table = document.createElement('table');
+      table.style = 'margin-top: 1.5rem;';
+      table.innerHTML += '<thead><tr><th>Proponente (nome abreviado)</th><th>Salvo em</th><th>Ação</th></tr></thead>'
+
+      table.classList.add(`${indexPagination === 0 ? "visible" : "unvisible"}`);
+      table.dataset.page = indexPagination;
+
+      const tbody = document.createElement('tbody');
+
       // Elementos para formação de uma página da paginação
       elements.splice(0, count).forEach((registro, indexElement) => {
         const data = dataTimestampToBRL(registro.data_criacao);
         const nome = registro.text_nome.toUpperCase().substr(0, 27);
 
         // Inserção de página com os elementos
-        modal.querySelector('table').innerHTML += `<tr data-element-pagination-id="${indexPagination + "" + indexElement}" data-id-registro="${registro.id || index}"><td>${nome.trim().length === 27 ? nome.trim() + "..." : nome}</td><td>${data !== 'Invalid Date' ? data : '-'}</td><td><button class="btn btn-primary recuperar-registro-salvo" onclick="recuperarRegistroSalvo(event, this)">Recuperar</button>&nbsp;<button class="btn btn-danger apagar-registro-salvo" onclick="apagarRegistroSalvo(event, this)">Apagar</button>&nbsp;<button class="btn btn-secondary" onclick="recuperarRegistroSalvo(event,this,'link')">🔗</button></td></tr>`
+        tbody.innerHTML += `<tr data-element-pagination-id="${indexPagination + "" + indexElement}" data-id-registro="${registro.id || index}"><td>${nome.trim().length === 27 ? nome.trim() + "..." : nome}</td><td>${data !== 'Invalid Date' ? data : '-'}</td><td><button class="btn btn-primary recuperar-registro-salvo" onclick="recuperarRegistroSalvo(event, this)">Recuperar</button>&nbsp;<button class="btn btn-danger apagar-registro-salvo" onclick="apagarRegistroSalvo(event, this)">Apagar</button>&nbsp;<button class="btn btn-secondary" onclick="recuperarRegistroSalvo(event,this,'link')">🔗</button></td></tr>`
+        table.appendChild(tbody);
       });
+
+      modal.querySelector('.modal-body').appendChild(table);
       
       // Inserindo os botões de troca de pagina
-      modal.querySelector('.modal-footer').innerHTML +=`<button class="" data-index-pagination="${indexPagination}">${indexPagination + 1}</button>`;
+      modal.querySelector('.modal-footer').innerHTML +=`<button class="btn btn-default" data-index-pagination="${indexPagination}">${indexPagination + 1}</button>`;
     }
   }
 }
