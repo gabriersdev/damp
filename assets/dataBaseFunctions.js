@@ -64,7 +64,9 @@ function carregarRegistros(){
       
       // Ordenando os itens salvos de acordo com a data (mais novos para mais antigos) e listando
       // Exibindo apenas os 50 primeiros registros ordenados
-      registros_salvos.toSorted((a, b) => {a.data_criacao - b.data_criacao}).reverse().splice(0, 50).forEach((registro, index) => {
+      paginarElementos(registros_salvos.toSorted((a, b) => {a.data_criacao - b.data_criacao}).reverse().splice(0, 50));
+      
+      [].forEach((registro, index) => {
         const data = dataTimestampToBRL(registro.data_criacao);
         const nome = registro.text_nome.toUpperCase().substr(0, 27);
         
@@ -81,9 +83,48 @@ function carregarRegistros(){
       registros_alterados ? localStorage.setItem('registros-armazenados', JSON.stringify(registros_salvos)) : '';
     }
   }catch(error){
+    console.log(error);
     const modal = document.querySelector('#modal-registros-salvos .modal-body');
     modal.innerHTML = `<div class="alert alert-warning"><span>Não foram encontrados registros armazenados</span></div>`
     console.log('Ocorreu um erro ao carregar os registros. Erro: %s', error);
+  }
+}
+
+const paginarElementos = (elements) => {
+  const modal = document.querySelector('#modal-registros-salvos');
+  if(!Array.isArray(elements)){
+    throw new Error('O elemento não é um array');
+  }
+
+  // Paginação
+  elements.sort((a, b) => a - b);
+  // Object.freeze(elements);
+  
+  const count = 5;
+  
+  if(elements.length <= count){
+    // Exibir apenas 1 página
+    console.log('Apenas 1 página')
+  }else if(elements.length == 0 || !Array.isArray(elements)){
+    // Exibir mensagem que não tem nada
+    console.log('Não tem nada no array de elementos')
+  }else{
+    // Resolvendo paginação
+    const countPagination = Math.ceil(elements.length / count);
+    
+    for (let indexPagination = 0; indexPagination < countPagination; indexPagination++) {
+      // Elementos para formação de uma página da paginação
+      elements.splice(0, count).forEach((registro, indexElement) => {
+        const data = dataTimestampToBRL(registro.data_criacao);
+        const nome = registro.text_nome.toUpperCase().substr(0, 27);
+
+        // Inserção de página com os elementos
+        modal.querySelector('table').innerHTML += `<tr data-element-pagination-id="${indexPagination + "" + indexElement}" data-id-registro="${registro.id || index}"><td>${nome.trim().length === 27 ? nome.trim() + "..." : nome}</td><td>${data !== 'Invalid Date' ? data : '-'}</td><td><button class="btn btn-primary recuperar-registro-salvo" onclick="recuperarRegistroSalvo(event, this)">Recuperar</button>&nbsp;<button class="btn btn-danger apagar-registro-salvo" onclick="apagarRegistroSalvo(event, this)">Apagar</button>&nbsp;<button class="btn btn-secondary" onclick="recuperarRegistroSalvo(event,this,'link')">🔗</button></td></tr>`
+      });
+      
+      // Inserindo os botões de troca de pagina
+      modal.querySelector('.modal-footer').innerHTML +=`<button class="" data-index-pagination="${indexPagination}">${indexPagination + 1}</button>`;
+    }
   }
 }
 
@@ -203,7 +244,7 @@ function recuperarRegistroSalvo(evento, button, action){
         alert('Não foi possível recuperar o registro');
       }
     }
-
+    
   }catch(error){
     alert('Não foi possível recuperar o registro');
   }
@@ -290,31 +331,4 @@ export{
   recuperarDados,
   carregarRegistros,
   exportarRegistrosArmazenados
-}
-
-// Paginação
-const elements = [0, 1, 2, 3, 4, 9, 7, 6, 5, 8, 10];
-elements.sort((a, b) => a - b);
-// Object.freeze(elements);
-
-const count = 5;
-
-if(elements.length <= count){
-  // Exibir apenas 1 página
-}else if(elements.length == 0 || !Array.isArray(elements)){
-  // Exibir mensagem que não tem nada
-}else{
-  // Resolvendo paginação
-  const countPagination = Math.ceil(elements.length / count);
-  
-  for (let indexPagination = 0; indexPagination < countPagination; indexPagination++) {
-    // Elementos para formação de uma página da paginação
-    elements.splice(0, count).forEach((element, indexElement) => {
-      // Inserção de página com os elementos
-      `<tr data-element-pagination-id="${indexPagination + "" + indexElement}">oi</tr>`;
-    });
-    
-    // Inserindo os botões de troca de pagina
-    `<button class="" data-index-pagination="${indexPagination}">${indexPagination + 1}</button>`;
-  }
 }

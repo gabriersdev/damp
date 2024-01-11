@@ -60,7 +60,7 @@
             <li>Firefox (versão 52 ou superior)</li>
           </ul>
         </h4>
-        <hr style="border: 1px solid #8a6d3b;">
+        <hr style="border: 1px solid #8A6D3B;">
         <h4>
           Informação do Navegador utilizado:<br>
           <span id="nav_incomp_fulllname" class="text-info"></span>
@@ -68,6 +68,8 @@
       </div>
     </div>
   </div>
+
+  <!-- DIV principal -->
   <div id="print_area" class="container no-print-allowed">
     <div>
       <div id="header-mo">
@@ -534,100 +536,103 @@
       </div>
     </div>
     <input id="pressedkeys" type="hidden">
-    <!-- MODAIS DA PÁGINA -->
-    <div class="modal fade option_view frd-modal-finished" id="minha-modal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="panel panel-danger text-center">
-              <div class="panel-heading" style="font-size: 20px;">
-                <h2><strong>ATENÇÃO!</strong></h2>
-              </div>
-              <div class="panel-body">
-                <div>
-                  <div style="width: 90px;float: left;margin-right: 30px;">
-                    <!-- PONTO DE EXCLAMAÇÃO CUSTOM DA MODAL -->
-                    <div id="custom-warning">
-                      <span>!</span>
-                    </div>
-                  </div>
-                  <div style="width: 545px;text-align: justify;font-size: 21px;">
-                    <!-- TEXTO DA MODAL -->
-                    <span id="modal-body-text" class="text-danger">
-                    </span>
+  </div>
+  <!-- Fechamento da DIV principal -->
+  
+  <!-- Modais da página -->
+  <div class="modal fade option_view frd-modal-finished" id="minha-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="panel panel-danger text-center">
+            <div class="panel-heading" style="font-size: 20px;">
+              <h2><strong>ATENÇÃO!</strong></h2>
+            </div>
+            <div class="panel-body">
+              <div>
+                <div style="width: 90px;float: left;margin-right: 30px;">
+                  <!-- PONTO DE EXCLAMAÇÃO CUSTOM DA MODAL -->
+                  <div id="custom-warning">
+                    <span>!</span>
                   </div>
                 </div>
-                <br style="clear: both;">
-                <button class="btn-frd-modal-finished btn btn-danger pull-right" data-dismiss="modal">OK</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal fade" id="modal-IR" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="panel panel-warning">
-              <div class="panel-heading" style="font-size: 20px;">
-                <h3><strong>ATENÇÃO!</strong></h3>
-                <h4><strong>Ano exercício (<span id="anoexerc"></span>) do IR informado é menor que (ou igual) o ano base (<span id="anobase"></span>)!!!</strong></h4>
-              </div>
-              <div class="panel-body text-warning">
-                <div>
-                  <p><strong>ANO BASE: </strong>Período de 12 meses (1º de janeiro a 31 de dezembro) em que foram registrados os rendimentos e despesas do contribuinte.</p>
-                  <p><strong>EXERCÍCIO: </strong>Ano em que a declaração é feita.</p>
-                  <br>
-                  <strong style="display: block;">Exemplo:</strong>
-                  <p>Em 2014 (ano <strong>exercício</strong>), declaram-se os rendimentos, despesas e bens de 2013 (ano <strong>base</strong>), por exemplo</p>
+                <div style="width: 545px;text-align: justify;font-size: 21px;">
+                  <!-- TEXTO DA MODAL -->
+                  <span id="modal-body-text" class="text-danger">
+                  </span>
                 </div>
-                <button type="button" class="btn btn-warning pull-right" data-dismiss="modal">OK</button>
               </div>
+              <br style="clear: both;">
+              <button class="btn-frd-modal-finished btn btn-danger pull-right" data-dismiss="modal">OK</button>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal fade" id="modalCPFPIS" role="dialog">
-      <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="panel panel-warning">
-              <div class="panel-heading" style="font-size: 20px; text-align: center;">
-                <h3><strong><span id="md-header"></span> inválido!!!</strong></h3>
-              </div>
-              <div class="panel-body text-warning">
-                <div>
-                  <h4>
-                    <p><span id="textoinicial"></span>"<strong id="nrDigitado"></strong>" não é válido ou foi digitado incorretamente!</p>
-                    <p><span id="textofim"></span></p>
-                  </h4>
-                </div>
-                <br>
-                <button type="button" class="btn btn-warning pull-right" data-dismiss="modal">X</button>	
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal fade" id="modal-registros-salvos" role="dialog">
-      <div class="modal-dialog modal-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          </div>
-          <div class="modal-body">
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<!-- FECHAMENTO DA DIV PRINCIPAL -->
-<!-- SCRIPTS -->
-<script type="module" src="./assets/scripts.js" defer></script>
+  <div class="modal fade" id="modal-IR" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="panel panel-warning">
+            <div class="panel-heading" style="font-size: 20px;">
+              <h3><strong>ATENÇÃO!</strong></h3>
+              <h4><strong>Ano exercício (<span id="anoexerc"></span>) do IR informado é menor que (ou igual) o ano base (<span id="anobase"></span>)!!!</strong></h4>
+            </div>
+            <div class="panel-body text-warning">
+              <div>
+                <p><strong>ANO BASE: </strong>Período de 12 meses (1º de janeiro a 31 de dezembro) em que foram registrados os rendimentos e despesas do contribuinte.</p>
+                <p><strong>EXERCÍCIO: </strong>Ano em que a declaração é feita.</p>
+                <br>
+                <strong style="display: block;">Exemplo:</strong>
+                <p>Em 2014 (ano <strong>exercício</strong>), declaram-se os rendimentos, despesas e bens de 2013 (ano <strong>base</strong>), por exemplo</p>
+              </div>
+              <button type="button" class="btn btn-warning pull-right" data-dismiss="modal">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="modalCPFPIS" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="panel panel-warning">
+            <div class="panel-heading" style="font-size: 20px; text-align: center;">
+              <h3><strong><span id="md-header"></span> inválido!!!</strong></h3>
+            </div>
+            <div class="panel-body text-warning">
+              <div>
+                <h4>
+                  <p><span id="textoinicial"></span>"<strong id="nrDigitado"></strong>" não é válido ou foi digitado incorretamente!</p>
+                  <p><span id="textofim"></span></p>
+                </h4>
+              </div>
+              <br>
+              <button type="button" class="btn btn-warning pull-right" data-dismiss="modal">X</button>	
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="modal-registros-salvos" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- SCRIPTS -->
+  <script type="module" src="./assets/scripts.js" defer></script>
 </body>
 </html>
