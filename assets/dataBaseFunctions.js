@@ -135,10 +135,16 @@ const paginarElementos = (elements) => {
       modal.querySelector('.modal-body').appendChild(table);
       
       // Inserindo os botões de troca de pagina
-      modal.querySelector('.modal-footer').innerHTML +=`<button class="btn btn-default" data-index-pagination="${indexPagination}">${indexPagination + 1}</button>`;
+      modal.querySelector('.modal-footer').innerHTML +=`<button class="btn ${indexPagination === 0 ? 'btn-primary'  :  'btn-default'}" data-button-pagination="${indexPagination}">${indexPagination + 1}</button>`;
     }
   }
 }
+
+// Evento de click para o botão de paginação
+$('[data-button-pagination]').click((evento) => {
+  evento.preventDefault();
+  // ...
+})
 
 function apagarRegistroSalvo(evento, elemento){
   evento.preventDefault();
