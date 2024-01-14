@@ -48,6 +48,7 @@ import {
   $(function(){
     $('.autoajuste').autoGrowInput({minWidth: 60, maxWidth:	function(){ return $('body').width()-50; }, comfortZone: 2 });
   });
+
   $(window).resize(function(){ $('.autoajuste').trigger('autogrow'); });
   
   // Definindo máscaras para inputs
@@ -330,7 +331,8 @@ import {
   //FIM DO DOCUMENT READY
   
   // Preenchendo a data e o local de assinatura
-  window.addEventListener('DOMContentLoaded', (event) => {
+  window.addEventListener('DOMContentLoaded', () => {
+    // Definindo data
     const date = new Date().toLocaleDateString('pt-BR');
     if(new RegExp('(?<dia>[0-9]{2})\/(?<mês>[0-9]{2})\/(?<ano>[0-9]{4})').test(date)){
       let {dia, mes, ano} = date.match(/(?<dia>[0-9]{2})\/(?<mes>[0-9]{2})\/(?<ano>[0-9]{4})/).groups;
@@ -339,7 +341,8 @@ import {
       $('[data-input="mes_assin"]').val(` ${converterParaMesBRL(mes).toUpperCase()} `);
       $('[data-input="ano_assin"]').val(`${ano}`);
     }
-    
+
+    // Definindo local de assinatura padrão
     $('#local_assin').val('Belo Horizonte'.toUpperCase());
     
     // Verificando se existem parâmetros que foram definidos
@@ -361,7 +364,7 @@ import {
   })
   
   // Monitoramento de eventos
-  
+
   /*SELECT MONITOR*/			
   $(document).on('change','#selectEstCiv',function(){
     verificaEstadoCivil($(this).val(), this);
@@ -371,6 +374,23 @@ import {
     $('#end_comp_bairro').slideToggle(600);				
     $('#mostrarCampoEnd').slideToggle(600);
   });
+
+  // Monitoramento de preench. do campo de logradouro, N.º, CEP
+  let timeout;
+  $('[data-input="endereco_logradouro"]').on('keydown', () => {
+    // Verifica se o campo está preenchido
+    if($('[data-input="endereco_logradouro"]').text().trim().length == 0){
+      // Se estiver, desativa o timeout e aciona a função de impedir impressão
+      clearTimeout(timeout);
+      exports.noPrintSettings();
+    }else{
+      // Se preenchido, desativa o timeout e atribui a variável um novo timeout que aciona a validação de impressão
+      clearTimeout(timeout)
+      timeout = setTimeout(() => {
+        exports.HabilitaImpressao();
+      }, 3500);
+    }
+  }) 
   
   /*CHECKBOX MONITOR*/
   $('input[type="checkbox"]').click(function(){

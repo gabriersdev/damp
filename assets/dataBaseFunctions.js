@@ -56,6 +56,9 @@ function carregarRegistros(){
     const modal = document.querySelector('#modal-registros-salvos .modal-body');
     registros_salvos = JSON.parse(localStorage.getItem('registros-armazenados'));
     
+    modal.innerHTML = '';
+    document.querySelector('#modal-registros-salvos .modal-footer').innerHTML = '';
+
     if(registros_salvos == null && !Array.isArray(registros_salvos)){
       modal.innerHTML = `<div class="alert alert-warning"><span>Não foram encontrados registros armazenados</span></div>`
     }else{
@@ -63,7 +66,7 @@ function carregarRegistros(){
       
       // Ordenando os itens salvos de acordo com a data (mais novos para mais antigos) e listando
       // Exibindo apenas os 50 primeiros registros ordenados
-      paginarElementos(registros_salvos.toSorted((a, b) => {a.data_criacao - b.data_criacao}).reverse().splice(0, 50));
+      paginarElementos(registros_salvos.toSorted((a, b) => {a.data_criacao - b.data_criacao}).reverse());
       
       [].forEach((registro, index) => {
         const data = dataTimestampToBRL(registro.data_criacao);
@@ -135,16 +138,26 @@ const paginarElementos = (elements) => {
       modal.querySelector('.modal-body').appendChild(table);
       
       // Inserindo os botões de troca de pagina
-      modal.querySelector('.modal-footer').innerHTML +=`<button class="btn ${indexPagination === 0 ? 'btn-primary'  :  'btn-default'}" data-button-pagination="${indexPagination}">${indexPagination + 1}</button>`;
+      modal.querySelector('.modal-footer').innerHTML +=`<button class="btn ${indexPagination === 0 ? 'btn-primary'  :  'btn-default'}" data-button-pagination="${indexPagination}" onclick="clickTogglePage(event)">${indexPagination + 1}</button>`;
     }
   }
 }
 
 // Evento de click para o botão de paginação
-$('[data-button-pagination]').click((evento) => {
+const clickTogglePage = (evento) => {
   evento.preventDefault();
-  // ...
-})
+  const id = evento.target.dataset.buttonPagination;
+  if(id){
+    $('table[data-page]').attr('class', 'unvisible');
+    $(`table[data-page=${id}]`).attr('class', 'visible');
+    $('button[data-button-pagination]').attr('class', 'btn btn-default');
+    evento.target.setAttribute('class', 'btn btn-primary');
+  }else{
+    console.log('Não foi possível capturar o identificador do botão');
+  }
+}
+
+window.clickTogglePage = clickTogglePage;
 
 function apagarRegistroSalvo(evento, elemento){
   evento.preventDefault();
@@ -159,7 +172,7 @@ function apagarRegistroSalvo(evento, elemento){
       // Confirmar exclusão de registro
       const data = dataTimestampToBRL(registros_salvos.find((registro) => registro.id === parseInt(id)).data_criacao);
       if(confirm(`⚠️ Excluir registro\n\nConfirma a exclusão do registro criado em ${data !== 'Invalid Date' ? data : '-'} do(a) ${document.querySelector('tr[data-id-registro="' + id + '"] > td').textContent.trim().toUpperCase()}? A exclusão não é reversível.`)){
-        registros_salvos.forEach((registro, index) => {
+        registros_salvos.forEach((registro) => {
           if(registro.id !== parseInt(id)){
             registros_atuais.push(registro);
           }
@@ -167,6 +180,9 @@ function apagarRegistroSalvo(evento, elemento){
         
         registros_atuais !== null && Array.isArray(registros_atuais) ? localStorage.setItem('registros-armazenados', JSON.stringify(registros_atuais)) : '';
         
+        // Removendo a linha do registro
+        elemento.closest('tr[data-element-pagination-id]').remove();
+        // Carregando registros novamente no modal
         carregarRegistros();
       }
     }

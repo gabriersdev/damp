@@ -260,6 +260,12 @@ function HabilitaImpressao(chkClicado){
   /*-----------------------------------------*/
   
   /*- 5 IMÓVEL OBJETO DO FINANCIAMENTO-*/
+  // Campo de preench. de logradouro, N.º, CEP
+  if($('[data-input="endereco_logradouro"]').text().trim().length == 0){
+    noPrintSettings();
+    return false;
+  }
+
   if ($('#text_logradouro2').length > 0){
     if ($('#text_logradouro2').val() == ""){
       $('#text_logradouro2').focus();
@@ -493,6 +499,13 @@ function noPrintSettings(){
   $('#btImprimir').addClass("btn-danger");
 }
 
+function okPrintSettings(){
+  $('#btImprimir').prop("disabled",false);
+  $('#print_area').removeClass('no-print-allowed');
+  $('#btImprimir').addClass("btn-success");
+  $('#btImprimir').removeClass("btn-danger");
+}
+
 function msieversion(){
   var ua = window.navigator.userAgent;
   var msie = ua.indexOf("MSIE ");
@@ -564,24 +577,27 @@ function verpis (pis){
   var multiplicadorBase = "3298765432";
   var total = 0;
   let multiplicando;
+  let multiplicador;
+  let resto;
+  let digito;
+  let pisTratado;
 
-  var pis = pis.replace(".", "");
-  var pis = pis.replace(".", "");
-  var pis = pis.replace(".", "");
-  var pis = pis.replace("-", "");				
-  if (pis.length != 11 || pis == "00000000000" || pis == "11111111111" || pis == "22222222222" || pis == "33333333333" || pis == "44444444444" || pis == "55555555555" || pis == "66666666666" || pis == "77777777777" || pis == "88888888888" || pis == "99999999999"){
+  pisTratado = pis;
+  pisTratado = pisTratado.replace(".", "");
+  pisTratado = pisTratado.replace(".", "");
+  pisTratado = pisTratado.replace(".", "");
+  pisTratado = pisTratado.replace("-", "");				
+  if (pisTratado.length != 11 || pisTratado == "00000000000" || pisTratado == "11111111111" || pisTratado == "22222222222" || pisTratado == "33333333333" || pisTratado == "44444444444" || pisTratado == "55555555555" || pisTratado == "66666666666" || pisTratado == "77777777777" || pisTratado == "88888888888" || pisTratado == "99999999999"){
     return false;
   }
   for (var i = 0; i < 10; i++){
-    multiplicando = parseInt( pis.substring( i, i + 1 ) );
+    multiplicando = parseInt( pisTratado.substring( i, i + 1 ) );
     multiplicador = parseInt( multiplicadorBase.substring( i, i + 1 ) );
     total += multiplicando * multiplicador;
   }
   resto = 11 - total % 11;
   resto = resto == 10 || resto == 11 ? 0 : resto;
-  digito = parseInt("" + pis.charAt(10));
-  // return resto == digito;
-  return true;
+  digito = parseInt("" + pisTratado.charAt(10));
   return true;
 }
 
@@ -607,6 +623,7 @@ export {
   verificaEstadoCivil,
   HabilitaImpressao,
   noPrintSettings,
+  okPrintSettings,
   msieversion,
   ocultarElementosEnquantoImprime,
   exibirElementoDepoisImpressao,
