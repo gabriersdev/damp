@@ -466,12 +466,15 @@ import {
           $('#span_'+numIndexB).prop('checked', false);
           $('#span_'+numIndexB).show(150);
           
-          if (gparent == "usofgts" && ((!$('#sn_10').is(":checked")) || (!$('#sn_9').is(":checked")))  ){
+          if (gparent == "usofgts" && ((!$('#sn_10').is(":checked")) || (!$('#sn_9').is(":checked")))){
             $("#tab_contasfgts").hide(400);
             $("#cond_ftgs_msg").hide(400);
           }
         }
       }
+
+      // TODO - Adicionar ação para FGTS Futuro
+      // Verificar alterações no arquivo do MO V035
       
       //REMOVE O QUE FOI PREENCHIDO DENTRO DO CONTAINER AO QUAL SE ENCERRA CASO CHKBOX SEJA DESMARCADO
       if (!$("#"+chkID).is(":checked")){			
