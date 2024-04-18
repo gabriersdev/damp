@@ -15,7 +15,7 @@ import {
 } from "./dataBaseFunctions.js";
 
 (() => {
-
+  
   // Apresentação do Projeto no console
   const dados_do_projeto = {
     "Project name": "DAMP",
@@ -26,29 +26,29 @@ import {
     "Origin": new URL(window.location).origin,
     "Status": "Active"
   };
-
+  
   const novas_funcionalidades = [
     "Compartilhamento de link de DAMP: é possível gerar um link para uma DAMP feita e armazenada no navegador e compartilhar o link com outras pessoas para gerar a mesma DAMP. Há uma limitação dos navegadores quanto a quantidade de caracteres de uma URL, por isso em alguns casos dados podem ser perdidos.",
     "Falha na recuperação de dados corrigida: alguns campos de checkbox não eram devidamente apresentados na recuperação dos registros. O erro foi corrigido nesta versão."
   ];
-
+  
   Object.freeze(novas_funcionalidades);
   Object.freeze(dados_do_projeto);
-
+  
   // Exibindo dados
   console.groupCollapsed(`${dados_do_projeto["Project name"]}, Version ${dados_do_projeto["Version"]}`);
   console.table(dados_do_projeto);
   console.groupEnd();
-
+  
   console.groupCollapsed('New features');
   novas_funcionalidades.toSorted((a, b) => a.localeCompare(b)).forEach((feature) => {console.info(`${feature}`)});
   console.groupEnd();
   // Fim da apresentação do projeto
-
+  
   $(function(){
     $('.autoajuste').autoGrowInput({minWidth: 60, maxWidth:	function(){ return $('body').width()-50; }, comfortZone: 2 });
   });
-
+  
   $(window).resize(function(){ $('.autoajuste').trigger('autogrow'); });
   
   // Definindo máscaras para inputs
@@ -341,7 +341,7 @@ import {
       $('[data-input="mes_assin"]').val(` ${converterParaMesBRL(mes).toUpperCase()} `);
       $('[data-input="ano_assin"]').val(`${ano}`);
     }
-
+    
     // Definindo local de assinatura padrão
     $('#local_assin').val('Belo Horizonte'.toUpperCase());
     
@@ -364,7 +364,7 @@ import {
   })
   
   // Monitoramento de eventos
-
+  
   /*SELECT MONITOR*/			
   $(document).on('change','#selectEstCiv',function(){
     verificaEstadoCivil($(this).val(), this);
@@ -374,7 +374,7 @@ import {
     $('#end_comp_bairro').slideToggle(600);				
     $('#mostrarCampoEnd').slideToggle(600);
   });
-
+  
   // Monitoramento de preench. do campo de logradouro, N.º, CEP
   let timeout;
   $('[data-input="endereco_logradouro"]').on('keydown', () => {
@@ -450,6 +450,15 @@ import {
           
           $(nextSpan).hide(400);
           
+          // Ação para seleção de USO de FGTS Futuro
+          if (gparent == "usofgtsfuturo" && ($('#sn_fgtsfuturosim').is(":checked"))){
+            $("#cond_ftgs_msg").show(400);
+          }
+          if (gparent == "usofgtsfuturo" && ($('#sn_fgtsfuturonao').is(":checked"))){
+            $("#cond_ftgs_msg").hide(400);
+          }
+
+          // Ação para seleção de USO de FGTS
           if (gparent == "usofgts" && ($('#sn_9').is(":checked"))){
             $("#tab_contasfgts").show(400);
             $("#cond_ftgs_msg").show(400);
@@ -466,13 +475,22 @@ import {
           $('#span_'+numIndexB).prop('checked', false);
           $('#span_'+numIndexB).show(150);
           
-          if (gparent == "usofgts" && ((!$('#sn_10').is(":checked")) || (!$('#sn_9').is(":checked")))){
+          // Caso os checkbox de USO de FGTS e de FGTS Futuro não esteja marcado, oculta a tabela de contas do FGTS e título para FGTS
+          if ((gparent == "usofgts" || gparent == "usofgtsfuturo") && ((!$('#sn_10').is(":checked")) || (!$('#sn_9').is(":checked"))) 
+          && ((!$('#sn_fgtsfuturosim').is(":checked")) || (!$('#sn_fgtsfuturonao').is(":checked")))){
             $("#tab_contasfgts").hide(400);
             $("#cond_ftgs_msg").hide(400);
+          } else if (gparent == "usofgtsfuturo" && (!$('#sn_fgtsfuturosim').is(":checked")) && (!$('#sn_fgtsfuturonao').is(":checked"))){
+            // TODO - Testar
+            $("#cond_ftgs_msg").hide(400);
+          } else if (gparent == "usofgts" && (!$('#sn_10').is(":checked")) && (!$('#sn_9').is(":checked"))){
+            // TODO - Testar
+            $("#cond_ftgs_msg").hide(400);
+            $("#tab_contasfgts").hide(400);
           }
         }
       }
-
+      
       // TODO - Adicionar ação para FGTS Futuro
       // Verificar alterações no arquivo do MO V035
       
