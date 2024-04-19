@@ -3,6 +3,8 @@ let registros_salvos = '';
 function salvarRegistro(){
   const registro = new Object();
   
+  // TODO - Verificar se tem outro registro com os mesmos dados - exceto data_criacao e id
+
   document.querySelectorAll('[data-input]').forEach((elemento) => {
     // console.log(elemento.tagName);
     const type = elemento.getAttribute('type');
@@ -313,6 +315,7 @@ function carregarRegistroRecuperado(dados){
           if(valor.length > 0 && elemento.dataset.input !== 'assinatura_titular' && elemento.dataset.input !== 'assinatura_caixa'){
             elemento.setAttribute('size', valor.length);
             if(dados[`${elemento.dataset.input}_w`] !== undefined && typeof(parseInt(dados[`${elemento.dataset.input}_w`])) == 'number'){
+              // TODO - Corrigir tamanho do campo de texto dos dados de utilização de FGTS
               elemento.style.width = `${(dados[`${elemento.dataset.input}_w`])}px`;
             }else if(elemento.dataset.input == 'selectRegime'){
               elemento.style.width = '275px';
