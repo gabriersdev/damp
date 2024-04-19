@@ -450,12 +450,20 @@ import {
           
           $(nextSpan).hide(400);
           
+          // SN 11 é o checkbox de USO de FGTS Futuro SIM
+          // SN 12 é o checkbox de USO de FGTS Futuro NÃO
+          
+          // SN 9 é o checkbox de USO de FGTS SIM
+          // SN 10 é o checkbox de USO de FGTS NÃO
+
           // Ação para seleção de USO de FGTS Futuro
-          if (gparent == "usofgtsfuturo" && ($('#sn_fgtsfuturosim').is(":checked"))){
+          if (gparent == "usofgtsfuturo" && ($('#sn_11').is(":checked"))){
             $("#cond_ftgs_msg").show(400);
+            $("#span_12").hide(300);
           }
-          if (gparent == "usofgtsfuturo" && ($('#sn_fgtsfuturonao').is(":checked"))){
+          if (gparent == "usofgtsfuturo" && ($('#sn_12').is(":checked"))){
             $("#cond_ftgs_msg").hide(400);
+            $("#span_11").hide(300);
           }
 
           // Ação para seleção de USO de FGTS
@@ -477,10 +485,10 @@ import {
           
           // Caso os checkbox de USO de FGTS e de FGTS Futuro não esteja marcado, oculta a tabela de contas do FGTS e título para FGTS
           if ((gparent == "usofgts" || gparent == "usofgtsfuturo") && ((!$('#sn_10').is(":checked")) || (!$('#sn_9').is(":checked"))) 
-          && ((!$('#sn_fgtsfuturosim').is(":checked")) || (!$('#sn_fgtsfuturonao').is(":checked")))){
+          && ((!$('#sn_11').is(":checked")) || (!$('#sn_12').is(":checked")))){
             $("#tab_contasfgts").hide(400);
             $("#cond_ftgs_msg").hide(400);
-          } else if (gparent == "usofgtsfuturo" && (!$('#sn_fgtsfuturosim').is(":checked")) && (!$('#sn_fgtsfuturonao').is(":checked"))){
+          } else if (gparent == "usofgtsfuturo" && (!$('#sn_11').is(":checked")) && (!$('#sn_12').is(":checked"))){
             // TODO - Testar
             $("#cond_ftgs_msg").hide(400);
           } else if (gparent == "usofgts" && (!$('#sn_10').is(":checked")) && (!$('#sn_9').is(":checked"))){
