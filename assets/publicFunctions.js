@@ -452,14 +452,33 @@ function HabilitaImpressao(chkClicado){
     ![null, undefined].includes(checkbox) ? checkbox.checked ? $(checkbox.closest(".recuo20")).show(300) : $(checkbox.closest(".recuo20")).hide(300) : '';
   })
   
+  // FGTS Futuro
+  if (!$('#sn_11').is(':checked') && !$('#sn_12').is(':checked')){
+    $('#span_11').show(400);
+    $('#span_12').show(400);
+    noPrintSettings();
+    return false;
+  } else if ($('#sn_11').is(':checked')){
+    $('#span_11').show(400);
+    $('#span_12').hide(400);
+  } else if ($('#sn_12').is(':checked')){
+    $('#span_11').hide(400);
+    $('#span_12').show(400);
+  }
+
   /*--------------------------------------*/		
   
   /*---- USO DO FGTS---------------------*/		
   if (!$('#sn_9').is(':checked') && !$('#sn_10').is(':checked')){
+    $('#tab_contasfgts').hide(400);
     noPrintSettings();
     return false;
   }		
-  if ($('#sn_9').is(':checked')){//se usa FGTS
+
+  // Se usa FGTS
+  if ($('#sn_9').is(':checked')){
+    $('#tab_contasfgts').show(400);
+
     if (!$('#chk_autoriza_saque').is(':checked')){
       noPrintSettings();
       return false;

@@ -452,7 +452,7 @@ import {
           
           // SN 11 é o checkbox de USO de FGTS Futuro SIM
           // SN 12 é o checkbox de USO de FGTS Futuro NÃO
-          
+
           // SN 9 é o checkbox de USO de FGTS SIM
           // SN 10 é o checkbox de USO de FGTS NÃO
 
@@ -486,13 +486,13 @@ import {
           // Caso os checkbox de USO de FGTS e de FGTS Futuro não esteja marcado, oculta a tabela de contas do FGTS e título para FGTS
           if ((gparent == "usofgts" || gparent == "usofgtsfuturo") && ((!$('#sn_10').is(":checked")) || (!$('#sn_9').is(":checked"))) 
           && ((!$('#sn_11').is(":checked")) || (!$('#sn_12').is(":checked")))){
-            $("#tab_contasfgts").hide(400);
+            
+            if (gparent == "usofgts") $("#tab_contasfgts").hide(400);
+
             $("#cond_ftgs_msg").hide(400);
           } else if (gparent == "usofgtsfuturo" && (!$('#sn_11').is(":checked")) && (!$('#sn_12').is(":checked"))){
-            // TODO - Testar
             $("#cond_ftgs_msg").hide(400);
           } else if (gparent == "usofgts" && (!$('#sn_10').is(":checked")) && (!$('#sn_9').is(":checked"))){
-            // TODO - Testar
             $("#cond_ftgs_msg").hide(400);
             $("#tab_contasfgts").hide(400);
           }
