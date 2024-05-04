@@ -51,7 +51,7 @@ function salvarRegistro(){
       regS.data_criacao = 0;
       regS.id = 0;
       
-      return regA === regS
+      return JSON.stringify(regA) === JSON.stringify(regS);
     })){
       // Se não tiver, o novo registro é salvo e o array é atualizado
       registros_salvos.push(registro)
@@ -82,18 +82,18 @@ function carregarRegistros(){
       // Exibindo apenas os 50 primeiros registros ordenados
       paginarElementos(registros_salvos.toSorted((a, b) => {a.data_criacao - b.data_criacao}).reverse());
       
-      [].forEach((registro, index) => {
-        const data = dataTimestampToBRL(registro.data_criacao);
-        const nome = registro.text_nome.toUpperCase().substr(0, 27);
+      // [].forEach((registro, index) => {
+      //   const data = dataTimestampToBRL(registro.data_criacao);
+      //   const nome = registro.text_nome.toUpperCase().substr(0, 27);
         
-        // Add. ID ao registro que não possui
-        if(registro.id == undefined){
-          registro.id = Math.floor(new Date(registro.data_criacao) * Math.random());
-          registros_alterados = true;
-        }
+      //   // Add. ID ao registro que não possui
+      //   if(registro.id == undefined){
+      //     registro.id = Math.floor(new Date(registro.data_criacao) * Math.random());
+      //     registros_alterados = true;
+      //   }
         
-        modal.querySelector('table').innerHTML += `<tr data-id-registro="${registro.id || index}"><td>${nome.trim().length === 27 ? nome.trim() + "..." : nome}</td><td>${data !== 'Invalid Date' ? data : '-'}</td><td><button class="btn btn-primary recuperar-registro-salvo" onclick="recuperarRegistroSalvo(event, this)">Recuperar</button>&nbsp;<button class="btn btn-danger apagar-registro-salvo" onclick="apagarRegistroSalvo(event, this)">Apagar</button>&nbsp;<button class="btn btn-secondary" onclick="recuperarRegistroSalvo(event,this,'link')">🔗</button></td></tr>`;
-      })
+      //   modal.querySelector('table').innerHTML += `<tr data-id-registro="${registro.id || index}"><td>${nome.trim().length === 27 ? nome.trim() + "..." : nome}</td><td>${data !== 'Invalid Date' ? data : '-'}</td><td><button class="btn btn-primary recuperar-registro-salvo" onclick="recuperarRegistroSalvo(event, this)">Recuperar</button>&nbsp;<button class="btn btn-danger apagar-registro-salvo" onclick="apagarRegistroSalvo(event, this)">Apagar</button>&nbsp;<button class="btn btn-secondary" onclick="recuperarRegistroSalvo(event,this,'link')">🔗</button></td></tr>`;
+      // })
       
       // Caso tenha havido necessidade de alterar o ID, o array com o que foi alterado será armazenado no localStorage
       registros_alterados ? localStorage.setItem('registros-armazenados', JSON.stringify(registros_salvos)) : '';
