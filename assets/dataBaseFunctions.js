@@ -269,7 +269,7 @@ function recuperarRegistroSalvo(evento, button, action){
         }else{
           if(!isEmpty(action) && typeof action == "string"){
             if(action.toLowerCase().trim() == "link"){
-              let saida_URL = "https://gabrieszin.github.io/damp?";
+              let saida_URL = "https://gabriersdev.github.io/damp?";
               let dado;
               
               try{
