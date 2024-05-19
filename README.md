@@ -27,4 +27,4 @@ Consulte a [página do MDN](https://developer.mozilla.org/pt-BR/docs/Web/HTML/Gl
 - <kbd>R</kbd> para acionar o botão de exibir os registros e as ações
 - <kbd>E</kbd> para acionar o botão de exportar registros armazenados
 
-[link-projeto]: https://gabrieszin.github.io/damp/
+[link-projeto]: https://gabriersdev.github.io/damp/
