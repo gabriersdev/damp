@@ -591,6 +591,12 @@ import {
     salvarRegistro();
     exibirElementoDepoisImpressao();
   }
+
+  // 
+  const enderecoLog = document.querySelector('[data-input="endereco_logradouro"]');
+  enderecoLog.addEventListener('blur', () => {
+    enderecoLog.textContent = enderecoLog.textContent;
+  });
   
   // Definindo as funções globais, para acesso via eventos no HTML
   window.printWindow = printWindow;
