@@ -458,12 +458,14 @@ import {
 
           // Ação para seleção de USO de FGTS Futuro
           if (gparent == "usofgtsfuturo" && ($('#sn_11').is(":checked"))){
-            $("#cond_ftgs_msg").show(400);
             $("#span_12").hide(300);
+            $("#cond_ftgs_msg").show(400);
+            $("#declaracao-tit-FGTS").show(400);
           }
           if (gparent == "usofgtsfuturo" && ($('#sn_12').is(":checked"))){
-            $("#cond_ftgs_msg").hide(400);
             $("#span_11").hide(300);
+            $("#cond_ftgs_msg").hide(400);
+            $("#declaracao-tit-FGTS").hide(400)
           }
 
           // Ação para seleção de USO de FGTS
