@@ -464,18 +464,26 @@ import {
           }
           if (gparent == "usofgtsfuturo" && ($('#sn_12').is(":checked"))){
             $("#span_11").hide(300);
-            $("#cond_ftgs_msg").hide(400);
-            $("#declaracao-tit-FGTS").hide(400)
+
+            if(!$('#sn_11').is(':checked') && !$('#sn_9').is(":checked")){
+              $("#cond_ftgs_msg").hide(400);
+              $("#declaracao-tit-FGTS").hide(400);
+            }
           }
 
           // Ação para seleção de USO de FGTS
           if (gparent == "usofgts" && ($('#sn_9').is(":checked"))){
             $("#tab_contasfgts").show(400);
             $("#cond_ftgs_msg").show(400);
+            $("#declaracao-tit-FGTS").show(400);
           }
           if (gparent == "usofgts" && ($('#sn_10').is(":checked"))){
             $("#tab_contasfgts").hide(400);
-            $("#cond_ftgs_msg").hide(400);
+            
+            if(!$('#sn_11').is(':checked') && !$('#sn_9').is(":checked")){
+              $("#cond_ftgs_msg").hide(400);
+              $("#declaracao-tit-FGTS").hide(400);
+            }
           }
         }else{
           $('#span_'+numIndexA).css({"fontWeight": "normal", "color": "black"});
@@ -485,18 +493,23 @@ import {
           $('#span_'+numIndexB).prop('checked', false);
           $('#span_'+numIndexB).show(150);
           
-          // Caso os checkbox de USO de FGTS e de FGTS Futuro não esteja marcado, oculta a tabela de contas do FGTS e título para FGTS
-          if ((gparent == "usofgts" || gparent == "usofgtsfuturo") && ((!$('#sn_10').is(":checked")) || (!$('#sn_9').is(":checked"))) 
-          && ((!$('#sn_11').is(":checked")) || (!$('#sn_12').is(":checked")))){
-            
-            if (gparent == "usofgts") $("#tab_contasfgts").hide(400);
+          // Caso os checkbox de USO de FGTS e de FGTS Futuro não esteja marcado, oculta a tabela de contas do FGTS, declaração e título para FGTS
+          const checkboxes = [
+            $('#sn_11').is(":checked"),
+            $('#sn_12').is(":checked"),
+            $('#sn_10').is(":checked"),
+            $('#sn_9').is(":checked")
+          ]
 
+          if (checkboxes.every((c) => c === false)){
             $("#cond_ftgs_msg").hide(400);
-          } else if (gparent == "usofgtsfuturo" && (!$('#sn_11').is(":checked")) && (!$('#sn_12').is(":checked"))){
+            $("#declaracao-tit-FGTS").hide(400);
+          } else if (!checkboxes[0] && !checkboxes[3]){
             $("#cond_ftgs_msg").hide(400);
-          } else if (gparent == "usofgts" && (!$('#sn_10').is(":checked")) && (!$('#sn_9').is(":checked"))){
-            $("#cond_ftgs_msg").hide(400);
-            $("#tab_contasfgts").hide(400);
+            $("#declaracao-tit-FGTS").hide(400);
+          } else if (checkboxes[0] || checkboxes[3]){
+            $("#cond_ftgs_msg").show(400);
+            $("#declaracao-tit-FGTS").show(400);
           }
         }
       }
