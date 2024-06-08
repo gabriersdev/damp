@@ -514,9 +514,6 @@ import {
         }
       }
       
-      // TODO - Adicionar ação para FGTS Futuro
-      // Verificar alterações no arquivo do MO V035
-      
       //REMOVE O QUE FOI PREENCHIDO DENTRO DO CONTAINER AO QUAL SE ENCERRA CASO CHKBOX SEJA DESMARCADO
       if (!$("#"+chkID).is(":checked")){			
         $(this).parent().find('input:text').val('');				
