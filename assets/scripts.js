@@ -64,22 +64,20 @@ import {
   $(".valor").maskMoney();
   
   $(document).ready(function(){
-    //******************** OS CÓDIGOS ABAIXO:
-    //DESABILITA O BOTÃO DE IMPRESSÃO, PARA SER HABILITADO NOVAMENTE MAIS TARDE, DEPOIS DE OUTRA FUNÇÃO
+    // OS CÓDIGOS ABAIXO:
+    // Desabilitam botão de impressão para ser acionado mais tarde por outra função
     $('#btImprimir').prop("disabled",false);
     $("#btImprimir").attr('disabled','disabled');
-    // DESABIILITA O ATALHO CRTL+P, PARA EVITAR IMPRESAO POR ATALHO
-    // TODO - Feedback para o usuário
 
-
-    document.onkeydown = function(e){//--> keydown
+    // Permite ou não impressão por atalho
+    document.onkeydown = function(e){
       exports.verificaAutImpressao(OK, e);
     };
 
-    document.onkeyup = function(e){//--> keyup
+    document.onkeyup = function(e){
       exports.verificaAutImpressao(OK, e);
     };
-    document.onkeypress = function(e){//keypress
+    document.onkeypress = function(e){
       exports.verificaAutImpressao(OK, e);
     };
 
@@ -385,6 +383,7 @@ import {
   // Monitoramento de preench. do campo de logradouro, N.º, CEP
   let timeout;
   $('[data-input="endereco_logradouro"]').on('keydown', () => {
+    // TODO - Preenc. auto de cidade e UF
     // Verifica se o campo está preenchido
     if($('[data-input="endereco_logradouro"]').text().trim().length == 0){
       // Se estiver, desativa o timeout e aciona a função de impedir impressão
