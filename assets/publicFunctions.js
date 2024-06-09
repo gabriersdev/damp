@@ -503,11 +503,9 @@ function HabilitaImpressao(chkClicado){
     $('#span_10').hide('400');
   }
   
-  /*--------------------------------------*/		
-  $('#print_area').removeClass('no-print-allowed');		
-  $('#btImprimir').prop("disabled",false);
-  $('#btImprimir').removeClass("btn-danger");
-  $('#btImprimir').addClass("btn-success");
+  // Permite impressão
+  okPrintSettings();
+
   return true;
 }
 
@@ -637,6 +635,24 @@ function controleEscalaImpressao(condicao){
   condicao ? $('html').prop('style', '--zoom: 1.5') : $('html').prop('style', '--zoom: 1');
 }
 
+const verificaAutImpressao = (OK, e) => {
+  if (e === undefined){
+    if (OK === true){
+      printWindow();
+    } else {
+      alert('Ainda existem campos necessários que não foram preenchidos. Preencha-os para continuar.');
+      return false;
+    }
+  } else if (e.ctrlKey && (e.keyCode === 80)){
+    if (OK === true){
+      printWindow();
+    } else {
+      alert('Ainda existem campos necessários que não foram preenchidos. Preencha-os para continuar.');
+      return false;
+    }
+  }
+}
+
 export {
   converterParaMesBRL,
   verificaEstadoCivil,
@@ -651,5 +667,6 @@ export {
   dataTimestampToBRL,
   dataBRLToTimestamp,
   controleAutocomplete,
-  controleEscalaImpressao
-};
+  controleEscalaImpressao,
+  verificaAutImpressao
+}

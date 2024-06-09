@@ -2,6 +2,7 @@
 
 // Importando todas as funções exportadas no arquivo functions.js e add. globalmente
 import * as exports from "./publicFunctions.js"
+
 Object.entries(exports).forEach(([name, exported]) => window[name] = exported);
 
 // Importando
@@ -12,9 +13,10 @@ import {
   recuperarRegistroSalvo, 
   recuperarDados,
   exportarRegistrosArmazenados 
-} from "./dataBaseFunctions.js";
-
+  } from "./dataBaseFunctions.js";
+  
 (() => {
+  let OK = false;
   
   // Apresentação do Projeto no console
   const dados_do_projeto = {
@@ -67,22 +69,27 @@ import {
     $('#btImprimir').prop("disabled",false);
     $("#btImprimir").attr('disabled','disabled');
     // DESABIILITA O ATALHO CRTL+P, PARA EVITAR IMPRESAO POR ATALHO
+    // TODO - Feedback para o usuário
+
+
     document.onkeydown = function(e){//--> keydown
-      if (e.ctrlKey && (e.keyCode === 80)){
-        return false;
-      }
+      exports.verificaAutImpressao(OK, e);
     };
+
     document.onkeyup = function(e){//--> keyup
-      if (e.ctrlKey && (e.keyCode === 80)){
-        return false;
-      }
+      exports.verificaAutImpressao(OK, e);
     };
     document.onkeypress = function(e){//keypress
-      if (e.ctrlKey && (e.keyCode === 80)){
-        return false;
-      }
+      exports.verificaAutImpressao(OK, e);
     };
-    //REMOVE AS OPÇÕES DO BOTÃO DIREITO DO MOUSE (PARA EVITAR IMPRESSÃO)	
+
+    // Quando o usuário tentar imprimir a página por um atalho (sem ser os de teclado - já impeditos acima), será exibido um alerta
+    var beforePrint = function() {
+      exports.verificaAutImpressao(OK);
+    };
+
+    window.onbeforeprint = beforePrint;
+
     $(document).on("contextmenu",function(e){
       // return false;
     });
@@ -383,11 +390,13 @@ import {
       // Se estiver, desativa o timeout e aciona a função de impedir impressão
       clearTimeout(timeout);
       exports.noPrintSettings();
+      OK = false;
     }else{
       // Se preenchido, desativa o timeout e atribui a variável um novo timeout que aciona a validação de impressão
       clearTimeout(timeout)
       timeout = setTimeout(() => {
-        exports.HabilitaImpressao();
+        const ret = exports.HabilitaImpressao();
+        if ([true, false].includes(ret)) OK = ret;
       }, 3500);
     }
   }) 
@@ -592,7 +601,7 @@ import {
     var chkID = $(this).attr('id');
     
     if(!['chk_autocomplete', 'chk_scale_print'].includes(this.getAttribute('id'))){
-      HabilitaImpressao(chkID);
+      OK = HabilitaImpressao(chkID);
     }
   });
   
