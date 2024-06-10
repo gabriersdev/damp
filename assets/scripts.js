@@ -16,8 +16,8 @@ import {
   } from "./dataBaseFunctions.js";
   
 (() => {
-  let OK = false;
-  
+  // TODO - Corrigir: auteração do OK não funciona para recuparação de registro salvo!
+
   // Apresentação do Projeto no console
   const dados_do_projeto = {
     "Project name": "DAMP",
@@ -71,19 +71,19 @@ import {
 
     // Permite ou não impressão por atalho
     document.onkeydown = function(e){
-      exports.verificaAutImpressao(OK, e);
+      exports.verificaAutImpressao(exports.isOK(), e);
     };
 
     document.onkeyup = function(e){
-      exports.verificaAutImpressao(OK, e);
+      exports.verificaAutImpressao(exports.isOK(), e);
     };
     document.onkeypress = function(e){
-      exports.verificaAutImpressao(OK, e);
+      exports.verificaAutImpressao(exports.isOK(), e);
     };
 
     // Quando o usuário tentar imprimir a página por um atalho (sem ser os de teclado - já impeditos acima), será exibido um alerta
     var beforePrint = function() {
-      exports.verificaAutImpressao(OK);
+      exports.verificaAutImpressao(exports.isOK());
     };
 
     window.onbeforeprint = beforePrint;
@@ -389,13 +389,13 @@ import {
       // Se estiver, desativa o timeout e aciona a função de impedir impressão
       clearTimeout(timeout);
       exports.noPrintSettings();
-      OK = false;
+      exports.isOK(false);
     }else{
       // Se preenchido, desativa o timeout e atribui a variável um novo timeout que aciona a validação de impressão
       clearTimeout(timeout)
       timeout = setTimeout(() => {
         const ret = exports.HabilitaImpressao();
-        if ([true, false].includes(ret)) OK = ret;
+        if ([true, false].includes(ret)) exports.isOK(ret);
       }, 3500);
     }
   }) 
@@ -600,7 +600,8 @@ import {
     var chkID = $(this).attr('id');
     
     if(!['chk_autocomplete', 'chk_scale_print'].includes(this.getAttribute('id'))){
-      OK = HabilitaImpressao(chkID);
+      const ret = HabilitaImpressao(chkID);
+      if ([true, false].includes(ret)) exports.isOK(ret);
     }
   });
   

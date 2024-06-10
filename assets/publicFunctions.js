@@ -504,7 +504,8 @@ function HabilitaImpressao(chkClicado){
   }
   
   // Permite impressão
-  okPrintSettings();
+  if (isOK) okPrintSettings();
+  else alert('Ainda existem campos necessários que não foram preenchidos. Preencha-os para continuar.');
 
   return true;
 }
@@ -653,6 +654,13 @@ const verificaAutImpressao = (OK, e) => {
   }
 }
 
+let OK = false;
+
+const isOK = (cond) => {
+  if ([true, false].includes(cond)) OK = cond;
+  return OK;
+}
+
 export {
   converterParaMesBRL,
   verificaEstadoCivil,
@@ -668,5 +676,6 @@ export {
   dataBRLToTimestamp,
   controleAutocomplete,
   controleEscalaImpressao,
-  verificaAutImpressao
+  verificaAutImpressao,
+  isOK
 }
