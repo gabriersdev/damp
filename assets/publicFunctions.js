@@ -504,8 +504,8 @@ function HabilitaImpressao(chkClicado){
   }
   
   // Permite impressão
-  if (isOK) okPrintSettings();
-  else alert('Ainda existem campos necessários que não foram preenchidos. Preencha-os para continuar.');
+  okPrintSettings();
+  OK = true;
 
   return true;
 }
