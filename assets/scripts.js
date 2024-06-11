@@ -383,7 +383,6 @@ import {
   // Monitoramento de preench. do campo de logradouro, N.º, CEP
   let timeout;
   $('[data-input="endereco_logradouro"]').on('keydown', () => {
-    // TODO - Preenc. auto de cidade e UF
     // Verifica se o campo está preenchido
     if($('[data-input="endereco_logradouro"]').text().trim().length == 0){
       // Se estiver, desativa o timeout e aciona a função de impedir impressão
@@ -613,10 +612,23 @@ import {
     exibirElementoDepoisImpressao();
   }
 
-  // 
+  // Monitora o campo de endereço para preenchimento automático
   const enderecoLog = document.querySelector('[data-input="endereco_logradouro"]');
   enderecoLog.addEventListener('blur', () => {
-    enderecoLog.textContent = enderecoLog.textContent;
+    // TODO - Preenc. auto de cidade e UF
+    const value = enderecoLog.textContent;    
+
+    // Tenta recuperar o endereço e preencher os campos de cidade e UF
+    try {
+      const endereco = value.match(/(?<logradouro>.+), n.?º (?<numero>\d+)(, )?(?<complemento>.+)(, )?CEP (?<cep>\d{5}-?\d{3}|\d{2}.\d{3}-?\d{3})(, )?(?<cidade>.+)\/(?<uf>.+)/i).groups;
+      if (endereco.cidade) $('[data-input="text_logradouro2"]').val(endereco.cidade);
+      if (endereco.uf) $('[data-input="text_uf2"]').val(endereco.uf);
+    } catch (error) {
+      // 
+    } finally {
+      enderecoLog.textContent = value;
+    }
+
   });
   
   // Definindo as funções globais, para acesso via eventos no HTML
