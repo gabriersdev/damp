@@ -615,14 +615,22 @@ import {
   // Monitora o campo de endereço para preenchimento automático
   const enderecoLog = document.querySelector('[data-input="endereco_logradouro"]');
   enderecoLog.addEventListener('blur', () => {
-    // TODO - Preenc. auto de cidade e UF
     const value = enderecoLog.textContent;    
 
     // Tenta recuperar o endereço e preencher os campos de cidade e UF
     try {
       const endereco = value.match(/(?<logradouro>.+), n.?º (?<numero>\d+)(, )?(?<complemento>.+)(, )?CEP (?<cep>\d{5}-?\d{3}|\d{2}.\d{3}-?\d{3})(, )?(?<cidade>.+)\/(?<uf>.+)/i).groups;
-      if (endereco.cidade) $('[data-input="text_logradouro2"]').val(endereco.cidade);
-      if (endereco.uf) $('[data-input="text_uf2"]').val(endereco.uf);
+      
+      const { input_cidade, input_UF } = [
+        document.querySelector('[data-input="text_logradouro2"]'),
+        document.querySelector('[data-input="text_uf2"]')
+      ];
+
+      if (endereco.cidade) $(input_cidade).val(endereco.cidade);
+      if (endereco.uf) $(input_UF).val(endereco.uf);
+
+      // Resize do input de endereço para caber o texto
+      if ((input_cidade.value.length * 10) > 0) input_cidade.style.width = `${input_cidade.value.length * 10}px`;
     } catch (error) {
       // 
     } finally {
