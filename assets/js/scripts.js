@@ -419,7 +419,7 @@ import {vercpf} from "./publicFunctions.js";
     let gparent = $(this).parent().parent().attr('id');
     let chldCount = $('#' + gparent).find('input[type=checkbox]').length;
     let chldCountEnq = $('#' + gparent).find('input[type=checkbox].enquad').length;
-    let classYESNO = (chkClass.indexOf("yesno") >= 0)
+    let classYESNO = chkClass ? (chkClass.indexOf("yesno") >= 0) : ""
 
     if (!['chk_autocomplete', 'chk_scale_print'].includes(this.getAttribute('id'))) {
       if (chkClass !== "yesno" && classYESNO === false) {
@@ -662,4 +662,13 @@ import {vercpf} from "./publicFunctions.js";
   window.printWindow = printWindow;
   window.recuperarRegistroSalvo = recuperarRegistroSalvo;
   window.apagarRegistroSalvo = apagarRegistroSalvo;
+
+  // Verifica se ESC foi pressionado para fechar os modais, se estiverem ativos
+  document.addEventListener('keydown', function (event) {
+    if (event.key === "Escape") {
+      [...$('.modal')].forEach(modal => {
+        modal.classList.contains('in') ? modal.querySelector('[data-dismiss="modal"]').click() : ''
+      })
+    }
+  });
 })();
