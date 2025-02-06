@@ -5,7 +5,7 @@ html{
 body{
   font-family: calibri, sans-serif;
   font-size: 16px; /* ALTERAR AQUI SE NECESSARIO */
-  margin: 40px; /* ALTERAR AQUI SE NECESSARIO */				
+  margin: 40px; /* ALTERAR AQUI SE NECESSARIO */
 }
 
 #navegador_incompativel, #print_area{display: none;}
@@ -25,10 +25,10 @@ body{
 .userInputs{width: 101px;}
 .data{width: 77px;}
 .valor{min-width: 40px;}
-.nrdamp{min-width: 185px;}			
+.nrdamp{min-width: 185px;}
 .wd20{width: 22px;}
 .wd34{width: 34px;}
-.wd65{width: 65px;}			
+.wd65{width: 65px;}
 
 .data, .userInputs, .valor, .nrdamp{
   border: none;
@@ -74,11 +74,10 @@ body{
   display : none;
 }
 
-.spn-block{display: block;}	
+.spn-block{display: block;}
 
 #selectEstCiv, #selectRegime {
   cursor: pointer;
-  outline: 0px;
   border: 0px;
   -appearance: none;
   -appearance: none;
@@ -120,10 +119,10 @@ input{cursor: pointer;}
   font-family: initial, -webkit-pictograph, serif, cursive;
 }
 
-#custom-warning > span{	
+#custom-warning > span{
   position: relative;
   top: -20px;
-}			
+}
 
 .margintoprecuo{
   margin-top: -10px;
@@ -135,7 +134,7 @@ input{cursor: pointer;}
   border: 1px solid #ddd;
   text-transform: uppercase;
   font-weight: 700;
-  border: solid 1px white;				
+  border: solid 1px white;
 }
 
 .justificado > li, justificado > p{
@@ -174,7 +173,7 @@ td>input{
 
 #text_numdamp{text-align: center;}
 
-.minitexto {font-size: 10px !important;}			
+.minitexto {font-size: 10px !important;}
 
 [contenteditable=true]:empty:before{
   color: #A9A9A9;
@@ -183,7 +182,7 @@ td>input{
   display: block; /* For Firefox */
 }
 
-#endereco[contenteditable=true]{	
+#endereco[contenteditable=true]{
   background-color: gainsboro;
 }
 
@@ -209,18 +208,18 @@ td>input{
   border-bottom: 1px solid #000;
   background-color: #F9F9F9;
   padding-left: 5px;
-}			
+}
 
 .div_assinat{
   float: left;
 }
 
-footer{	
+footer{
   clear: left;
   text-align: center;
 }
 
-#printdiv{ 
+#printdiv{
   text-align: center;
   margin-top: 1.5rem;
 }
@@ -230,7 +229,7 @@ footer{
 [data-action="exportar-registros"]{
   height: 55px;
   min-width: 130px;
-  font-size: 25px;		
+  font-size: 25px;
   text-transform: uppercase;
 }
 
@@ -273,16 +272,16 @@ footer{
   .hide_chk, .do-not-print{
     display: none !important;
   }
-  
+
   body{
     margin-left: 2px !important;
-    margin-right: 2px !important; 
+    margin-right: 2px !important;
   }
-  
+
   .editableDiv{
     text-decoration: underline;
   }
-  
+
   div#printdiv{
     display: none;
   }
