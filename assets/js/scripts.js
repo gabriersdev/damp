@@ -667,7 +667,7 @@ import {vercpf} from "./publicFunctions.js";
   document.addEventListener('keydown', function (event) {
     if (event.key === "Escape") {
       [...$('.modal')].forEach(modal => {
-        modal.classList.contains('in') ? modal.querySelector('[data-dismiss="modal"]').click() : ''
+        modal.classList.contains('in') ? modal.querySelector('[data-dismiss="modal"]').click() : '';
       })
     }
   });
