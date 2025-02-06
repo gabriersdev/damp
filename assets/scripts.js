@@ -419,16 +419,10 @@ import {vercpf} from "./publicFunctions.js";
     let gparent = $(this).parent().parent().attr('id');
     let chldCount = $('#' + gparent).find('input[type=checkbox]').length;
     let chldCountEnq = $('#' + gparent).find('input[type=checkbox].enquad').length;
-
-    try {
-      let classYESNO = (chkClass.indexOf("yesno") >= 0)
-    } catch (error) {
-    }
+    let classYESNO = (chkClass.indexOf("yesno") >= 0)
 
     if (!['chk_autocomplete', 'chk_scale_print'].includes(this.getAttribute('id'))) {
       if (chkClass !== "yesno" && classYESNO === false) {
-        let chldCount = 0;
-
         if (gparent === "enquadramento") {
           chldCount = chldCountEnq;
         }
@@ -439,7 +433,7 @@ import {vercpf} from "./publicFunctions.js";
             let hddchk = "#chk" + gparent + i;
             if (!$(hddchk).is(":checked")) {
               $(hddchk).prop('checked', false);
-              $(hddDiv).hide(400);//ou toggle. tanto faz
+              $(hddDiv).hide(400);
             }
             if (gparent === "enquadramento" && ($(hddchk).is(":checked"))) {
               $("#boxenq" + i).show(400);
@@ -450,7 +444,7 @@ import {vercpf} from "./publicFunctions.js";
             let hddDiv = "#" + gparent + i;
             let hddchk = "#chk" + gparent + i;
             $(hddchk).prop('checked', false);
-            $(hddDiv).show(400);//ou toggle. tanto faz
+            $(hddDiv).show(400);
             if (gparent === "enquadramento" && (!$(hddchk).is(":checked"))) {
               $("#boxenq" + i).hide(400);
             }
@@ -640,12 +634,13 @@ import {vercpf} from "./publicFunctions.js";
   const enderecoLog = document.querySelector('[data-input="endereco_logradouro"]');
   enderecoLog.addEventListener('blur', () => {
     const value = enderecoLog.textContent;
+    if (!value) return;
 
     // Tenta recuperar o endereço e preencher os campos de cidade e UF
     try {
       const endereco = value.match(/(?<logradouro>.+), n.?º (?<numero>\d+)(, )?(?<complemento>.+)(, )?CEP (?<cep>\d{5}-?\d{3}|\d{2}.\d{3}-?\d{3})(, )?(?<cidade>.+)\/(?<uf>.+)/i).groups;
 
-      const {input_cidade, input_UF} = [
+      const [input_cidade, input_UF] = [
         document.querySelector('[data-input="text_logradouro2"]'),
         document.querySelector('[data-input="text_uf2"]')
       ];
@@ -667,5 +662,4 @@ import {vercpf} from "./publicFunctions.js";
   window.printWindow = printWindow;
   window.recuperarRegistroSalvo = recuperarRegistroSalvo;
   window.apagarRegistroSalvo = apagarRegistroSalvo;
-
 })();
