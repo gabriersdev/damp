@@ -353,6 +353,7 @@ import {vercpf} from "./publicFunctions.js";
   // Preenchendo a data e o local de assinatura
   window.addEventListener('DOMContentLoaded', () => {
     // Definindo data
+    const nw = new Date();
     const date = new Date().toLocaleDateString('pt-BR');
     if (new RegExp('(?<dia>[0-9]{2})\/(?<mês>[0-9]{2})\/(?<ano>[0-9]{4})').test(date)) {
       let {dia, mes, ano} = date.match(/(?<dia>[0-9]{2})\/(?<mes>[0-9]{2})\/(?<ano>[0-9]{4})/).groups;
@@ -360,6 +361,17 @@ import {vercpf} from "./publicFunctions.js";
       $('#end_camp').val(`${dia}`);
       $('[data-input="mes_assin"]').val(` ${converterParaMesBRL(mes).toUpperCase()} `);
       $('[data-input="ano_assin"]').val(`${ano}`);
+    }
+
+    // Definindo ano base e referência do IRPF
+    if (nw.getTime() < new Date(`${nw.getFullYear()}-07-01T00:00:00`).getTime()) {
+      // Verifica se a data é anterior à 30/06. Se for, preenche com os dados de IR do ano anterior
+      $('[data-input="text_irano1"], [data-input="text_irano2"]').val(nw.getFullYear() - 2);
+      $('[data-input="text_irexerc1"], [data-input="text_irexerc2"]').val(nw.getFullYear() - 1);
+    } else {
+      // Se não for, preenche com os dados do ano corrente
+      $('[data-input="text_irano1"], [data-input="text_irano2"]').val(nw.getFullYear() - 1);
+      $('[data-input="text_irexerc1"], [data-input="text_irexerc2"]').val(nw.getFullYear());
     }
 
     // Definindo local de assinatura padrão
