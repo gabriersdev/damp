@@ -330,7 +330,10 @@ import {controlePreenchimentoAnosIR, vercpf} from "./publicFunctions.js";
         }
 
         if (armazenados['chk_years'] !== undefined && typeof armazenados['chk_years'] === 'boolean') {
-          controlePreenchimentoAnosIR(armazenados['chk_years'])
+          controlePreenchimentoAnosIR(armazenados['chk_years']);
+          $('#chk_years').prop('checked', armazenados['chk_years']);
+        } else {
+          $('#chk_years').prop('checked', true);
         }
       } else {
         // Configurações padrão
