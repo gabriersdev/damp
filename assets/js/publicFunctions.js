@@ -671,12 +671,11 @@ function controleEscalaImpressao(condicao) {
 }
 
 function controlePreenchimentoAnosIR(condicao) {
-  console.log(condicao)
   if (condicao) {
     const nw = new Date();
     // Definindo ano base e referência do IRPF
-    if (nw.getTime() < new Date(`${nw.getFullYear()}-07-01T00:00:00`).getTime()) {
-      // Verifica se a data é anterior à 30/06. Se for, preenche com os dados de IR do ano anterior
+    if (nw.getTime() < new Date(`${nw.getFullYear()}-03-15T00:00:00`).getTime()) {
+      // Verifica se a data é anterior à 14/03. Se for, preenche com os dados de IR do ano anterior
       $('[data-input="text_irano1"], [data-input="text_irano2"]').val(nw.getFullYear() - 2);
       $('[data-input="text_irexerc1"], [data-input="text_irexerc2"]').val(nw.getFullYear() - 1);
     } else {
