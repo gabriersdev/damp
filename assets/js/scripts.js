@@ -373,8 +373,13 @@ import {controlePreenchimentoAnosIR, vercpf} from "./publicFunctions.js";
       $('[data-input="ano_assin"]').val(`${ano}`);
     }
 
-    // Definindo local de assinatura padrão
-    $('#local_assin').val('Belo Horizonte'.toUpperCase());
+    // Definindo local de assinatura padrão e preenchendo cidade e estado de residência padrão e ocupação
+    [$('#local_assin'), $('#text_logradouro'), $('#text_localocupa')].forEach(e => e.val('Belo Horizonte'.toUpperCase()));
+    [$('#text_uf0'), $('#text_uf1')].forEach(e => e.val('MG'));
+
+    // Preenche anos de residência no municípios
+    $('#text_compl1').val('10');
+    $('#text_compl2').val('00');
 
     // Verificando se existem parâmetros que foram definidos
     try {
