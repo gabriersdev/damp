@@ -381,6 +381,9 @@ import {controlePreenchimentoAnosIR, vercpf} from "./publicFunctions.js";
     $('#text_compl1').val('10');
     $('#text_compl2').val('00');
 
+    // Marca os checkboxes
+    ['chkocupacao1', 'chkresidencia1', 'chkuniaoestavel2'].forEach(e => { $(`#${e}`).attr('checked', true); });
+
     // Verificando se existem parâmetros que foram definidos
     try {
       const URLParams = new URLSearchParams(new URL(window.location).search);
