@@ -364,7 +364,7 @@ import {controlePreenchimentoAnosIR, vercpf} from "./publicFunctions.js";
     
     // Definindo local de assinatura padrão e preenchendo cidade e estado de residência padrão e ocupação
     [$('#local_assin'), $('#text_logradouro'), $('#text_localocupa')].forEach(e => e.val('Belo Horizonte'.toUpperCase()));
-    [$('#text_uf0'), $('#text_uf1')].forEach(e => e.val('MG'));
+    [$('#text_uf0'), $('#text_uf1'), $('#text_uf2')].forEach(e => e.val('MG'));
     
     // Preenche anos de residência no municípios
     $('#text_compl1').val('10');
@@ -374,6 +374,54 @@ import {controlePreenchimentoAnosIR, vercpf} from "./publicFunctions.js";
     ['chkocupacao1', 'chkresidencia1', 'chkuniaoestavel2'].forEach(e => {
       $(`#${e}`).attr('checked', true);
     });
+    
+    const criarDatalist = (itens, listaId) => {
+      const datalist = document.createElement("datalist");
+      datalist.id = listaId;
+      
+      itens.toSorted((a, b) => a > b).forEach(ocp => {
+        const opt = document.createElement("option")
+        opt.value = ocp;
+        datalist.appendChild(opt);
+      });
+      
+      document.body.appendChild(datalist);
+    }
+    
+    // Adiciona profissões mais usadas em uma lista de sugestões do input de ocupação e cidades nos inputs de cidades
+    const ocupacoes = [
+      "Proprietário de empresa",
+      "Proprietária de empresa",
+      "Analista de sistemas",
+      "Servidor público municipal",
+      "Servidor público estadual",
+      "Servidor público federal",
+    ];
+    
+    const cidadesMaisUsadas = [
+      "Belo Horizonte",
+      "Contagem",
+      "Betim"
+    ];
+    
+    const estadosMaisUsados = ["MG"];
+    
+    criarDatalist(ocupacoes, "sLOcupacao");
+    criarDatalist(cidadesMaisUsadas, "sLCidades");
+    criarDatalist(estadosMaisUsados, "sLEstados");
+    
+    const adicionarEm = [
+      ...["#text_logradouro2", "#text_possuiimovellocal", "#text_logradouro", "#text_localocupa", "#text_ocupacao"].map(id => {
+        return {inputId: id, listId: "sLCidades"};
+      }),
+      ...["#text_uf0", "#text_uf1", "#text_uf2", "#text_uf999"].map(id => {
+        return {inputId: id, listId: "sLEstados"};
+      })
+    ]
+    
+    adicionarEm.forEach(e => {
+      $(e.inputId).attr("list", e.listId);
+    })
     
     // Verificando se existem parâmetros que foram definidos
     try {
