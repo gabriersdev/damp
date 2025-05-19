@@ -56,6 +56,7 @@ import {controlePreenchimentoAnosIR, vercpf} from "./publicFunctions.js";
         return $('body').width() - 50;
       }, comfortZone: 2
     });
+    
   });
   
   $(window).resize(function () {
@@ -86,6 +87,7 @@ import {controlePreenchimentoAnosIR, vercpf} from "./publicFunctions.js";
     document.onkeyup = function (e) {
       exports.verificaAutImpressao(exports.isOK(), e);
     };
+    
     document.onkeypress = function (e) {
       exports.verificaAutImpressao(exports.isOK(), e);
     };
@@ -411,16 +413,40 @@ import {controlePreenchimentoAnosIR, vercpf} from "./publicFunctions.js";
     criarDatalist(estadosMaisUsados, "sLEstados");
     
     const adicionarEm = [
-      ...["#text_logradouro2", "#text_possuiimovellocal", "#text_logradouro", "#text_localocupa", "#text_ocupacao"].map(id => {
+      ...["#text_logradouro2", "#text_possuiimovellocal", "#text_logradouro", "#text_localocupa"].map(id => {
         return {inputId: id, listId: "sLCidades"};
       }),
       ...["#text_uf0", "#text_uf1", "#text_uf2", "#text_uf999"].map(id => {
         return {inputId: id, listId: "sLEstados"};
-      })
+      }),
+      {inputId: "#text_ocupacao", listId: "sLOcupacao"}
     ]
     
+    // Adiciona o id das listas criadas como referência pro input
     adicionarEm.forEach(e => {
-      $(e.inputId).attr("list", e.listId);
+      const elm = $(e.inputId);
+      $(elm).attr("list", e.listId);
+      
+      if (!navigator.userAgent.includes("Chrome")) return
+      const inpt = document.querySelector(e.inputId)
+      
+      // Altera o tamanho dos inputs de acordo com a quatidade de caracteres eles tem
+      const setWidth = (e, size) => {
+        let novoWidth = size * 9.5
+        novoWidth < 64 ? novoWidth = 64 : "";
+        console.log(size, novoWidth);
+        setTimeout(() => {e.style.width = novoWidth + "px";}, 0)
+      }
+      
+      if (!inpt.value) inpt.setAttribute("size", inpt.placeholder.length || 0)
+      else if (inpt.value) inpt.setAttribute("size", inpt.value.trim().length || 0)
+      setWidth(inpt, parseInt(inpt.getAttribute("size")) + 1);
+      
+      inpt.addEventListener("change", e => {
+        const size = e.target.value.trim().length
+        e.target.setAttribute("size", size);
+        setWidth(e.target, size);
+      })
     })
     
     // Verificando se existem parâmetros que foram definidos

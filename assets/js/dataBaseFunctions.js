@@ -351,7 +351,7 @@ function carregarRegistroRecuperado(dados) {
             } else if (elemento.dataset.input == 'selectRegime') {
               elemento.style.width = '275px';
             } else {
-              elemento.style.width = `${((valor.length) * 16) + 16}px`;
+                elemento.style.width = `${((valor.length) * 16) + 16}px`;
             }
             ;
           }
