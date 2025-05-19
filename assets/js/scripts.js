@@ -432,7 +432,7 @@ import {controlePreenchimentoAnosIR, vercpf} from "./publicFunctions.js";
       
       // Altera o tamanho dos inputs de acordo com a quatidade de caracteres eles tem
       const setWidth = (e, size) => {
-        let novoWidth = size * 9.5
+        let novoWidth = size * 11
         novoWidth < 64 ? novoWidth = 64 : "";
         console.log(size, novoWidth);
         setTimeout(() => {
@@ -447,7 +447,7 @@ import {controlePreenchimentoAnosIR, vercpf} from "./publicFunctions.js";
       inpt.addEventListener("change", e => {
         const size = e.target.value.trim().length
         e.target.setAttribute("size", size);
-        setWidth(e.target, size);
+        setWidth(e.target, size + 1);
       })
     })
     
