@@ -435,7 +435,9 @@ import {controlePreenchimentoAnosIR, vercpf} from "./publicFunctions.js";
         let novoWidth = size * 9.5
         novoWidth < 64 ? novoWidth = 64 : "";
         console.log(size, novoWidth);
-        setTimeout(() => {e.style.width = novoWidth + "px";}, 0)
+        setTimeout(() => {
+          e.style.width = novoWidth + "px";
+        }, 0)
       }
       
       if (!inpt.value) inpt.setAttribute("size", inpt.placeholder.length || 0)
@@ -448,6 +450,23 @@ import {controlePreenchimentoAnosIR, vercpf} from "./publicFunctions.js";
         setWidth(e.target, size);
       })
     })
+    
+    // Impede o fechamento da página se tiver algo preenchido
+    window.addEventListener("beforeunload", function (e) {
+      const inputs = document.querySelectorAll("input, textarea, select");
+      let hasData = false;
+      
+      inputs.forEach(input => {
+        if (input.type !== "hidden" && input.value.trim() !== "") {
+          hasData = true;
+        }
+      });
+      
+      if (hasData) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    });
     
     // Verificando se existem parâmetros que foram definidos
     try {
