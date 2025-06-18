@@ -431,23 +431,29 @@ import {controlePreenchimentoAnosIR, vercpf} from "./publicFunctions.js";
       const inpt = document.querySelector(e.inputId)
       
       // Altera o tamanho dos inputs de acordo com a quatidade de caracteres eles tem
-      const setWidth = (e, size) => {
-        let novoWidth = size * 11
-        novoWidth < 64 ? novoWidth = 64 : "";
-        console.log(size, novoWidth);
-        setTimeout(() => {
-          e.style.width = novoWidth + "px";
-        }, 0)
+      const setWidth = (e, add) => {
+        const originalWidth = parseFloat(e.style.width || 0);
+        const baseFontSize = parseFloat(e.style.fontSize || 16);
+        let novoWidth;
+        
+        if (add) novoWidth = parseInt(e.value.trim().length || "0") * (baseFontSize / 2) + parseFloat(add || "0");
+        else if (originalWidth) novoWidth = originalWidth + 2 * baseFontSize;
+        else return;
+        
+        setTimeout(() => {e.style.width = novoWidth + "px"}, 0);
       }
       
       if (!inpt.value) inpt.setAttribute("size", inpt.placeholder.length || 0)
       else if (inpt.value) inpt.setAttribute("size", inpt.value.trim().length || 0)
-      setWidth(inpt, parseInt(inpt.getAttribute("size")) + 1);
+      
+      if (inpt.value.trim().length !== 0) setWidth(inpt, "32")
+      
+      setWidth(inpt);
       
       inpt.addEventListener("change", e => {
         const size = e.target.value.trim().length
-        e.target.setAttribute("size", size);
-        setWidth(e.target, size + 1);
+        e.target.setAttribute("size", size.toString());
+        setWidth(e.target);
       })
     })
     
