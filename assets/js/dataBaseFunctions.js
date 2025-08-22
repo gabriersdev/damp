@@ -1,3 +1,5 @@
+import {limparFormDamp} from "./lib.js";
+
 let registros_salvos = '';
 
 function salvarRegistro() {
@@ -303,8 +305,11 @@ function recuperarRegistroSalvo(evento, button, action) {
           }
         }
 
+        // Limpando o form
+        limparFormDamp();
+        console.log("[DEBUG] - Limpando o formulário e carregando registro recuperado");
         // Acionando função responsável pelo carregamento do registro que foi recuperado
-        carregarRegistroRecuperado(dados);
+        setTimeout(() => {carregarRegistroRecuperado(dados)}, 500);
 
       } catch (error) {
         console.log('Ocorreu um erro ao recuperar os dados do registro. Erro: %s', error);
@@ -332,7 +337,7 @@ function carregarRegistroRecuperado(dados) {
   if (typeof dados == 'object') {
     const chaves = Object.keys(dados);
 
-    chaves.forEach((chave, index) => {
+    chaves.forEach(chave => {
       const elemento = document.querySelector(`[data-input="${chave}"]`);
       const valor = dados[chave];
 
@@ -365,8 +370,8 @@ function carregarRegistroRecuperado(dados) {
         } else {
           elemento.value = String(valor).replaceAll("[n]", "\n");
         }
-      }
-    })
+      } else if (elemento && !valor) elemento.value = "";
+    }); 
 
     HabilitaImpressao();
     $('#modal-registros-salvos').modal('hide');

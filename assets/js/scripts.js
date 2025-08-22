@@ -2,6 +2,7 @@
 
 // Importando todas as funções exportadas no arquivo functions.js e add. globalmente
 import * as exports from "./publicFunctions.js"
+import {limparFormDamp} from "./lib.js"
 
 Object.entries(exports).forEach(([name, exported]) => window[name] = exported);
 
@@ -12,7 +13,7 @@ import {
   carregarRegistros,
   recuperarRegistroSalvo,
   recuperarDados,
-  exportarRegistrosArmazenados
+  exportarRegistrosArmazenados,
 } from "./dataBaseFunctions.js";
 import {controlePreenchimentoAnosIR, vercpf} from "./publicFunctions.js";
 
@@ -1051,7 +1052,16 @@ import {controlePreenchimentoAnosIR, vercpf} from "./publicFunctions.js";
     } finally {
       enderecoLog.textContent = value;
     }
-    
+  });
+
+  // Monitora o submit do form
+  document.querySelector("form#damp_form").addEventListener("submit", (e) => {
+    e.preventDefault();
+  })
+
+  // Monitora o click no botão com prop [data-action="limpar-form"]
+  document.querySelector("[data-action='limpar-form']").addEventListener("click", () => {
+    if (confirm("Você tem certeza que deseja limpar o formulário? Não será possível recuperar o progresso depois.")) limparFormDamp();
   });
   
   // Definindo as funções globais, para acesso via eventos no HTML

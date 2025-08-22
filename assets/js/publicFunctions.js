@@ -728,5 +728,5 @@ export {
   controleEscalaImpressao,
   controlePreenchimentoAnosIR,
   verificaAutImpressao,
-  isOK
+  isOK,
 }

@@ -301,7 +301,8 @@ footer {
 
 #btImprimir,
 [data-action="registros-salvos"],
-[data-action="exportar-registros"] {
+[data-action="exportar-registros"],
+[data-action="limpar-form"] {
   height: 55px;
   min-width: 130px;
   font-size: 25px;
