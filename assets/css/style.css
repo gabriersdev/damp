@@ -447,6 +447,7 @@ input:checked + .slider:before {
   display: none;
 }
 
+/* List autocomplete */
 /* Tenta ocultar a setinha como dropdown */
 input[list]::-webkit-calendar-picker-indicator {
   opacity: 0;
@@ -466,4 +467,52 @@ input[list] {
   -webkit-appearance: none;
   -moz-appearance: none;
   background-image: none !important;
+}
+
+/* Container para o posicionamento relativo */
+.autocomplete-container {
+  position: relative;
+}
+
+/* A lista de sugestões (o dropdown) */
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-top: none;
+  z-index: 9999; /* Garante que a lista fique sobre outros elementos */
+  top: 100%; /* Posiciona logo abaixo do input */
+  left: 0;
+  right: 0;
+
+  /* Estilos do Bootstrap 3 Dropdown */
+  list-style: none;
+  padding-left: 0;
+  margin-top: 2px;
+  background-color: #fff;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+}
+
+/* Itens individuais na lista */
+.autocomplete-items li {
+  padding: 8px 12px;
+  cursor: pointer;
+  color: #333;
+  border-bottom: 1px solid #f4f4f4;
+  text-transform: uppercase;
+}
+
+/* Efeito ao passar o mouse sobre um item */
+.autocomplete-items li:hover {
+  background-color: #f5f5f5;
+}
+
+/* Estilo para destacar a parte do texto que corresponde à digitação */
+.autocomplete-items li strong {
+  font-weight: bold;
+  color: #000;
 }
