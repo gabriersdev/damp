@@ -343,18 +343,15 @@ function carregarRegistroRecuperado(dados) {
         } else if (type == 'text') {
           elemento.value = valor;
 
-          if (valor.length > 0 && elemento.dataset.input !== 'assinatura_titular' && elemento.dataset.input !== 'assinatura_caixa') {
+          if (valor.length > 0 && elemento.dataset.input !== 'assinatura_titular' && elemento.dataset.input !== 'assinatura_caixa' && parseInt(dados[`${elemento.dataset.input}_w`] || "0", 10) !== 0) {
+
             elemento.setAttribute('size', valor.length);
-            if (dados[`${elemento.dataset.input}_w`] !== undefined && typeof (parseInt(dados[`${elemento.dataset.input}_w`])) == 'number') {
-              // TODO - Corrigir tamanho do campo de texto dos dados de utilização de FGTS
-              elemento.style.width = `${(dados[`${elemento.dataset.input}_w`])}px`;
-            } else if (elemento.dataset.input == 'selectRegime') {
-              elemento.style.width = '275px';
-            } else {
-                elemento.style.width = `${((valor.length) * 16) + 16}px`;
-            }
-            ;
-          }
+
+            if (dados[`${elemento.dataset.input}_w`] !== undefined && typeof (parseInt(dados[`${elemento.dataset.input}_w`])) == 'number') elemento.style.width = `${(dados[`${elemento.dataset.input}_w`])}px`;
+            else if (elemento.dataset.input == 'selectRegime') elemento.style.width = '275px';
+            else elemento.style.width = `${((valor.length) * 16) + 16}px`;
+
+          } else if (valor.length === 0 || parseInt(dados[`${elemento.dataset.input}_w`] || "0", 10) === 0) elemento.style.width = 'auto';
 
         } else if (elemento.tagName.trim().toLowerCase() == 'select') {
           elemento.value = valor;
@@ -376,7 +373,7 @@ function carregarRegistroRecuperado(dados) {
   }
 
   // Scrollando para o topo da página
-  window.scrollTo({top: 0, behavior: 'smooth'});
+  window.scrollTo({ top: 0, behavior: 'smooth' });
   setTimeout(() => {
     const ret = HabilitaImpressao();
     if ((Array.isArray(ret) && ret.every(r => r === true)) || ret === true) printWindow();
