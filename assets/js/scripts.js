@@ -703,41 +703,41 @@ import {controlePreenchimentoAnosIR, vercpf} from "./publicFunctions.js";
     ]
     
     // Adiciona o id das listas criadas como referência pro input
-    adicionarEm.forEach(e => {
-      const elm = $(e.inputId);
-      $(elm).attr("list", e.listId);
+    // adicionarEm.forEach(e => {
+    //   const elm = $(e.inputId);
+    //   $(elm).attr("list", e.listId);
       
-      if (!navigator.userAgent.includes("Chrome")) return
-      const inpt = document.querySelector(e.inputId)
+    //   if (!navigator.userAgent.includes("Chrome")) return
+    //   const inpt = document.querySelector(e.inputId)
       
-      // Altera o tamanho dos inputs de acordo com a quatidade de caracteres eles tem
-      const setWidth = (e, add) => {
-        const originalWidth = parseFloat(e.style.width || 0);
-        const baseFontSize = parseFloat(e.style.fontSize || 16);
-        let novoWidth;
+    //   // Altera o tamanho dos inputs de acordo com a quatidade de caracteres eles tem
+    //   const setWidth = (e, add) => {
+    //     const originalWidth = parseFloat(e.style.width || 0);
+    //     const baseFontSize = parseFloat(e.style.fontSize || 16);
+    //     let novoWidth;
         
-        if (add) novoWidth = parseInt(e.value.trim().length || "0") * (baseFontSize / 2) + parseFloat(add || "0");
-        else if (originalWidth) novoWidth = originalWidth + 2 * baseFontSize;
-        else return;
+    //     if (add) novoWidth = parseInt(e.value.trim().length || "0") * (baseFontSize / 2) + parseFloat(add || "0");
+    //     else if (originalWidth) novoWidth = originalWidth + 2 * baseFontSize;
+    //     else return;
         
-        setTimeout(() => {
-          e.style.width = novoWidth + "px"
-        }, 0);
-      }
+    //     setTimeout(() => {
+    //       e.style.width = novoWidth + "px"
+    //     }, 0);
+    //   }
       
-      if (!inpt.value) inpt.setAttribute("size", inpt.placeholder.length || 0)
-      else if (inpt.value) inpt.setAttribute("size", inpt.value.trim().length || 0)
+    //   if (!inpt.value) inpt.setAttribute("size", inpt.placeholder.length || 0)
+    //   else if (inpt.value) inpt.setAttribute("size", inpt.value.trim().length || 0)
       
-      if (inpt.value.trim().length !== 0) setWidth(inpt, "32")
+    //   if (inpt.value.trim().length !== 0) setWidth(inpt, "32")
       
-      setWidth(inpt);
+    //   setWidth(inpt);
       
-      inpt.addEventListener("change", e => {
-        const size = e.target.value.trim().length
-        e.target.setAttribute("size", size.toString());
-        setWidth(e.target);
-      })
-    })
+    //   inpt.addEventListener("change", e => {
+    //     const size = e.target.value.trim().length
+    //     e.target.setAttribute("size", size.toString());
+    //     setWidth(e.target);
+    //   })
+    // })
     
     // Impede o fechamento da página se tiver algo preenchido
     window.addEventListener("beforeunload", function (e) {
