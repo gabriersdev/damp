@@ -18,8 +18,6 @@ import {
 import { controlePreenchimentoAnosIR, vercpf } from "./publicFunctions.js";
 
 (() => {
-  // TODO - Corrigir: auteração do OK não funciona para recuparação de registro salvo!
-
   // Apresentação do Projeto no console
   const dados_do_projeto = {
     "Project name": "DAMP",
@@ -378,6 +376,7 @@ import { controlePreenchimentoAnosIR, vercpf } from "./publicFunctions.js";
       $(`#${e}`).attr('checked', true);
     });
 
+    // Autocomplete
     // Adiciona profissões mais usadas em uma lista de sugestões do input de ocupação e cidades nos inputs de cidades
     const ocupacoes = [
       "ACOUGUEIRO",
@@ -692,7 +691,7 @@ import { controlePreenchimentoAnosIR, vercpf } from "./publicFunctions.js";
 
     let activeInput = null; // Para rastrear qual input está ativo
 
-    // --- 4. LÓGICA DE EVENTOS ---
+    // Eventos
     adicionarEm.forEach(mapeamento => {
       const $input = $(mapeamento.inputId);
       const sugestoes = listasDeSugestoes[mapeamento.listId].sort((a, b) => a.localeCompare(b));
@@ -703,7 +702,7 @@ import { controlePreenchimentoAnosIR, vercpf } from "./publicFunctions.js";
       }
 
       // Evento quando o usuário digita no campo
-      $input.on('input', function () {
+      $input.bind('input click', function () {
         const valorDigitado = $(this).val();
         activeInput = this; // Define o input atual como ativo
 
