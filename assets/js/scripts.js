@@ -98,8 +98,6 @@ import { controlePreenchimentoAnosIR, vercpf } from "./publicFunctions.js";
     const beforePrint = function () {
       exports.verificaAutImpressao(exports.isOK());
 
-      console.log("ANTES DA IMPRESSAO")
-
       // Encontra todos os elementos select na página
       const allSelects = document.querySelectorAll('select');
 
