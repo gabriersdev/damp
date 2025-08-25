@@ -91,12 +91,71 @@ import { controlePreenchimentoAnosIR, vercpf } from "./publicFunctions.js";
       exports.verificaAutImpressao(exports.isOK(), e);
     };
 
+    // Issue #X
+    const originalSelects = [];
+
     // Quando o usuário tentar imprimir a página por um atalho (sem ser os de teclado - já impeditos acima), será exibido um alerta
     const beforePrint = function () {
       exports.verificaAutImpressao(exports.isOK());
+
+      console.log("ANTES DA IMPRESSAO")
+
+      // Encontra todos os elementos select na página
+      const allSelects = document.querySelectorAll('select');
+
+      allSelects.forEach((selectElement, index) => {
+        // Guarda o select original no array
+        originalSelects[index] = selectElement;
+
+        // Pega o texto da opção selecionada
+        const selectedOptionText = selectElement.options[selectElement.selectedIndex].text;
+
+        // Cria um novo elemento span para substituir o select
+        const textReplacement = document.createElement('span');
+        textReplacement.innerText = selectedOptionText;
+
+        // Adiciona uma classe para identificar os spans que foram criados
+        textReplacement.classList.add('print-replacement-text');
+
+        // Define um ID no span e uma referência no select para podermos restaurá-lo depois
+        const replacementId = `print-replacement-${index}`;
+        textReplacement.id = replacementId;
+        selectElement.setAttribute('data-print-replacement-id', replacementId);
+
+        // Substitui o select pelo span no DOM
+        selectElement.parentNode.replaceChild(textReplacement, selectElement);
+      });
+    };
+
+    const afterPrint = () => {
+      // Encontra todos os spans de substituição
+      const allReplacements = document.querySelectorAll('.print-replacement-text');
+
+      allReplacements.forEach(replacementElement => {
+        const replacementId = replacementElement.id;
+
+        // Encontra o select original correspondente usando o ID que guardamos
+        // Embora o array 'originalSelects' contenha os elementos,
+        // fazer a busca pelo ID é mais robusto caso a ordem do DOM mude.
+        const originalSelect = originalSelects.find(
+          select => select.getAttribute('data-print-replacement-id') === replacementId
+        );
+
+        if (originalSelect) {
+          // Remove o atributo de dados para limpeza
+          originalSelect.removeAttribute('data-print-replacement-id');
+          // Restaura o select original, substituindo o span
+          replacementElement.parentNode.replaceChild(originalSelect, replacementElement);
+        }
+      });
+
+      // Limpa o array de referência
+      originalSelects.length = 0;
     };
 
     window.onbeforeprint = beforePrint;
+
+    window.onafterprint = afterPrint;
 
     $('[data-toggle="tooltip"]').tooltip();
 
