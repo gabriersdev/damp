@@ -429,7 +429,7 @@ import { controlePreenchimentoAnosIR, vercpf } from "./publicFunctions.js";
     $('#text_compl2').val('00');
 
     // Marca os checkboxes
-    ['chkocupacao1', 'chkresidencia1', 'chkuniaoestavel2'].forEach(e => {
+    ['chkocupacao1', 'chkresidencia1', 'chkuniaoestavel2', 'sn_4', 'chkmodalidade2', 'chkusufruto1', 'sn_12', 'sn_10'].forEach(e => {
       $(`#${e}`).attr('checked', true);
     });
 
