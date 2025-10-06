@@ -79,9 +79,10 @@ function verificaEstadoCivil(valor, elemento) {
   $(elemento).css({width: '275px'})
 }
 
-function HabilitaImpressao(chkClicado) {
-  var emptyText = "";
-
+let confirmSignedFieldsEmpty = false;
+function HabilitaImpressao() {
+  let emptyText = "";
+  
   if ($('#text_nome').length > 0) {
     if ($('#text_nome').val() == "") {
       $('#text_nome').focus();
@@ -536,7 +537,19 @@ function HabilitaImpressao(chkClicado) {
     $('#span_9').show('400');
     $('#span_10').hide('400');
   }
-
+  
+  // Verifica se o local, dia, mês ou data de assinatura está em branco e pede confirmação se é isso mesmo
+  const signedFields = $("#local_assin, #end_camp, #mes_assin, #ano_assin")
+  if (signedFields.length > 0) {
+    const existsSignedFieldEmpty = Object.values(signedFields).filter(v => v.value === "");
+    if (existsSignedFieldEmpty && Array.isArray(existsSignedFieldEmpty) && existsSignedFieldEmpty.length > 0 && !confirmSignedFieldsEmpty) {
+      if (!confirm("Um ou mais campos de assinatura estão em branco. Você confirma que quer imprimir a DAMP sem que eles sejam preenchidos?")) {
+        noPrintSettings();
+        return false;
+      } else confirmSignedFieldsEmpty = true;
+    }
+  }
+  
   // Permite impressão
   okPrintSettings();
   OK = true;
