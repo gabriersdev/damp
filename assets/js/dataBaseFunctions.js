@@ -79,7 +79,7 @@ function carregarRegistros() {
     if (registros_salvos == null && !Array.isArray(registros_salvos)) {
       modal.innerHTML = `<div class="alert alert-warning"><span>Não foram encontrados registros armazenados</span></div>`
     } else {
-      modal.innerHTML = `<div class="alert alert-warning"><span><strong>Registros ordenados do mais recente para o mais antigo.</strong> Os registros são armazenados no seu navegador.</span></div>`
+      modal.innerHTML = `<div class="alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><span><strong>Registros ordenados do mais recente para o mais antigo.</strong> Os registros são armazenados no seu navegador.</span></div>`
 
       // Ordenando os itens salvos conforme a data (mais novos para mais antigos) e listando
       // Exibindo apenas os 50 primeiros registros ordenados

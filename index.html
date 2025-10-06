@@ -69,6 +69,13 @@
         </div>
       </div>
     </div>
+    
+    <div class="container" data-id="no-print-div">
+      <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Atenção!</strong> No momento de imprimir a DAMP, escolha por ocultar o cabeçalho e o rodapé da página.
+      </div>
+    </div>
 
     <!-- DIV principal -->
     <div id="print_area" class="container no-print-allowed">
@@ -746,7 +753,7 @@
         </div>
       </form>
 
-      <div id="printdiv">
+      <div id="printdiv" data-id="no-print-div">
         <input type="button" onclick="printWindow();" id="btImprimir" name="btImprimir"
           class="btn btn-danger do-not-print" accesskey="P" value="Imprimir" name="btImprimir">
         <button type="button" class="btn btn-primary" data-action="registros-salvos" accesskey="R">Registros</button>

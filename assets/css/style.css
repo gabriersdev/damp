@@ -358,7 +358,8 @@ footer {
     text-decoration: underline;
   }
 
-  div#printdiv {
+  div#printdiv,
+  [data-id="no-print-div"] {
     display: none;
   }
 }
