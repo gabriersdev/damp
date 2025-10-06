@@ -1147,6 +1147,12 @@ import { controlePreenchimentoAnosIR, vercpf } from "./publicFunctions.js";
     }
   });
 
+  // Monitora TODOS os inputs TEXT, NUMBER, MAIL e PASSWORD para remover espaços extras que forem inseridos pelo usuário
+  $("input[type=text], input[type=number], input[type=mail], input[type=password]").on("blur", function(e) {
+    const inputValue = (e.target.value || "");
+    if (inputValue.startsWith(" ") || inputValue.endsWith(" ")) e.target.value = inputValue.trim();
+  })
+  
   // Monitora o submit do form
   document.querySelector("form#damp_form").addEventListener("submit", (e) => {
     e.preventDefault();
