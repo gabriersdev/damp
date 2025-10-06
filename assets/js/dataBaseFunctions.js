@@ -70,7 +70,7 @@ function carregarRegistros() {
 
   try {
     const modal = document.querySelector('#modal-registros-salvos .modal-body');
-    registros_salvos = JSON.parse(localStorage.getItem('registros-armazenados'));
+    registros_salvos = JSON.parse(localStorage.getItem('registros-armazenados')) ?? [];
 
     modal.innerHTML = '';
     document.querySelector('#modal-registros-salvos .modal-footer').innerHTML = '';
@@ -133,10 +133,10 @@ const paginarElementos = (elements) => {
 
     elements.forEach((registro, indexElement) => {
       const data = dataTimestampToBRL(registro.data_criacao);
-      const nome = registro.text_nome.toUpperCase().substr(0, 27);
+      const nome = registro.text_nome?.toUpperCase().substr(0, 27);
 
       // Inserção de página com os elementos
-      tbody.innerHTML += `<tr data-element-pagination-id="${0 + "" + indexElement}" data-id-registro="${registro.id || indexElement}"><td>${nome.trim().length === 27 ? nome.trim() + "..." : nome}</td><td>${(elements.filter(r => r.text_nome === registro.text_nome).length > 1) ? "Editada" : "Original"}</td><td>${data !== 'Invalid Date' ? data : '-'}</td><td><button class="btn btn-primary recuperar-registro-salvo" onclick="recuperarRegistroSalvo(event, this)">Recuperar</button>&nbsp;<button class="btn btn-danger apagar-registro-salvo" onclick="apagarRegistroSalvo(event, this)">Apagar</button>&nbsp;<button class="btn btn-secondary" onclick="recuperarRegistroSalvo(event,this,'link')">🔗</button></td></tr>`
+      tbody.innerHTML += `<tr data-element-pagination-id="${0 + "" + indexElement}" data-id-registro="${registro.id || indexElement}"><td>${nome?.trim().length === 27 ? nome?.trim() + "..." : nome}</td><td>${(elements.filter(r => r.text_nome === registro.text_nome).length > 1) ? "Editada" : "Original"}</td><td>${data !== 'Invalid Date' ? data : '-'}</td><td><button class="btn btn-primary recuperar-registro-salvo" onclick="recuperarRegistroSalvo(event, this)">Recuperar</button>&nbsp;<button class="btn btn-danger apagar-registro-salvo" onclick="apagarRegistroSalvo(event, this)">Apagar</button>&nbsp;<button class="btn btn-secondary" onclick="recuperarRegistroSalvo(event,this,'link')">🔗</button></td></tr>`
       table.appendChild(tbody);
     });
 
