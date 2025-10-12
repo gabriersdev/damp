@@ -168,7 +168,7 @@ body {
 
 input:not([type="button"]) {
   cursor: pointer;
-  text-align: center;
+  text-align: left;
   font-size: 15px !important;
 }
 
