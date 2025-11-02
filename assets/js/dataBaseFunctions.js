@@ -137,7 +137,7 @@ const paginarElementos = (elements) => {
       const nome = registro.text_nome?.toUpperCase().substr(0, 27);
 
       // Inserção de página com os elementos
-      tbody.innerHTML += `<tr data-element-pagination-id="${0 + "" + indexElement}" data-id-registro="${registro.id || indexElement}"><td>${nome?.trim().length === 27 ? nome?.trim() + "..." : nome}</td><td>${(elements.filter(r => r.text_nome === registro.text_nome).length > 1) ? "Editada" : "Original"}</td><td>${data !== 'Invalid Date' ? data : '-'}</td><td><button class="btn btn-primary recuperar-registro-salvo" onclick="recuperarRegistroSalvo(event, this)">Recuperar</button>&nbsp;<button class="btn btn-danger apagar-registro-salvo" onclick="apagarRegistroSalvo(event, this)">Apagar</button>&nbsp;<button class="btn btn-secondary" onclick="recuperarRegistroSalvo(event,this,'link')">🔗</button></td></tr>`
+        tbody.innerHTML += `<tr data-element-pagination-id="${0 + "" + indexElement}" data-id-registro="${registro.id || indexElement}"><td>${nome?.trim().length === 27 ? nome?.trim() + "..." : nome}</td><td>${(elements.filter(r => r.text_nome === registro.text_nome).length > 1) ? "Editada" : "Original"}</td><td>${data !== 'Invalid Date' ? data : '-'}</td><td><button class="btn btn-primary recuperar-registro-salvo" onclick="recuperarRegistroSalvo(event, this)">Recuperar</button>&nbsp;<button class="btn btn-danger apagar-registro-salvo" onclick="apagarRegistroSalvo(event, this)">Apagar</button>&nbsp;<button class="btn btn-secondary" onclick="recuperarRegistroSalvo(event,this,'link')">LINK</button></td></tr>`
       table.appendChild(tbody);
     });
 
@@ -207,7 +207,7 @@ function apagarRegistroSalvo(evento, elemento) {
     } else {
       // Confirmar exclusão de registro
       const data = dataTimestampToBRL(registros_salvos.find((registro) => registro.id === parseInt(id)).data_criacao);
-      if (confirm(`⚠️ Excluir registro\n\nConfirma a exclusão do registro criado em ${data !== 'Invalid Date' ? data : '-'} do(a) ${document.querySelector('tr[data-id-registro="' + id + '"] > td').textContent.trim().toUpperCase()}? A exclusão não é reversível.`)) {
+      if (confirm(`Excluir registro: Confirma a exclusão do registro criado em ${data !== 'Invalid Date' ? data : '-'} do(a) ${document.querySelector('tr[data-id-registro="' + id + '"] > td').textContent.trim().toUpperCase()}? A exclusão não é reversível.`)) {
         registros_salvos.forEach((registro) => {
           if (registro.id !== parseInt(id)) {
             registros_atuais.push(registro);
