@@ -1172,6 +1172,9 @@ import {controlePreenchimentoAnosIR, exibirElementoDepoisImpressao, HabilitaImpr
   window.printWindow = printWindow;
   window.recuperarRegistroSalvo = recuperarRegistroSalvo;
   window.apagarRegistroSalvo = apagarRegistroSalvo;
+  // Adicionando acionamento da função 'msieversion' no carregamento do body
+  const msieversion = () => exports.msieversion();
+  document.body.onload(msieversion);
   
   // Verifica se ESC foi pressionado para fechar os modais, se estiverem ativos
   document.addEventListener('keydown', function (event) {
