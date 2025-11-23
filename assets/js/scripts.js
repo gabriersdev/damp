@@ -237,6 +237,7 @@ import {controlePreenchimentoAnosIR, exibirElementoDepoisImpressao, HabilitaImpr
     // FUNÇÃO PARA ADICIONAR OU REMOVER LINHAS NA TABELA PARA USO DO FGTS
     $("button.btn-fgts").click(function () {
       let btnId = $(this).attr("id");
+      let lastRowId;
       
       switch (btnId) {
         case "btnAdicionar":
@@ -258,7 +259,7 @@ import {controlePreenchimentoAnosIR, exibirElementoDepoisImpressao, HabilitaImpr
           break;
         
         case "btnRemover":
-          let lastRowId = $('#tb1 tr.conta_fgts:last').attr('id');
+          lastRowId = $('#tb1 tr.conta_fgts:last').attr('id');
           if (lastRowId === "tr_1") {
             return false
           }
@@ -1172,9 +1173,6 @@ import {controlePreenchimentoAnosIR, exibirElementoDepoisImpressao, HabilitaImpr
   window.printWindow = printWindow;
   window.recuperarRegistroSalvo = recuperarRegistroSalvo;
   window.apagarRegistroSalvo = apagarRegistroSalvo;
-  // Adicionando acionamento da função 'msieversion' no carregamento do body
-  const msieversion = () => exports.msieversion();
-  document.body.onload(msieversion);
   
   // Verifica se ESC foi pressionado para fechar os modais, se estiverem ativos
   document.addEventListener('keydown', function (event) {

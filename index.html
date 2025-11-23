@@ -49,7 +49,7 @@
   <script src="assets/js/maskMoney.js" defer></script>
 </head>
 
-<body>
+<body onload="msieversion()">
 <div id="navegador_incompativel" class="container">
   <div class="panel panel-warning">
     <div class="panel-heading">
@@ -352,52 +352,60 @@
     </div>
     <!-- FIM DA MODALIDADE -->
     <br>
+    <!-- TODO: seleção e exibição e ocultação de item não está funcionando -->
     <div id="enquadramento" class="margintoprecuo">
       <strong>8 - ENQUADRAMENTO</strong>
       <div id="enquadramento1" class="recuo20">
         <input type="checkbox" class="enquad hide_chk" id="chkenquadramento1" data-input="chkenquadramento1">
-        <div>
-          <label for="chkenquadramento1">
-            <strong>CARTA DE CRÉDITO FGTS - CCFGTS/PMCMV OU CCFGTS-OPERAÇÕES ESPECIAIS</strong>
-          </label>
+        <label for="chkenquadramento1">
+          <strong>CARTA DE CRÉDITO FGTS – CCFGTS/PMCMV OU CCFGTS-OPERAÇÕES ESPECIAIS</strong>
           <div id="boxenq1" class="oculto">
             <p style="margin-top:0"><strong>DECLARO</strong>, sob as penas da Lei, que:</p>
             <ul class="justificado" style="margin-top: -12px">
               <li class="small-font-print">Não sou titular de financiamento ativo no SFH em qualquer parte do País,
                 independente do percentual de propriedade;
               </li>
-              <li>
-                Não sou proprietário, arrendatário, cessionário ou promitente comprador de imóvel residencial urbano, concluído ou em construção, no município onde:
+              <li>Não sou proprietário, arrendatário, cessionário ou promitente comprador de imóvel residencial
+                urbano,
+                concluído ou em construção, no município onde:
               </li>
-              <li>
-                <ol class="lista_ordenada_letra">
-                  <li class="small-font-print">
-                    Exerço minha ocupação principal, incluindo os municípios limítrofes e integrantes da mesma Região Metropolitana; nem
-                  </li>
-                  <li class="small-font-print">
-                    Resido atualmente, incluindo os municípios limítrofes e integrantes da mesma Região Metropolitana; nem
-                  </li>
-                  <li class="small-font-print">
-                    Pretendo trabalhar ou residir.
-                  </li>
-                </ol>
+              <ol class="lista_ordenada_letra">
+                <li class="small-font-print">Exerço minha ocupação principal, incluindo os municípios limítrofes e
+                  integrantes da mesma Região Metropolitana; nem
+                </li>
+                <li class="small-font-print">Resido atualmente, incluindo os municípios limítrofes e integrantes da
+                  mesma
+                  Região Metropolitana; nem
+                </li>
+                <li class="small-font-print">Pretendo trabalhar ou residir.</li>
+              </ol>
+              <li>Restituirei o valor do subsídio, proporcionalmente ao prazo remanescente, se quitar, transferir ou
+                amortizar o financiamento até o 5º ano de vigência do contrato;
               </li>
-              <li>
-                Restituirei o valor do subsídio, proporcionalmente ao prazo remanescente, se quitar, transferir ou amortizar o financiamento até o 5º ano de vigência do contrato;
+              <li>Não sou titular de direito de aquisição de imóvel residencial urbano, concluído ou em construção,
+                no
+                atual local de meu domicílio nem onde pretendo fixá-lo, inclusive no Programa de Arrendamento
+                Residencial;
               </li>
-              <li>
-                Não sou titular de direito de aquisição de imóvel residencial urbano, concluído ou em construção, no atual local de meu domicílio nem onde pretendo fixá-lo, inclusive no Programa de Arrendamento Residencial;
+              <li>O imóvel objeto da proposta de financiamento destina-se a minha residência e localiza-se em área
+                urbana,
+                no município onde comprovadamente resido ou exerço minha ocupação principal, incluindo os municípios
+                limítrofes e integrantes da mesma Região Metropolitana ou onde pretendo fixar residência e/ou
+                trabalho
+                e,
+                se já concluído, possui plenas condições de habitabilidade;
               </li>
-              <li>
-                O imóvel objeto da proposta de financiamento destina-se a minha residência e localiza-se em área urbana, no município onde comprovadamente resido ou exerço minha ocupação principal, incluindo os municípios limítrofes e integrantes da mesma Região Metropolitana ou onde pretendo fixar residência e/ou trabalho e, se já concluído, possui plenas condições de habitabilidade;
-              </li>
-              <li>Recebi a Cartilha "O que você precisa saber antes de comprar o seu imóvel";</li>
+              <li>Recebi a Cartilha “O que você precisa saber antes de comprar o seu imóvel”;</li>
               <li>Concordo em adquirir o imóvel sem via de acesso pavimentada, se for o caso;</li>
-              <li>
-                Estou ciente que, se concedido o redutor de 0,5% na taxa de juros, este será cancelado se não atendidas as exigências estabelecidas para sua aplicação;
+              <li>Estou ciente que, se concedido o redutor de 0,5% na taxa de juros, este será cancelado se não
+                atendidas
+                as exigências estabelecidas para sua aplicação;
               </li>
-              <li>
-                Estou ciente que, caso já tenha sido beneficiado com desconto/subsídio concedido pelo FGTS, exceto para Aquisição de Material de Construção - AMC, o novo financiamento será concedido sem desconto, sem redução da taxa de juros e com pagamento da Taxa de Administração.
+              <li>Estou ciente que, caso já tenha sido beneficiado com desconto/subsídio concedido pelo FGTS, exceto
+                para
+                Aquisição de Material de Construção - AMC, o novo financiamento será concedido sem desconto, sem
+                redução
+                da taxa de juros e com pagamento da Taxa de Administração.
               </li>
             </ul>
             <div class="yesno">
@@ -405,88 +413,88 @@
               <span id="span_1" class="recuo20">
                     <input type="checkbox" id="sn_1" data-input="sn_1" value="sim" class="yesno hide_chk">
                     <label for="sn_1">SIM</label>
-              </span>
+                  </span>
               <span id="span_2" class="recuo20">
                     <input type="checkbox" id="sn_2" data-input="sn_2" value="nao" class="yesno hide_chk">
                     <label for="sn_2">NÃO</label>
-              </span>
-              <span class="minitexto spn-block recuo20">
-                ³ Na contagem do tempo é considerado a soma dos períodos trabalhados, consecutivos ou não, na mesma ou em diferentes empresas.
-              </span>
+                  </span>
+              <span class="minitexto spn-block" class="recuo20">³ Na contagem do tempo é considerado a soma dos
+                    períodos trabalhados, consecutivos ou não, na mesma ou em diferentes empresas.</span>
             </div>
             <div class="yesno">
-              <strong class="spn-block">
-                Já fui beneficiado com desconto/subsídio concedido pelo FGTS (exceto para Aquisição de Material de Construção - AMC):
-              </strong>
+              <strong class="spn-block">Já fui beneficiado com desconto/subsídio concedido pelo FGTS (exceto para
+                Aquisição de Material de Construção – AMC):</strong>
               <span id="span_3" class="recuo20">
                     <input type="checkbox" id="sn_3" data-input="sn_3" value="sim" class="yesno hide_chk">
                     <label for="sn_3">SIM</label>
-              </span>
+                  </span>
               <span id="span_4" class="recuo20">
                     <input type="checkbox" id="sn_4" data-input="sn_4" value="nao" class="yesno hide_chk">
                     <label for="sn_4">NÃO</label>
-              </span>
+                  </span>
             </div>
           </div>
-        </div>
+        </label>
       </div>
       <div id="enquadramento2" class="recuo20">
         <input type="checkbox" class="enquad hide_chk" id="chkenquadramento2" data-input="chkenquadramento2">
-        <div>
-          <label for="chkenquadramento2">
-            <strong>CARTA DE CRÉDITO PRÓ-COTISTA OU PRÓ-COTISTA/PMCMV</strong>
-          </label>
+        <label for="chkenquadramento2">
+          <strong>CARTA DE CRÉDITO PRÓ-COTISTA OU PRÓ-COTISTA/PMCMV</strong>
           <div id="boxenq2" class="oculto">
             <p style="margin-top: 0"><strong>DECLARO</strong>, sob as penas da Lei, que:</p>
             <ul class="justificado" style="margin-top: -12px">
-              <li>
-                Não sou titular de financiamento ativo no SFH em qualquer parte do País, independente do percentual de propriedade;
+              <li>Não sou titular de financiamento ativo no SFH em qualquer parte do País, independente do
+                percentual
+                de
+                propriedade;
               </li>
-              <li>
-                Não sou proprietário, arrendatário, cessionário ou promitente comprador de imóvel residencial urbano, concluído ou em construção, no município onde:
+              <li>Não sou proprietário, arrendatário, cessionário ou promitente comprador de imóvel residencial
+                urbano,
+                concluído ou em construção, no município onde:
               </li>
-              <li>
-                <ul class="lista_ordenada_letra">
-                  <li>
-                    Exerço minha ocupação principal, incluindo os municípios limítrofes e integrantes da mesma Região Metropolitana; nem
-                  </li>
-                  <li>
-                    Resido atualmente, incluindo os municípios limítrofes e integrantes da mesma Região Metropolitana
-                  </li>
-                  <!--li>Pretendo trabalhar ou residir.</li>-->
-                </ul>
-              </li>
-              <li>
-                Não sou titular de direito de aquisição de imóvel residencial urbano, concluído ou em construção, no atual local de meu domicílio nem onde pretendo fixá-lo, inclusive no Programa de Arrendamento Residencial;
+              <ul class="lista_ordenada_letra">
+                <li>Exerço minha ocupação principal, incluindo os municípios limítrofes e integrantes da mesma
+                  Região
+                  Metropolitana; nem
+                </li>
+                <li>Resido atualmente, incluindo os municípios limítrofes e integrantes da mesma Região
+                  Metropolitana
+                </li>
+                <!--li>Pretendo trabalhar ou residir.</li>-->
+              </ul>
+              <li>Não sou titular de direito de aquisição de imóvel residencial urbano, concluído ou em construção,
+                no
+                atual local de meu domicílio nem onde pretendo fixá-lo, inclusive no Programa de Arrendamento
+                Residencial;
               </li>
               <li>Um dos participantes da proposta de financiamento possui:</li>
-              <li>
-                <ul class="lista_ordenada_letra">
-                  <li>36 meses³ de trabalho sob o regime do FGTS;</li>
-                  <li>
-                    Contrato de trabalho ativo sob regime do FGTS ou saldo em CV FGTS, na data de concessão do financiamento, de, no mínimo, 10% do Valor de Avaliação do imóvel;
-                  </li>
-                </ul>
+              <ul class="lista_ordenada_letra">
+                <li>36 meses³ de trabalho sob o regime do FGTS;</li>
+                <li>Contrato de trabalho ativo sob regime do FGTS ou saldo em CV FGTS, na data de concessão do
+                  financiamento, de, no mínimo, 10% do Valor de Avaliação do imóvel;
+                </li>
+              </ul>
+              <li>O imóvel objeto da proposta de financiamento destina-se a minha residência e localiza-se em área
+                urbana,
+                no município onde comprovadamente resido ou exerço minha ocupação principal, incluindo os municípios
+                limítrofes e integrantes da mesma Região Metropolitana e, se já concluído, possui plenas condições
+                de
+                habitabilidade;
               </li>
-              <li>
-                O imóvel objeto da proposta de financiamento destina-se a minha residência e localiza-se em área urbana, no município onde comprovadamente resido ou exerço minha ocupação principal, incluindo os municípios limítrofes e integrantes da mesma Região Metropolitana e, se já concluído, possui plenas condições de habitabilidade;
-              </li>
-              <li>
-                Não sou detentor de usufruto de imóvel residencial, pois renunciei expressamente essa condição, registrada no Registro de Imóveis.
+              <li>Não sou detentor de usufruto de imóvel residencial, pois renunciei expressamente essa condição,
+                registrada no Registro de Imóveis.
               </li>
             </ul>
-            <span class="minitexto spn-block recuo20">
-              ³ Na contagem do tempo é considerado a soma dos períodos trabalhados, consecutivos ou não, na mesma ou em diferentes empresas.
-            </span>
+            <span class="minitexto spn-block" class="recuo20">³ Na contagem do tempo é considerado a soma dos
+                  períodos
+                  trabalhados, consecutivos ou não, na mesma ou em diferentes empresas.</span>
           </div>
-        </div>
+        </label>
       </div>
       <div id="enquadramento3" class="recuo20">
         <input type="checkbox" class="enquad hide_chk" id="chkenquadramento3" data-input="chkenquadramento3">
-        <div>
-          <label for="chkenquadramento3">
-            <strong>AQUISIÇÃO DE MATERIAL DE CONSTRUÇÃO - AMC</strong>
-          </label>
+        <label for="chkenquadramento3">
+          <strong>AQUISIÇÃO DE MATERIAL DE CONSTRUÇÃO – AMC</strong>
           <div id="boxenq3" class="oculto">
             <p><strong>DECLARO</strong>, sob as penas da Lei, que:</p>
             <ul class="justificado" style="margin-top: -12px">
@@ -528,11 +536,11 @@
                     <input type="checkbox" id="sn_8" value="nao" data-input="sn_8" class="yesno hide_chk">
                     <label for="sn_8">NÃO</label>
                   </span>
-              <span class="minitexto spn-block recuo20">³ Na contagem do tempo é considerado a soma dos
+              <span class="minitexto spn-block" class="recuo20">³ Na contagem do tempo é considerado a soma dos
                     períodos trabalhados, consecutivos ou não, na mesma ou em diferentes empresas.</span>
             </div>
           </div>
-        </div>
+        </label>
       </div>
       <div id="enquadramento4" class="recuo20">
         <input type="checkbox" id="chkenquadramento4" data-input="chkenquadramento4" class="enquad hide_chk">
@@ -631,6 +639,8 @@
             </tr>
           </table>
           <p class="minitexto" style="margin-top: -25px;">² Valor a ser utilizado, incluindo o montante resgatado do FMP, se for o caso</p>
+          <!-- TODO: erro - adicao de elementos nao esta funcionando -->
+          <!-- Uncaught ReferenceError: can't access lexical declaration 'lastRowId' before initialization -->
           <div id="ctr_box" class="do-not-print">
             <p>Clique para adicionar ou remover linhas na tabela.</p>
             <div>
