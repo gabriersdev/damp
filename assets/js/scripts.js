@@ -237,6 +237,7 @@ import {controlePreenchimentoAnosIR, exibirElementoDepoisImpressao, HabilitaImpr
     // FUNÇÃO PARA ADICIONAR OU REMOVER LINHAS NA TABELA PARA USO DO FGTS
     $("button.btn-fgts").click(function () {
       let btnId = $(this).attr("id");
+      let lastRowId;
       
       switch (btnId) {
         case "btnAdicionar":
@@ -258,7 +259,7 @@ import {controlePreenchimentoAnosIR, exibirElementoDepoisImpressao, HabilitaImpr
           break;
         
         case "btnRemover":
-          let lastRowId = $('#tb1 tr.conta_fgts:last').attr('id');
+          lastRowId = $('#tb1 tr.conta_fgts:last').attr('id');
           if (lastRowId === "tr_1") {
             return false
           }
